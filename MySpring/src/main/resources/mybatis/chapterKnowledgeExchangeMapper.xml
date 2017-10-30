@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.ChapterKnowledgeExchangeDao">
+	<resultMap id="BaseResultMap" type="com.example.demo.model.ChapterKnowledgeExchange">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="knowledge_context" property="knowledgeContext" jdbcType="VARCHAR" />
+		<result column="chapter_id" property="chapterId" jdbcType="VARCHAR" />
+		<result column="student_id" property="studentId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+	id,knowledge_context,chapter_id,student_id,create_time,modify_time
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from chapter_knowledge_exchange
+		where student_id = #{studentId,jdbcType=VARCHAR}
+	</select>
+</mapper>

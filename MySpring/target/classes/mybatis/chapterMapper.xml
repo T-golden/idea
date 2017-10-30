@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.ChapterDao">
+	<resultMap id="BaseResultMap" type="com.example.demo.model.Chapter">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="chapter_id" property="chapterId" jdbcType="VARCHAR" />
+		<result column="chapter_context" property="chapterContext" jdbcType="VARCHAR" />
+		<result column="course_id" property="courseId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+	id,chapter_id,chapter_context,course_id,create_time,modify_time
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from chapter
+		where chapter_id = #{chapterId,jdbcType=VARCHAR}
+	</select>
+</mapper>
