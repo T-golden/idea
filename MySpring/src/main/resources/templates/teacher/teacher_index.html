@@ -1,11 +1,5 @@
 <!DOCTYPE html>
-
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-
-<!--[if !IE]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
-
+<html lang="en" class="no-js">
 <!-- BEGIN HEAD -->
 
 <head>
@@ -37,130 +31,10 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
-	<!-- BEGIN HEADER -->
-	<div class="header navbar navbar-inverse navbar-fixed-top">
-		<!-- BEGIN TOP NAVIGATION BAR -->
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<!-- BEGIN LOGO -->
-				<a class="brand" href="#">
-				<img src="teacher/images/logo.png" alt="logo"/>
-				</a>
-				<!-- END LOGO -->
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-				<img src="teacher/images/menu-toggler.png" alt="" />
-				</a>          
-				<!-- END RESPONSIVE MENU TOGGLER -->            
-				<!-- BEGIN TOP NAVIGATION MENU -->              
-				<ul class="nav pull-right">
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-					<li class="dropdown user">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img alt="" src="teacher/images/avatar1_small.jpg" />
-							<span class="username">Bob Nilson</span>
-							<i class="icon-angle-down"></i>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
-							<li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
-							<li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox(3)</a></li>
-							<li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
-							<li class="divider"></li>
-							<li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a></li>
-							<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
-						</ul>
-					</li>
-					<!-- END USER LOGIN DROPDOWN -->
-				</ul>
-				<!-- END TOP NAVIGATION MENU --> 
-			</div>
-		</div>
-		<!-- END TOP NAVIGATION BAR -->
-	</div>
-	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
-		<!-- BEGIN SIDEBAR -->
-		<div class="page-sidebar nav-collapse collapse">
-			<!-- BEGIN SIDEBAR MENU -->        
-			<ul class="page-sidebar-menu">
-				<li>
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-					<div class="sidebar-toggler hidden-phone"></div>
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-				</li>
-				<li>
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<form class="sidebar-search">
-						<div class="input-box">
-							<a href="javascript:;" class="remove"></a>
-							<input type="text" placeholder="Search..." />
-							<input type="button" class="submit" value=" " />
-						</div>
-					</form>
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-				</li>
-				<li class="start active ">
-					<a href="index.html">
-						<i class="icon-home"></i> 
-						<span class="title">Dashboard</span>
-						<span class="selected"></span>
-					</a>
-				</li>
-				<li class="">
-					<a href="javascript:;">
-						<i class="icon-cogs"></i> 
-						<span class="title">Layouts</span>
-						<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="layout_horizontal_sidebar_menu.html">
-							Horzontal & Sidebar Menu</a>
-						</li>
-						<li>
-							<a href="layout_horizontal_menu1.html">
-							Horzontal Menu 1</a>
-						</li>
-						<li>
-							<a href="layout_horizontal_menu2.html">
-							Horzontal Menu 2</a>
-						</li>
-						<li>
-							<a href="layout_promo.html">
-							Promo Page</a>
-						</li>
-						<li>
-							<a href="layout_email.html">
-							Email Templates</a>
-						</li>
-						<li>
-							<a href="layout_ajax.html">
-							Content Loading via Ajax</a>
-						</li>
-						<li>
-							<a href="layout_sidebar_closed.html">
-							Sidebar Closed Page</a>
-						</li>
-						<li>
-							<a href="layout_blank_page.html">
-							Blank Page</a>
-						</li>
-						<li>
-							<a href="layout_boxed_page.html">
-							Boxed Page</a>
-						</li>
-						<li>
-							<a href="layout_boxed_not_responsive.html">
-							Non-Responsive Boxed Layout</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-			<!-- END SIDEBAR MENU -->
-		</div>
-		<!-- END SIDEBAR -->
+	<div th:include="teacher/teacher_top :: teacher_top" class="header navbar navbar-inverse navbar-fixed-top" ></div>
+	<div th:include="teacher/teacher_menu :: teacher_menu" class="page-sidebar nav-collapse collapse" ></div>
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN PAGE CONTAINER-->
@@ -215,21 +89,11 @@
 						<!-- END BEGIN STYLE CUSTOMIZER -->    
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							Dashboard <small>statistics and more</small>
+							欢迎回来！ <small>teacherName</small>
 						</h3>
 						<ul class="breadcrumb">
-							<li>
-								<i class="icon-home"></i>
-								<a href="index.html">Home</a> 
-								<i class="icon-angle-right"></i>
-							</li>
-							<li><a href="#">Dashboard</a></li>
 							<li class="pull-right no-text-shadow">
-								<div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
-									<i class="icon-calendar"></i>
-									<span></span>
-									<i class="icon-angle-down"></i>
-								</div>
+								<div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range"><span></span></div>
 							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -237,7 +101,7 @@
 				</div>
 				<!-- END PAGE HEADER-->
 				<div id="dashboard">
-				
+				阿斯顿 
 				</div>
 			</div>
 		</div>

@@ -33,8 +33,12 @@ public class HomeController {
 
 	@RequestMapping("login")
 	public String login(@RequestParam("status") int status, @RequestParam("account") String account, @RequestParam("password") String password, Model model) {
+		System.out.println("status ====>" + status + "::account=====>" + account + "::password====>" + password);
 		if (status == 1) {
 			TeacherAccount teacherAccount = teacherService.teacherLogin(account, password);
+			if(teacherAccount == null) {
+				
+			}
 			model.addAttribute("teacherAccount", teacherAccount);
 			return "teacher/teacher_index";
 		} else if (status == 2) {
