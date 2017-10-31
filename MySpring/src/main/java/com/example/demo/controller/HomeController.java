@@ -34,18 +34,28 @@ public class HomeController {
 	@RequestMapping("login")
 	public String login(@RequestParam("status") int status, @RequestParam("account") String account, @RequestParam("password") String password, Model model) {
 		System.out.println("status ====>" + status + "::account=====>" + account + "::password====>" + password);
-		if (status == 1) {
-			TeacherAccount teacherAccount = teacherService.teacherLogin(account, password);
-			if(teacherAccount == null) {
-				
+		try {
+			if (status == 1) {
+				TeacherAccount teacherAccount = teacherService.teacherLogin(account, password);
+				if(teacherAccount == null) {
+					model.addAttribute("status", status);
+					return "login";
+				}
+				model.addAttribute("teacherAccount", teacherAccount);
+				return "teacher/teacher_index";
+			} else if (status == 2) {
+				StudentAccount studentAccount = studentService.studentLogin(account, password);
+				if(studentAccount == null) {
+					model.addAttribute("status", status);
+					return "login";
+				}
+				model.addAttribute("studentAccount", studentAccount);
+				return "student/student_index";
 			}
-			model.addAttribute("teacherAccount", teacherAccount);
-			return "teacher/teacher_index";
-		} else if (status == 2) {
-			StudentAccount studentAccount = studentService.studentLogin(account, password);
-			model.addAttribute("studentAccount", studentAccount);
-			return "student/student_index";
+			model.addAttribute("status", status);
+			return "login";
+		} catch (Exception e) {
+			return "";
 		}
-		return "login";
 	}
 }
