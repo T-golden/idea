@@ -29,6 +29,7 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
+	<input type="hidden" id="teacherId" th:value="${teacherId}" />
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
 	<div th:include="teacher/teacher_top :: teacher_top" class="header navbar navbar-inverse navbar-fixed-top" ></div>
@@ -155,6 +156,7 @@
 	<script src="js/app.js" type="text/javascript"></script>
 	<script src="js/index.js" type="text/javascript"></script>        
 	<!-- END PAGE LEVEL SCRIPTS -->  
+	<script src="js/teacher.config.js" type="text/javascript"></script> 
 	<script>
 		jQuery(document).ready(function() {    
 		   App.init(); // initlayout and core plugins

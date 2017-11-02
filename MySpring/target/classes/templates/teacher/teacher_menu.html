@@ -1,5 +1,6 @@
 <!-- BEGIN SIDEBAR -->
 <div th:fragment="teacher_menu">
+	
 	<!-- BEGIN SIDEBAR MENU -->
 	<ul class="page-sidebar-menu">
 		<li>
@@ -18,32 +19,34 @@
 		</li>
 		<li class=""><a href="javascript:;"><span class="title">学生管理</span></a>
 			<ul class="sub-menu">
-				<li><a href="/teacher/toCreateStudent">学生账号创建</a></li>
-				<li><a href="/teacher/toStudentInfo">学生账号管理</a></li>
+				<li><a id="toCreateStudent">学生账号创建</a></li>
+				<li><a id="toStudentInfo">学生账号管理</a></li>
+				<li><a id="toCreateClass">班级信息创建</a></li>
+				<li><a id="toClassInfo" href="/teacher/">班级信息管理</a></li>
 			</ul>
 		</li>
 		<li class=""><a href="javascript:;"><span class="title">课程管理</span></a>
 			<ul class="sub-menu">
-				<li><a href="/teacher/tocourse">课程信息管理</a></li>
-				<li><a href="/teacher/toChapter">课程章节管理</a></li>
+				<li><a id="tocourse">课程信息管理</a></li>
+				<li><a id="toChapter">课程章节管理</a></li>
 			</ul>
 		</li>
 		<li class=""><a href="javascript:;"><span class="title">教程管理</span></a>
 			<ul class="sub-menu">
-				<li><a href="/teacher/toChapterUpload">上传教程</a></li>
-				<li><a href="/teacher/toChapterMaterial">教程信息管理</a></li>
+				<li><a id="toChapterUpload">上传教程</a></li>
+				<li><a id="toChapterMaterial">教程信息管理</a></li>
 			</ul>
 		</li>
 		<li class=""><a href="javascript:;"><span class="title">作业管理</span></a>
 			<ul class="sub-menu">
-				<li><a href="/teacher/toAssignmentUpload">上传作业</a></li>
-				<li><a href="/teacher/toAssignmentInfo">作业信息管理</a></li>
+				<li><a id="toAssignmentUpload">上传作业</a></li>
+				<li><a id="toAssignmentInfo">作业信息管理</a></li>
 			</ul>
 		</li>
 		<li class=""><a href="javascript:;"><span class="title">个人信息管理</span></a>
 			<ul class="sub-menu">
-				<li><a href="/teacher/toUpdatePass">修改密码</a></li>
-				<li><a href="/teacher">个人信息</a></li>
+				<li><a id="toUpdatePass">修改密码</a></li>
+				<li><a id="toteacher">个人信息</a></li>
 			</ul>
 		</li>
 	</ul>
