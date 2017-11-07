@@ -19,8 +19,7 @@
 		id,teacher_id,teacher_pik,teacher_name,teacher_sex,teacher_age,teacher_email,teacher_phone,create_time,modify_time
 	</sql>
 	
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="String">
 		select
 		<include refid="Base_Column_List" />
 		from teacher where teacher_id = #{teacherId,jdbcType=VARCHAR}

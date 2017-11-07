@@ -1,6 +1,21 @@
 var basePath = "http://localhost:8081";
 var teacherId = $("#teacherId").val();
 console.log(teacherId);
+
+$(function(){
+	getTeacherInfo();
+})
+
+function getTeacherInfo(){
+	$.ajax({
+		   type : "post",  //提交方式  
+		   url : "http://localhost:8081/teacherApi/getTeacherInfo?teacherId="+teacherId,	//路径  
+			data : "",//数据，这里使用的是Json格式进行传输  
+			success : function(res) {//返回数据根据结果进行相应的处理 
+				console.log("resresres" + res);
+			}
+	});
+}
 //1.
 $("#toCreateStudent").click(function(){
 	var url =  basePath + "/teacher/toCreateStudent?teacherId=" + teacherId ;

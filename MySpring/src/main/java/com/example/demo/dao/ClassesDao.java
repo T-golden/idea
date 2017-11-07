@@ -1,7 +1,9 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Classes;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.example.demo.model.Classes;
+@Mapper
 public interface ClassesDao {
 	Classes selectByPrimaryKey(String classId);
 }
