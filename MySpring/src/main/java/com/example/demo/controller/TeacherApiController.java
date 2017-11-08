@@ -33,7 +33,7 @@ public class TeacherApiController {
 			jsonResult = teacherService.getTeacherInfo(teacherId);
 		} catch (Exception e) {
 			jsonResult.setStatus(1);
-			jsonResult.setMsg("教师信息异常");
+			jsonResult.setMsg("教师信息获取异常");
 		}
 		return jsonResult;
 	}

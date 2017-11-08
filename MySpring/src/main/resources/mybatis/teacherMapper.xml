@@ -12,14 +12,17 @@
 			jdbcType="VARCHAR" />
 		<result column="teacher_phone" property="teacherPhone"
 			jdbcType="VARCHAR" />
+		<result column="teacher_qq" property="teacherQQ"
+			jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id,teacher_id,teacher_pik,teacher_name,teacher_sex,teacher_age,teacher_email,teacher_phone,create_time,modify_time
+		id,teacher_id,teacher_pik,teacher_name,teacher_sex,teacher_age,teacher_email,teacher_phone,teacher_qq,create_time,modify_time
 	</sql>
-	
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="String">
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="String">
 		select
 		<include refid="Base_Column_List" />
 		from teacher where teacher_id = #{teacherId,jdbcType=VARCHAR}

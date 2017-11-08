@@ -27,6 +27,34 @@
 	<link href="teacher/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
 	<!-- END PAGE LEVEL STYLES -->
 	<link rel="shortcut icon" href="teacher/images/favicon.ico" />
+	<style type="text/css">
+		table.altrowstable {
+			font-family: verdana,arial,sans-serif;
+			font-size:11px;
+			color:#333333;
+			border-width: 1px;
+			border-color: #a9c6c9;
+			border-collapse: collapse;
+		}
+		table.altrowstable th {
+			border-width: 1px;
+			padding: 8px;
+			border-style: solid;
+			border-color: #a9c6c9;
+		}
+		table.altrowstable td {
+			border-width: 1px;
+			padding: 8px;
+			border-style: solid;
+			border-color: #a9c6c9;
+		}
+		.oddrowcolor{
+			background-color:#d4e3e5;
+		}
+		.evenrowcolor{
+			background-color:#c3dde0;
+		}
+</style>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -90,7 +118,7 @@
 						<!-- END BEGIN STYLE CUSTOMIZER -->    
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							欢迎回来！ <small>teacherName</small>
+							欢迎回来！ <small class="teacherName">teacherName</small>
 						</h3>
 						<ul class="breadcrumb">
 							<li class="pull-right no-text-shadow">
@@ -101,8 +129,35 @@
 					</div>
 				</div>
 				<!-- END PAGE HEADER-->
-				<div id="dashboard">
-				teacher_index
+				<h5>教师编号  : <span class="teacherId" id="teacherId"></span></h5>
+				<div id="dashboard" align="center">
+					<table id="infoTable" border="1" style="width: 100%;">
+						<thead>
+							<tr>
+								<td align="center" colspan="4">个人信息</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>姓名 : <span class="teacherName"></span></td></td>
+								<td>性别 : <span class="teacherSexVal"></span></td>
+								<td>年龄 : <span class="teacherAge"></span> 岁</td>
+								<td rowspan="3">教师头像</td>
+							</tr>
+							<tr>
+								<td align="center" colspan="3">联系方式</td>
+							</tr>
+							<tr>
+								<td>Email : <span class="teacherEmail"></span></td>
+								<td>手机 : <span class="teacherPhone"></span></td>
+								<td>QQ : <span class="teacherQQ"></span> 岁</td>
+							</tr>
+							<tr>
+								<td>创建时间 : <span class="createTime"></span></td>
+								<td>上次修改时间 : <span class="modifyTime"></span></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -111,7 +166,7 @@
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
 		<div class="footer-inner">
-			2013 &copy; Metronic by keenthemes.Collect from <a href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a> - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+			2017 &copy; graduation project by Xuyixin from <a href="javascript:volid(0);" title="信息科技学院" target="_blank">信息科技学院</a> - 
 		</div>
 		<div class="footer-tools">
 			<span class="go-top">
@@ -170,6 +225,18 @@
 		   Index.initMiniCharts();
 		   Index.initDashboardDaterange();
 		   Index.initIntro();
+		   
+		   var table = document.getElementById(infoTable);  
+		   var rows = table.getElementsByTagName("tr");
+		   for(i = 0; i < rows.length; i++){          
+			   if(i % 2 == 0){
+				   rows[i].className = "evenrowcolor";
+				   }else{
+					   rows[i].className = "oddrowcolor";
+					}     
+			 }
+				
+
 	});
 	</script>
 	<!-- END JAVASCRIPTS -->

@@ -11,6 +11,7 @@ public class Teacher {
 	private int teacherAge;
 	private String teacherEmail;
 	private String teacherPhone;
+	private String teacherQQ;
 	private Date createTime;
 	private Date modifyTime;
 
@@ -18,7 +19,7 @@ public class Teacher {
 
 	}
 
-	public String getTeacherId() {
+	public String getTeacherId() { 
 		return teacherId;
 	}
 
@@ -96,5 +97,13 @@ public class Teacher {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getTeacherQQ() {
+		return teacherQQ;
+	}
+
+	public void setTeacherQQ(String teacherQQ) {
+		this.teacherQQ = teacherQQ;
 	}
 }
