@@ -1,17 +1,26 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dao.TeacherDao;
+import com.example.demo.model.Teacher;
+
 @Controller
 @RequestMapping("/teacher")
 public class TeacherController {
-
-	@RequestMapping("")
-	public String toIndex() {
-		return "teacher/teacher_index";
+	
+	@Autowired
+	private TeacherDao teacherDao;
+	
+	@RequestMapping("toTeacher")
+	public String toTeacher(@RequestParam ("teacherId") String teacherId ,Model model) {
+		Teacher teacher = teacherDao.selectByPrimaryKey(teacherId);
+		model.addAttribute("teacher", teacher);
+		return "teacher/teacher_info";
 	}
 
 	/**
@@ -21,7 +30,6 @@ public class TeacherController {
 	 */
 	@RequestMapping("/toCreateStudent")
 	public String toCreateStudent(@RequestParam("teacherId") String teacherId , Model model) {
-		System.out.println(teacherId);
 		model.addAttribute("teacherId", teacherId);
 		return "teacher/teacher_create_student";
 	}

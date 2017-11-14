@@ -38,7 +38,6 @@ public class TeacherServiceImpl implements TeacherService {
 	 */
 	@Override
 	public JsonResult getTeacherInfo(String teacherId) {
-		System.out.println("teacherId = " + teacherId);
 		JsonResult jsonResult = new JsonResult();
 		Teacher teacher = teacherDao.selectByPrimaryKey(teacherId);
 		if(teacher != null) {

@@ -1,7 +1,9 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" class="no-js">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.w.org" class="no-js">
 <!-- BEGIN HEAD -->
+
 <head>
+
 	<meta charset="utf-8" />
 	<title>teacher page</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -24,7 +26,40 @@
 	<link href="css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
 	<!-- END PAGE LEVEL STYLES -->
-	<link rel="shortcut icon" href="teacher/images/favicon.ico" />
+	<link rel="shortcut icon" href="images/favicon.ico" />
+	<style>
+	.mt5 {
+		margin-top: 5px;
+	}
+	
+	/* Border styles */
+	#table-1 thead, #table-1 tr {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: rgb(230, 189, 189);
+	}
+	#table-1 {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(230, 189, 189);
+	}
+	
+	/* Padding and font style */
+	#table-1 td, #table-1 th {
+	padding: 5px 10px;
+	font-size: 12px;
+	font-family: Verdana;
+	color: rgb(177, 106, 104);
+	}
+	
+	/* Alternating background colors */
+	#table-1 tr:nth-child(even) {
+	background: rgb(238, 211, 210)
+	}
+	#table-1 tr:nth-child(odd) {
+	background: #FFF
+	}
+	</style>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -86,22 +121,41 @@
 						</div>
 						<!-- END BEGIN STYLE CUSTOMIZER -->    
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
-						<h3 class="page-title">
-							欢迎回来！ <small>teacherName</small>
-						</h3>
-						<ul class="breadcrumb">
-							<li class="pull-right no-text-shadow">
-								<div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range"><span></span></div>
-							</li>
-						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
 				</div>
 				<!-- END PAGE HEADER-->
-				<div id="dashboard">
-				<div id="layer_div_1">
-					
-				</div>
+				<div id="layer1_teacherInfo" style="width: 100%;" align="center">
+					<form action="">
+						<table id="table-1" border="1" style="width: 100%;">
+							<thead>
+								<tr>
+									<td align="center" colspan="4">个人信息</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td align="center" colspan="3">基本信息</td>
+									<td align="center">教师编号 :<input disabled="disabled" id="teacherId" th:value="${teacher.teacherId}"></td>
+								</tr>
+								<tr>
+									<td>姓名 : <input id="teacherName" th:value="${teacher.teacherName}"></td>
+									<td>性别 : <input id="teacherSex" th:value="${teacher.teacherSex}"></td>
+									<td>年龄 : <input id="teacherAge" th:value="${teacher.teacherAge}"> 岁</td>
+									<td rowspan="3" width="20%">教师头像</td>
+								</tr>
+								<tr>
+									<td align="center" colspan="3">联系方式</td>
+								</tr>
+								<tr>
+									<td>Email : <input id="teacherEmail" th:value="${teacher.teacherEmail}"></td>
+									<td>手机 : <input id="teacherPhone" th:value="${teacher.teacherPhone}"></td>
+									<td>QQ : <input id="teacherQQ" th:value="${teacher.teacherQQ}"></td>
+								</tr>
+							</tbody>
+						</table>
+						<button>提交修改</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -110,7 +164,7 @@
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
 		<div class="footer-inner">
-			2013 &copy; Metronic by keenthemes.Collect from <a href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a> - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+			2017 &copy; graduation project by Xuyixin from <a href="javascript:volid(0);" title="信息科技学院" target="_blank">信息科技学院</a> - 
 		</div>
 		<div class="footer-tools">
 			<span class="go-top">
@@ -157,7 +211,8 @@
 	<script src="js/app.js" type="text/javascript"></script>
 	<script src="js/index.js" type="text/javascript"></script>        
 	<!-- END PAGE LEVEL SCRIPTS -->  
-	<script src="js/teacher.config.js" type="text/javascript"></script> 
+	<script src="js/teacher.config.js" type="text/javascript"></script>
+	<script src="js/teacher.config.api.js" type="text/javascript"></script>            
 	<script>
 		jQuery(document).ready(function() {    
 		   App.init(); // initlayout and core plugins
@@ -169,7 +224,7 @@
 		   Index.initMiniCharts();
 		   Index.initDashboardDaterange();
 		   Index.initIntro();
-		});
+	});
 	</script>
 	<!-- END JAVASCRIPTS -->
 </body>

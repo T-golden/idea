@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.util.Date;
 
+//班级
 public class Classes {
 	private int id;
 	private String classId;

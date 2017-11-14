@@ -26,4 +26,20 @@
 		<include refid="Base_Column_List" />
 		from teacher_account where account = #{account,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
 	</select>
+	
+	<update id="updateByteacherId" parameterType="BaseResultMap">
+		update teacher 
+		set account,password,modify_time 
+		value (account = #{account,jdbcType=VARCHAR} , password = #{password,jdbcType=VARCHAR} , now())
+		where teacher_id = #{teacherId,jdbcType=VARCHAR}
+	</update>
+	
+	<insert id="insertAccount" parameterType="BaseResultMap">
+		insert into teacher_account 
+		values (account=#{account,jdbcType=VARCHAR} , password=#{password,jdbcType=VARCHAR} , teacher_id=#{teacherId,jdbcType=VARCHAR} , now(),now())
+	</insert>
+	
+	<delete id="deleteTeacherAccount" parameterType="String">
+		delete from teacher_account where teacher_id = #{teacherId,jdbcType=VARCHAR}
+	</delete>
 </mapper>

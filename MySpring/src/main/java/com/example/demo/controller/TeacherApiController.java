@@ -27,7 +27,6 @@ public class TeacherApiController {
 	@RequestMapping(value = "getTeacherInfo")
 	@ResponseBody
 	public JsonResult getTeacherInfo(@RequestParam("teacherId") String teacherId , HttpServletRequest request) {
-		System.out.println(teacherId);
 		JsonResult jsonResult = new JsonResult();
 		try {
 			jsonResult = teacherService.getTeacherInfo(teacherId);

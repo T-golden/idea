@@ -24,20 +24,19 @@ public class HomeController {
 	public String index(Model model) {
 		return "index";
 	}
-	
+
 	@RequestMapping("tologin")
-	public String tologinPage(@RequestParam("status") int status, Model model){
+	public String tologinPage(@RequestParam("status") int status, Model model) {
 		model.addAttribute("status", status);
 		return "login";
 	}
 
 	@RequestMapping("login")
 	public String login(@RequestParam("status") int status, @RequestParam("account") String account, @RequestParam("password") String password, Model model) {
-		System.out.println("status ====>" + status + "::account=====>" + account + "::password====>" + password);
 		try {
 			if (status == 1) {
 				TeacherAccount teacherAccount = teacherService.teacherLogin(account, password);
-				if(teacherAccount == null) {
+				if (teacherAccount == null) {
 					model.addAttribute("status", status);
 					return "login";
 				}
@@ -45,7 +44,7 @@ public class HomeController {
 				return "teacher/teacher_index";
 			} else if (status == 2) {
 				StudentAccount studentAccount = studentService.studentLogin(account, password);
-				if(studentAccount == null) {
+				if (studentAccount == null) {
 					model.addAttribute("status", status);
 					return "login";
 				}

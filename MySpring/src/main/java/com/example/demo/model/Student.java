@@ -11,7 +11,6 @@ public class Student {
 	private int studentSex;
 	private String studentEmail;
 	private String studentPhone;
-	private String teacherId;
 	private String classId;
 	private Date createTime;
 	private Date modifyTime;
@@ -66,14 +65,6 @@ public class Student {
 
 	public void setStudentPhone(String studentPhone) {
 		this.studentPhone = studentPhone;
-	}
-
-	public String getTeacherId() {
-		return teacherId;
-	}
-
-	public void setTeacherId(String teacherId) {
-		this.teacherId = teacherId;
 	}
 
 	public String getClassId() {

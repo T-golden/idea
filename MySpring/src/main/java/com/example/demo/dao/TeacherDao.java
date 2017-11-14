@@ -8,9 +8,30 @@ import com.example.demo.model.Teacher;
 @Mapper
 public interface TeacherDao {
 	/**
-	 * 教师信息
+	 * 查询教师信息
 	 * @param teacherId
 	 * @return
 	 */
 	Teacher selectByPrimaryKey(String teacherId);
+	
+	/**
+	 * 修改教师信息
+	 * @param teacher
+	 * @return
+	 */
+	int updateById(Teacher teacher);
+	
+	/**
+	 * 添加教师信息
+	 * @param teacher
+	 * @return
+	 */
+	int insertTeacherInfo(Teacher teacher);
+	
+	/**
+	 * 删除教师信息
+	 * @param teacher
+	 * @return
+	 */
+	int deleteTeacherInfo(Teacher teacher);
 }

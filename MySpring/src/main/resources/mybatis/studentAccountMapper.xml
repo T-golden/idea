@@ -14,17 +14,34 @@
 		account,password,student_id,teacher_id,create_time,modify_time
 	</sql>
 	
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
 		from student_account where teacher_id = #{teacherId,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectByaccount" resultMap="BaseResultMap"
-		parameterType="Object">
+	<select id="selectByaccount" resultMap="BaseResultMap" parameterType="Object">
 		select
 		<include refid="Base_Column_List" />
 		from student_account where account = #{account,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
 	</select>
+	
+	<insert id="insertStudentAccont" parameterType="BaseResultMap">
+		insert into student_account 
+		set 
+		account,password,student_id,teacher_id,create_time,modify_time
+		value(account=#{account,jdbcType=VARCHAR},password=#{password,jdbcType=VARCHAR},
+		student_id=#{studentId,jdbcType=VARCHAR},teacher_id=#{teacherId,jdbcType=VARCHAR},now(),now())
+	</insert>
+	
+	<update id="updateStudentAccount" parameterType="BaseResultMap">
+		update student_account 
+		set account=#{account,jdbcType=VARCHAR},password=#{password,jdbcType=VARCHAR},
+		teacher_id=#{teacherId,jdbcType=VARCHAR},now()
+		where student_id=#{studentId,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deleteStudentAccount" parameterType="String">
+		delete from student where student_id=#{studentId,jdbcType=VARCHAR}
+	</delete>
 </mapper>
