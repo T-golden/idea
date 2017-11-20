@@ -2,10 +2,15 @@ package com.example.demo.model;
 
 import java.util.Date;
 
-//班级
+/**
+ * 班级
+ * @author john
+ *
+ */
 public class Classes {
 	private int id;
 	private String classId;
+	private String className;
 	private String teacherId;
 	private Date createTime;
 	private Date modifyTime;
@@ -52,6 +57,14 @@ public class Classes {
 
 	public void classes(){
 		
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
 	

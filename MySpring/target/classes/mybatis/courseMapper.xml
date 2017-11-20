@@ -23,4 +23,25 @@
 		from course
 		where course_id = #{courseId,jdbcType=VARCHAR}
 	</select>
+	
+	<insert id="createCourse" parameterType="com.example.demo.model.Course">
+		insert into course
+		(course_id,course_name,course_context,course_Begin_time,course_over_time,teacher_id,create_time,modify_time)
+		values
+		(#{courseId,jdbcType=VARCHAR},#{courseName,jdbcType=VARCHAR},#{courseContext,jdbcType=VARCHAR},
+		#{courseBeginTime,jdbcType=TIMESTAMP},#{courseOverTime,jdbcType=TIMESTAMP},
+		#{teacherId,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
+	</insert>
+	
+	<update id="updateCourseById" parameterType="com.example.demo.model.Course">
+		update course set 
+		course_name=#{courseName,jdbcType=VARCHAR},course_context=#{courseContext,jdbcType=VARCHAR},
+		course_Begin_time=#{courseBeginTime,jdbcType=TIMESTAMP},course_over_time=#{courseOverTime,jdbcType=TIMESTAMP},
+		teacher_id=#{teacherId,jdbcType=VARCHAR},create_time=#{createTime,jdbcType=TIMESTAMP},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
+		where course_id=#{courseId,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deleteCourseById" parameterType="String">
+		delete from course where course_id=#{courseId,jdbcType=VARCHAR}
+	</delete>
 </mapper>

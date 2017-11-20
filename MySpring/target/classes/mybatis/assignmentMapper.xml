@@ -21,4 +21,22 @@
 		from assignment
 		where assignment_id = #{assignmentId,jdbcType=VARCHAR}
 	</select>
+	
+	<insert id="createAssignment" parameterType="com.example.demo.model.Assignment">
+		insert into assignment
+		(assignment_id,assignment_context,chapter_id,class_id,create_time,modify_time)
+		values
+		(#{assignmentId,jdbcType=VARCHAR},#{assignmentContext,jdbcType=VARCHAR},
+		#{chapterId,jdbcType=VARCHAR},#{classId,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
+	</insert>
+	
+	<update id="updateAssignment" parameterType="String">
+		update assignment set 
+		assignment_context=#{assignmentContext,jdbcType=VARCHAR},chapter_id=#{chapterId,jdbcType=VARCHAR},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
+		where assignment_id=#{assignmentId,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deleteAssignment" parameterType="String">
+		delete from assignment where assignment_id=#{assignmentId,jdbcType=VARCHAR}
+	</delete>
 </mapper>

@@ -2,6 +2,11 @@ package com.example.demo.model;
 
 import java.util.Date;
 
+/**
+ * 教师账号
+ * @author john
+ *
+ */
 public class TeacherAccount {
 	private int id;
 	private String account;

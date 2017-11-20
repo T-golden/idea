@@ -26,25 +26,23 @@
 		where student_id = #{studentId,jdbcType=VARCHAR}
 	</select>
 	
-	<insert id="insertStudent" parameterType="BaseResultMap">
+	<insert id="insertStudent" parameterType="com.example.demo.model.Student">
 		insert into student 
+		(student_id,student_name,student_pik,student_sex,student_email,student_phone,class_id,create_time,modify_time)
 		values 
-		(student_id=#{studentId,jdbcType=VARCHAR},student_name=#{studentName,jdbcType=VARCHAR},
-		student_pik=#{studentPik,jdbcType=VARCHAR},student_sex=#{studentSex,jdbcType=INTEGER},
-		student_email=#{studentEmail,jdbcType=VARCHAR},student_phone=#{studentPhone,jdbcType=VARCHAR},
-		class_id=#{classId,jdbcType=VARCHAR},
-		now(),now())
+		(#{studentId,jdbcType=VARCHAR},#{studentName,jdbcType=VARCHAR},
+		#{studentPik,jdbcType=VARCHAR},#{studentSex,jdbcType=INTEGER},
+		#{studentEmail,jdbcType=VARCHAR},#{studentPhone,jdbcType=VARCHAR},
+		#{classId,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
 	</insert>
 	
-	<update id="updateStudent" parameterType="BaseResultMap">
+	<update id="updateStudent" parameterType="com.example.demo.model.Student">
 		update student 
 		set 
-		student_name,student_pik,student_sex,student_email,student_phone,teacher_id,class_id,modify_time
-		value
 		student_name=#{studentName,jdbcType=VARCHAR},
 		student_pik=#{studentPik,jdbcType=VARCHAR},student_sex=#{studentSex,jdbcType=INTEGER},
 		student_email=#{studentEmail,jdbcType=VARCHAR},student_phone=#{studentPhone,jdbcType=VARCHAR},
-		class_id=#{classId,jdbcType=VARCHAR},now()
+		class_id=#{classId,jdbcType=VARCHAR},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
 		where student_id=#{studentId,jdbcType=VARCHAR}
 	</update>
 	

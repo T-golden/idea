@@ -28,23 +28,38 @@
 		from teacher where teacher_id = #{teacherId,jdbcType=VARCHAR}
 	</select>
 	
-	<update id="updateById" parameterType="BaseResultMap">
+	<update id="updateById" parameterType="com.example.demo.model.Teacher">
 		update teacher 
 		set
-		teacher_id,teacher_pik,teacher_name,teacher_sex,teacher_age,teacher_email,teacher_phone,teacher_qq,modify_time 
-		value
-		teacher_id = #{teacherId,jdbcType=VARCHAR},teacher_pik=#{teacherPik,jdbcType=VARCHER},teacher_name=#{teacherName,jdbcType=VARCHAR},teacher_sex=#{teacherSex,jdbcType=INTEGER},teacher_age=#{teacherAge,jdbcType=INTEGER},
-		teacher_email=#{teacherEmail,jdbcType=VARCHAR},teacher_phone=#{teacherPhone,jdbcType=VARCHAR},teacher_qq=#{teacherQQ,jdbcType=VARCHAR},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
+		teacher_id = #{teacherId,jdbcType=VARCHAR},
+		teacher_pik=#{teacherPik,jdbcType=VARCHER},
+		teacher_name=#{teacherName,jdbcType=VARCHAR},
+		teacher_sex=#{teacherSex,jdbcType=INTEGER},
+		teacher_age=#{teacherAge,jdbcType=INTEGER},
+		teacher_email=#{teacherEmail,jdbcType=VARCHAR},
+		teacher_phone=#{teacherPhone,jdbcType=VARCHAR},
+		teacher_qq=#{teacherQQ,jdbcType=VARCHAR},
+		modify_time=#{modifyTime,jdbcType=TIMESTAMP}
 		where teacher_id = #{teacherId,jdbcType=VARCHAR}
 	</update>
 	
-	<insert id="insertTeacherInfo" parameterType="BaseResultMap">
-		insert into teacher values (teacher_id = #{teacherId,jdbcType=VARCHAR},teacher_pik=#{teacherPik,jdbcType=VARCHER},teacher_name=#{teacherName,jdbcType=VARCHAR},teacher_sex=#{teacherSex,jdbcType=INTEGER},teacher_age=#{teacherAge,jdbcType=INTEGER},
-		teacher_email=#{teacherEmail,jdbcType=VARCHAR},teacher_phone=#{teacherPhone,jdbcType=VARCHAR},teacher_qq=#{teacherQQ,jdbcType=VARCHAR},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
+	<insert id="insertTeacherInfo" parameterType="com.example.demo.model.Teacher">
+		insert into teacher 
+		teacher_id,teacher_pik,
+		teacher_name,teacher_sex,
+		teacher_age,teacher_email,
+		teacher_phone,teacher_qq,
+		create_time,modify_time
+		values 
+		(#{teacherId,jdbcType=VARCHAR},#{teacherPik,jdbcType=VARCHER},
+		#{teacherName,jdbcType=VARCHAR},#{teacherSex,jdbcType=INTEGER},
+		#{teacherAge,jdbcType=INTEGER},#{teacherEmail,jdbcType=VARCHAR},
+		#{teacherPhone,jdbcType=VARCHAR},#{teacherQQ,jdbcType=VARCHAR},
+		#{creatTime,JdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP}
 		where teacher_id = #{teacherId,jdbcType=VARCHAR})
 	</insert>
 	
 	<delete id="deleteTeacherInfo" parameterType="String">
-		delete from teacher where teacher_id=#{teacherId.jdbcType=VARCHAR}
+		delete from teacher where teacher_id=#{teacherId,jdbcType=VARCHAR}
 	</delete>
 </mapper>

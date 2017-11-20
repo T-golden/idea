@@ -26,18 +26,18 @@
 		from student_account where account = #{account,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
 	</select>
 	
-	<insert id="insertStudentAccont" parameterType="BaseResultMap">
+	<insert id="insertStudentAccont" parameterType="com.example.demo.model.StudentAccount">
 		insert into student_account 
-		set 
-		account,password,student_id,teacher_id,create_time,modify_time
-		value(account=#{account,jdbcType=VARCHAR},password=#{password,jdbcType=VARCHAR},
-		student_id=#{studentId,jdbcType=VARCHAR},teacher_id=#{teacherId,jdbcType=VARCHAR},now(),now())
+		(account,password,student_id,teacher_id,create_time,modify_time)
+		values(#{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},
+		#{studentId,jdbcType=VARCHAR},#{teacherId,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
 	</insert>
 	
-	<update id="updateStudentAccount" parameterType="BaseResultMap">
+	<update id="updateStudentAccount" parameterType="com.example.demo.model.StudentAccount">
 		update student_account 
 		set account=#{account,jdbcType=VARCHAR},password=#{password,jdbcType=VARCHAR},
-		teacher_id=#{teacherId,jdbcType=VARCHAR},now()
+		teacher_id=#{teacherId,jdbcType=VARCHAR},modify_time=#{modifyTime.jdbcType=TIMESTAMP}
 		where student_id=#{studentId,jdbcType=VARCHAR}
 	</update>
 	

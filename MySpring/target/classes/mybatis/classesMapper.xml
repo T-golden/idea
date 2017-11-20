@@ -4,18 +4,36 @@
 	<resultMap id="BaseResultMap" type="com.example.demo.model.Classes">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="class_id" property="classId" jdbcType="VARCHAR" />
+		<result column="class_name" property="className" jdbcType="VARCHAR" />
 		<result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-	id,class_id,teacher_id,create_time,modify_time
+	id,class_id,class_name,teacher_id,create_time,modify_time
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from activity
+		from class
 		where class_id = #{classId,jdbcType=VARCHAR}
 	</select>
+	
+	<insert id="createClass" parameterType="com.example.demo.model.Classes">
+		insert into class
+		(class_id,teacher_id,create_time,modify_time)
+		values(#{classId,jdbcType=VARCHAR},#{teacherId,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
+	</insert>
+	
+	<update id="updateClassById" parameterType="com.example.demo.model.Classes">
+		update class set
+		class_name=#{className,jdbcType=VARCHAR},teacher_id=#{teacherId,jdbcType=VARCHAR},
+		create_time=#{createTime,jdbcType=TIMESTAMP},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
+		where class_id=#{classId,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deleteClass" parameterType="String">
+		delete from class where class_id=#{classId,jdbcType=VARCHAR}
+	</delete>
 </mapper>

@@ -2,7 +2,11 @@ package com.example.demo.model;
 
 import java.util.Date;
 
-//章节资料
+/**
+ * 章节资料
+ * @author john
+ *
+ */
 public class ChapterMaterial {
 	
 	private int id;

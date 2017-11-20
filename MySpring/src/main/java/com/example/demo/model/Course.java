@@ -2,7 +2,11 @@ package com.example.demo.model;
 
 import java.util.Date;
 
-//课程
+/**
+ * 课程
+ * @author john
+ *
+ */
 public class Course {
 	
 	private int id;

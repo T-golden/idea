@@ -2,7 +2,11 @@ package com.example.demo.model;
 
 import java.util.Date;
 
-//章节知识点
+/**
+ * 章节知识点
+ * @author john
+ *
+ */
 public class ChapterKnowledgeExchange {
 	private int id;
 	private String knowledgeContext;

@@ -2,7 +2,11 @@ package com.example.demo.model;
 
 import java.util.Date;
 
-//作业
+/**
+ * 作业
+ * @author john
+ *
+ */
 public class Assignment {
 	private int id;
 	private String assignmentId;

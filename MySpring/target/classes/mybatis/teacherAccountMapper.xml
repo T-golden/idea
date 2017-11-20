@@ -27,16 +27,27 @@
 		from teacher_account where account = #{account,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
 	</select>
 	
-	<update id="updateByteacherId" parameterType="BaseResultMap">
+	<update id="updateByteacherId" parameterType="com.example.demo.model.TeacherAccount">
 		update teacher 
-		set account,password,modify_time 
-		value (account = #{account,jdbcType=VARCHAR} , password = #{password,jdbcType=VARCHAR} , now())
+		<set>
+			<if test="account != null">
+				account = #{account,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				modifyTime = #{modifyTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
 		where teacher_id = #{teacherId,jdbcType=VARCHAR}
 	</update>
 	
-	<insert id="insertAccount" parameterType="BaseResultMap">
+	<insert id="insertAccount" parameterType="com.example.demo.model.TeacherAccount">
 		insert into teacher_account 
-		values (account=#{account,jdbcType=VARCHAR} , password=#{password,jdbcType=VARCHAR} , teacher_id=#{teacherId,jdbcType=VARCHAR} , now(),now())
+		(account,password,teacher_id,create_time,modify_time)
+		values
+		(#{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{teacherId,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
 	</insert>
 	
 	<delete id="deleteTeacherAccount" parameterType="String">

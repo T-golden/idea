@@ -20,4 +20,23 @@
 		from chapter
 		where chapter_id = #{chapterId,jdbcType=VARCHAR}
 	</select>
+	
+	<insert id="createChapter" parameterType="com.example.demo.model.Chapter">
+		insert into chapter
+		(chapter_id,chapter_context,course_id,create_time,modify_time)
+		values
+		(#{chapterId,jdbcType=VARCHAR},#{chapterContext,jdbcType=VARCHAR},#{courseId,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
+	</insert>
+	
+	<update id="updateChapter" parameterType="com.example.demo.model.Chapter">
+		update chapter set
+		chapter_id=#{chapterId,jdbcType=VARCHAR},chapter_context=#{chapterContext,jdbcType=VARCHAR},course_id=#{courseId,jdbcType=VARCHAR},
+		create_time=#{createTime,jdbcType=TIMESTAMP},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
+		where chapter_id=#{chapterId,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deleteChapter" parameterType="String">
+		delete from chapter where chapter_id=#{chapterId,jdbcType=VARCHAR}
+	</delete>
 </mapper>

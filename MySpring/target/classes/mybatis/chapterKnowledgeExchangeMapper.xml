@@ -20,4 +20,23 @@
 		from chapter_knowledge_exchange
 		where student_id = #{studentId,jdbcType=VARCHAR}
 	</select>
+	
+	<insert id="createKnowledge" parameterType="com.example.demo.model.ChapterKnowledgeExchange">
+		insert into chapter_knowledge_exchange
+		(knowledge_context,chapter_id,student_id,create_time,modify_time)
+		values
+		(#{knowledgeContext,jdbcType=VARCHAR},#{chapterId,jdbcType=VARCHAR},
+		#{studentId,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
+	</insert>
+	
+	<update id="updateKnowledge" parameterType="com.example.demo.model.ChapterKnowledgeExchange">
+		update chapter_knowledge_exchange set 
+		knowledge_context=#{knowledgeContext,jdbcType=VARCHAR},chapter_id=#{chapterId,jdbcType=VARCHAR},student_id=#{studentId,jdbcType=VARCHAR},
+		create_time=#{createTime,jdbcType=TIMESTAMP},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
+		where student_id = #{studentId,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deleteKnowledge" parameterType="com.example.demo.model.ChapterKnowledgeExchange">
+		delete from chapter_knowledge_exchange where student_id = #{studentId,jdbcType=VARCHAR}
+	</delete>
 </mapper>
