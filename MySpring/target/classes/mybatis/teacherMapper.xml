@@ -32,7 +32,7 @@
 		update teacher 
 		set
 		teacher_id = #{teacherId,jdbcType=VARCHAR},
-		teacher_pik=#{teacherPik,jdbcType=VARCHER},
+		teacher_pik=#{teacherPik,jdbcType=VARCHAR},
 		teacher_name=#{teacherName,jdbcType=VARCHAR},
 		teacher_sex=#{teacherSex,jdbcType=INTEGER},
 		teacher_age=#{teacherAge,jdbcType=INTEGER},
@@ -51,11 +51,11 @@
 		teacher_phone,teacher_qq,
 		create_time,modify_time
 		values 
-		(#{teacherId,jdbcType=VARCHAR},#{teacherPik,jdbcType=VARCHER},
+		(#{teacherId,jdbcType=VARCHAR},#{teacherPik,jdbcType=VARCHAR},
 		#{teacherName,jdbcType=VARCHAR},#{teacherSex,jdbcType=INTEGER},
 		#{teacherAge,jdbcType=INTEGER},#{teacherEmail,jdbcType=VARCHAR},
 		#{teacherPhone,jdbcType=VARCHAR},#{teacherQQ,jdbcType=VARCHAR},
-		#{creatTime,JdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP}
+		#{creatTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP}
 		where teacher_id = #{teacherId,jdbcType=VARCHAR})
 	</insert>
 	
