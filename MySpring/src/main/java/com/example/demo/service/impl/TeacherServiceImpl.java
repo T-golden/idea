@@ -51,4 +51,18 @@ public class TeacherServiceImpl implements TeacherService {
 		return jsonResult;
 	}
 
+	@Override
+	public JsonResult updateTeacherInfo(Teacher teacher) {
+		JsonResult jsonResult = new JsonResult();
+		boolean b = teacherDao.updateById(teacher);
+		if(b) {
+			jsonResult.setMsg("教师信息修改成功！");
+			jsonResult.setStatus(0);
+		}else {
+			jsonResult.setMsg("教师信息修改失败！");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+
 }

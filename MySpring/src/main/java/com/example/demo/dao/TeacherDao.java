@@ -19,7 +19,7 @@ public interface TeacherDao {
 	 * @param teacher
 	 * @return
 	 */
-	int updateById(Teacher teacher);
+	boolean updateById(Teacher teacher);
 	
 	/**
 	 * 添加教师信息

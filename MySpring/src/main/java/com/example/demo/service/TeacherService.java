@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.JsonResult;
+import com.example.demo.model.Teacher;
 import com.example.demo.model.TeacherAccount;
 
 public interface TeacherService {
@@ -18,4 +19,11 @@ public interface TeacherService {
 	 * @return
 	 */
 	JsonResult getTeacherInfo(String teacherId);
+	
+	/**
+	 * 修改教师信息
+	 * @param teacherId
+	 * @return
+	 */
+	JsonResult updateTeacherInfo(Teacher teacher);
 }

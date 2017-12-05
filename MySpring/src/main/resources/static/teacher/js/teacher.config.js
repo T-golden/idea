@@ -58,7 +58,7 @@ $("#toUpdatePass").click(function(){
 	window.location.href=url;
 })
 //10.
-$("#toteacher").click(function(){
+$("#toTeacher").click(function(){
 	var url =  basePath + "teacher/toTeacher?teacherId=" + teacherId ;
 	console.log(url);
 	window.location.href=url;

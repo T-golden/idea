@@ -126,7 +126,6 @@
 				</div>
 				<!-- END PAGE HEADER-->
 				<div id="layer1_teacherInfo" style="width: 100%;" align="center">
-					<form action="">
 						<table id="table-1" border="1" style="width: 100%;">
 							<thead>
 								<tr>
@@ -140,9 +139,14 @@
 								</tr>
 								<tr>
 									<td>姓名 : <input id="teacherName" th:value="${teacher.teacherName}"></td>
-									<td>性别 : <input id="teacherSex" th:value="${teacher.teacherSex}"></td>
+									<td>性别 : 
+										<select id="teacherSex" name="teacherSex" th:value="${teacher.teacherSex}">
+											<option value="0">请选择</option>
+											<option value="1">男</option>
+											<option value="2">女</option>
+										</select>
 									<td>年龄 : <input id="teacherAge" th:value="${teacher.teacherAge}"> 岁</td>
-									<td rowspan="3" width="20%">教师头像</td>
+									<td rowspan="3" width="20%"><input type="file" name="teacherPik" id="teacherPik" th:value="${teacher.teacherPik}" placeholder="教师头像" style="border: 0;"></td>
 								</tr>
 								<tr>
 									<td align="center" colspan="3">联系方式</td>
@@ -154,8 +158,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<button>提交修改</button>
-					</form>
+						<button id="btn_update" style="position:absolute; bottom:0;">提交修改</button>
 				</div>
 			</div>
 		</div>
