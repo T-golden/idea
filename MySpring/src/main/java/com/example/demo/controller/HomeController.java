@@ -40,8 +40,8 @@ public class HomeController {
 					model.addAttribute("status", status);
 					return "login";
 				}
-				model.addAttribute("teacherAccount", teacherAccount);
-				return "teacher/teacher_index";
+				model.addAttribute("teacherId", teacherAccount.getTeacherId());
+				return "teacher/teacher_info";
 			} else if (status == 2) {
 				StudentAccount studentAccount = studentService.studentLogin(account, password);
 				if (studentAccount == null) {

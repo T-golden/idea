@@ -1,5 +1,6 @@
 var basePath = "http://localhost:8081/";
 var teacherId = $("#teacherId").val();
+console.log(teacherId);
 
 $(function(){
 	getTeacherInfo();
@@ -12,9 +13,10 @@ function getTeacherInfo(){
 		   async:true,    //或false,是否异步
 		   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
 		   success : function(res) {//返回数据根据结果进行相应的处理 
+			   console.log(res);
 			   var data = res.data;
-			   $(".teacherId").text(data.teacherId);
-			   $(".teacherName").text(data.teacherName);
+			   console.log(data.teacherName);
+			   $(".teacherName").val(data.teacherName);
 			   var teacherSex = data.teacherSex;
 			   if(teacherSex == 1){
 				   $(".teacherSexVal").text("男");
