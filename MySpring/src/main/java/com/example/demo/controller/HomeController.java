@@ -41,7 +41,7 @@ public class HomeController {
 					return "login";
 				}
 				model.addAttribute("teacherId", teacherAccount.getTeacherId());
-				return "teacher/teacher_info";
+				return "teacher/teacher_index";
 			} else if (status == 2) {
 				StudentAccount studentAccount = studentService.studentLogin(account, password);
 				if (studentAccount == null) {

@@ -60,7 +60,6 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
-	<input type="hidden" id="teacherId" th:value="${teacherAccount.teacherId}" />
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
 	<div th:include="teacher/teacher_top :: teacher_top" class="header navbar navbar-inverse navbar-fixed-top" ></div>
@@ -119,7 +118,7 @@
 						<!-- END BEGIN STYLE CUSTOMIZER -->    
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							欢迎回来！ <small class="teacherName">teacherName</small>
+							欢迎回来！ <input  type="text" readonly="readonly" class="teacherName" style="border: 0;"></input>
 						</h3>
 						<ul class="breadcrumb">
 							<li class="pull-right no-text-shadow">
@@ -130,7 +129,7 @@
 					</div>
 				</div>
 				<!-- END PAGE HEADER-->
-				<h5>教师编号  : <span class="teacherId" id="teacherId"></span></h5>
+				<h5>教师编号  : <input  type="text"  disabled="true" class="teacherId" id="teacherId" th:value="${teacherId}"></input></h5>
 				<div id="dashboard" align="center">
 					<table id="table-1" border="1" style="width: 100%;">
 						<thead>
@@ -140,25 +139,32 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>姓名 : <span class="teacherName"></span></td></td>
-								<td>性别 : <span class="teacherSexVal"></span></td>
-								<td>年龄 : <span class="teacherAge"></span> 岁</td>
-								<td rowspan="3">教师头像</td>
+								<td>姓名 : <input type="text" id="teacherName" class="teacherName"></input></td>
+								<td>性别 : 
+									<select id="teacherSex">
+									<option value="0">请选择</option>
+									<option value="1">男</option>
+									<option value="2">女</option>
+									</select>
+								</td>
+								<td>年龄 : <input id="teacherAge" class="teacherAge"></input> 岁</td>
+								<td rowspan="3"><input id="teacherPik">教师头像</td>
 							</tr>
 							<tr>
 								<td align="center" colspan="3">联系方式</td>
 							</tr>
 							<tr>
-								<td>Email : <span class="teacherEmail"></span></td>
-								<td>手机 : <span class="teacherPhone"></span></td>
-								<td>QQ : <span class="teacherQQ"></span> 岁</td>
+								<td>Email : <input id="teacherEmail" class="teacherEmail"></input></td>
+								<td>手机 : <input id="teacherPhone" class="teacherPhone"></input></td>
+								<td>QQ : <input id="teacherQQ" class="teacherQQ"></input></td>
 							</tr>
 							<tr>
-								<td>创建时间 : <span class="createTime"></span></td>
-								<td>上次修改时间 : <span class="modifyTime"></span></td>
+								<td>创建时间 : <span id="createTime" class="createTime"></span></td>
+								<td>上次修改时间 : <span id="modifyTime" class="modifyTime"></span></td>
 							</tr>
 						</tbody>
 					</table>
+					<div style="position: absolute; bottom: 0;"><button id="update_submit">提交修改</button></div>
 				</div>
 			</div>
 		</div>
@@ -227,7 +233,61 @@
 		   Index.initMiniCharts();
 		   Index.initDashboardDaterange();
 		   Index.initIntro();
-	});
+		   getTeacherInfo();
+		   $("#update_submit").click(function(){
+			   updateTeacherInfo();
+		   });
+		});
+		
+		function getTeacherInfo(){
+			$.ajax({
+				   type : "get",  //提交方式  
+				   url :  basePath+"teacherApi/getTeacherInfo?teacherId="+teacherId,	//路径  
+				   async:true,    //或false,是否异步
+				   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+				   success : function(res) {//返回数据根据结果进行相应的处理 
+					   console.log(res);
+					   var data = res.data;
+					   console.log(data.teacherName);
+					   $(".teacherName").val(data.teacherName);
+					   $("#teacherSex").val(data.teacherSex);
+					   $("#teacherAge").val(data.teacherAge);
+					   $("#teacherEmail").val(data.teacherEmail);
+					   $("#teacherPhone").val(data.teacherPhone);
+					   $("#teacherQQ").val(data.teacherQQ);
+					   
+					   
+					   var createTime = new Date(data.createTime);
+					   var _createTime = createTime.getFullYear() + '-' + (createTime.getMonth() + 1) + '-' + createTime.getDate() + ' ' + createTime.getHours() + ':' + createTime.getMinutes() + ':' + createTime.getSeconds();
+					   var modifyTime = new Date(data.modifyTime);
+					   var _modifyTime = modifyTime.getFullYear() + '-' + (modifyTime.getMonth() + 1) + '-' + modifyTime.getDate() + ' ' + modifyTime.getHours() + ':' + modifyTime.getMinutes() + ':' + modifyTime.getSeconds();
+					   $(".createTime").text(_createTime);
+					   $(".modifyTime").text(_modifyTime);
+				   }
+			});
+		}
+		
+		function updateTeacherInfo(){
+			var teacherName = $("#teacherName").val();
+			var teacherPik = $("#teacherPik").val();
+			var teacherSex = $("#teacherSex").val();
+			var teacherAge = $("#teacherAge").val();
+			var teacherEmail = $("#teacherEmail").val();
+			var teacherPhone = $("#teacherPhone").val();
+			var teacherQQ = $("#teacherQQ").val();
+			alert(teacherName + teacherSex + teacherAge + teacherEmail + teacherPhone + teacherQQ); 
+			alert(basePath + teacherId);
+			$.ajax({
+				   type : "post",  //提交方式  
+				   url :  basePath+"teacherApi/update TeacherInfo?teacherId="+teacherId+"&&teacherName="+teacherName+"&&teacherPik="+teacherPik+"&&teacherSex="+teacherSex+"&&teacherAge="+teacherAge+"&&teacherEmail="+teacherEmail+"&&teacherPhone="+teacherPhone+"&&teacherQQ="+teacherQQ,	//路径  
+				   async:false,    //或false,是否异步
+				   success : function(res) {//返回数据根据结果进行相应的处理 
+					   alert("yes");
+					   console.log(res);
+				   }
+			});
+		}
+		
 	</script>
 	<!-- END JAVASCRIPTS -->
 </body>

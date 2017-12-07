@@ -59,9 +59,13 @@ $("#toUpdatePass").click(function(){
 })
 //10.
 $("#toTeacher").click(function(){
-	var url =  basePath + "teacher/toTeacher?teacherId=" + teacherId ;
-	console.log(url);
-	window.location.href=url;
+	$.ajax({
+		type : "post",  //提交方式  
+		url :  basePath+"teacher/toTeacher?teacherId="+teacherId,
+		success : function(res) {//返回数据根据结果进行相应的处理 
+			
+		}
+	});
 })
 //11.
 $("#toCreateClass").click(function(){

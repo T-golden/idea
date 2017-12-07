@@ -53,10 +53,12 @@ public class TeacherApiController {
 	 * @param request
 	 * @return
 	 */
-	public JsonResult updataTeacherInfo(@RequestParam(value="teacherId") String teacherId , @RequestParam(value="teacherName", required=false) String teacherName , @RequestParam(value="teacherPik") String teacherPik , 
-			@RequestParam(value="teacherSex",required=false) int teacherSex , @RequestParam(value="teacherAge",required=false) int teacherAge , @RequestParam(value="teacherEmail",required=false) String teacherEmail ,
-			@RequestParam(value="teacherPhone",required=false) String teacherPhone , @RequestParam(value="teacherQQ",required=false) String teacherQQ , HttpServletRequest request) {
+	@RequestMapping("updateTeacherInfo")
+	public JsonResult updateTeacherInfo(@RequestParam("teacherId") String teacherId , @RequestParam("teacherName") String teacherName , @RequestParam("teacherPik") String teacherPik , 
+			@RequestParam("teacherSex") int teacherSex , @RequestParam("teacherAge") int teacherAge , @RequestParam("teacherEmail") String teacherEmail ,
+			@RequestParam("teacherPhone") String teacherPhone , @RequestParam("teacherQQ") String teacherQQ , HttpServletRequest request) {
 		JsonResult jsonResult = new JsonResult();
+		System.out.println("i am in");
 		Teacher teacher = new Teacher();
 		teacher.setTeacherId(teacherId);
 		teacher.setTeacherPik(teacherPik);
