@@ -2,30 +2,100 @@
 <html xmlns:th="http://www.thymeleaf.org" class="no-js">
 <!-- BEGIN HEAD -->
 <head>
-	<meta charset="utf-8" />
-	<title>teacher page</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
-	<!-- BEGIN GLOBAL MANDATORY STYLES -->
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style-metro.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style-responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="css/uniform.default.css" rel="stylesheet" type="text/css"/>
-	<!-- END GLOBAL MANDATORY STYLES -->
-	<!-- BEGIN PAGE LEVEL STYLES --> 
-	<link href="css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-	<link href="css/daterangepicker.css" rel="stylesheet" type="text/css" />
-	<link href="css/fullcalendar.css" rel="stylesheet" type="text/css"/>
-	<link href="css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-	<!-- END PAGE LEVEL STYLES -->
-	<link rel="shortcut icon" href="teacher/images/favicon.ico" />
-	<link href="css/demo.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8" />
+<title>teacher page</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="css/style-metro.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/style-responsive.css" rel="stylesheet" type="text/css" />
+<link href="css/default.css" rel="stylesheet" type="text/css"
+	id="style_color" />
+<link href="css/uniform.default.css" rel="stylesheet" type="text/css" />
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link href="css/jquery.gritter.css" rel="stylesheet" type="text/css" />
+<link href="css/fullcalendar.css" rel="stylesheet" type="text/css" />
+<link href="css/jqvmap.css" rel="stylesheet" type="text/css"
+	media="screen" />
+<link href="css/jquery.easy-pie-chart.css" rel="stylesheet"
+	type="text/css" media="screen" />
+<link href="css/demo.css" rel="stylesheet" type="text/css">
+<!-- END PAGE LEVEL STYLES -->
+<link rel="shortcut icon" href="teacher/images/favicon.ico" />
+<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var date = new Date().getTime();
+		$("#studentId").val(date);
+		getTeacherInfo();
+		getClass();
+	});  
+	
+
+	
+	function getTeacherInfo(){
+		$.ajax({
+			   type : "post",  //提交方式  
+			   url :  basePath+"teacherApi/getTeacherInfo?teacherId="+teacherId,	//路径  
+			   async:true,    //或false,是否异步
+			   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+			   success : function(res) {//返回数据根据结果进行相应的处理 
+				   console.log(res);
+				   var data = res.data;
+				   console.log(data.teacherName);
+				   $("#teacherName").html(data.teacherName);
+			   }
+		});
+	}
+	
+	function getClass(){
+		$.ajax({
+			   type : "get",
+			   url :  basePath+"teacherApi/getClassInfoByTeacherId?teacherId="+teacherId,
+			   async:true,
+			   success : function(res) {
+				   var status = res.status;
+				   var msg = res.msg;
+				   if(status!=0){
+					   alert(msg);
+				   }
+				   console.log(res.data);
+				   var data = res.data;
+				   for(var i = 0; i < data.length; i++){
+					   $("#classId").append("<option value='"+data[i].classId+"'>"+data[i].className+"</option>");
+				   }
+				   $("#classId").change(function(){
+					   var classId = $("#classId").val();
+					   alert(classId);
+					   $.ajax({
+						   type : "get",
+						   url :  basePath+"teacherApi/getClassInfoByClassId?classId="+classId,
+						   async:true,
+						   success : function(res) {
+							   var status = res.status;
+							   var msg = res.msg;
+							   if(status != 0){
+								   alert(msg);
+							   }
+							   console.log(res);
+							   var data = res.data;
+							   $("#classNum").val(data.classNum);
+						   }
+					   });
+				   });
+			   }
+		});
+	}
+</script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -33,8 +103,10 @@
 	<input type="hidden" id="teacherId" th:value="${teacherId}" />
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
-	<div th:include="teacher/teacher_top :: teacher_top" class="header navbar navbar-inverse navbar-fixed-top" ></div>
-	<div th:include="teacher/teacher_menu :: teacher_menu" class="page-sidebar nav-collapse collapse" ></div>
+		<div th:include="teacher/teacher_top :: teacher_top"
+			class="header navbar navbar-inverse navbar-fixed-top"></div>
+		<div th:include="teacher/teacher_menu :: teacher_menu"
+			class="page-sidebar nav-collapse collapse"></div>
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN PAGE CONTAINER-->
@@ -49,117 +121,95 @@
 							<div class="color-mode">
 								<p>THEME COLOR</p>
 								<ul class="inline">
-									<li class="color-black current color-default" data-style="default"></li>
+									<li class="color-black current color-default"
+										data-style="default"></li>
 									<li class="color-blue" data-style="blue"></li>
 									<li class="color-brown" data-style="brown"></li>
 									<li class="color-purple" data-style="purple"></li>
 									<li class="color-grey" data-style="grey"></li>
 									<li class="color-white color-light" data-style="light"></li>
 								</ul>
-								<label>
-									<span>Layout</span>
-									<select class="layout-option m-wrap small">
+								<label> <span>Layout</span> <select
+									class="layout-option m-wrap small">
 										<option value="fluid" selected>Fluid</option>
 										<option value="boxed">Boxed</option>
-									</select>
-								</label>
-								<label>
-									<span>Header</span>
-									<select class="header-option m-wrap small">
+								</select>
+								</label> <label> <span>Header</span> <select
+									class="header-option m-wrap small">
 										<option value="fixed" selected>Fixed</option>
 										<option value="default">Default</option>
-									</select>
-								</label>
-								<label>
-									<span>Sidebar</span>
-									<select class="sidebar-option m-wrap small">
+								</select>
+								</label> <label> <span>Sidebar</span> <select
+									class="sidebar-option m-wrap small">
 										<option value="fixed">Fixed</option>
 										<option value="default" selected>Default</option>
-									</select>
-								</label>
-								<label>
-									<span>Footer</span>
-									<select class="footer-option m-wrap small">
+								</select>
+								</label> <label> <span>Footer</span> <select
+									class="footer-option m-wrap small">
 										<option value="fixed">Fixed</option>
 										<option value="default" selected>Default</option>
-									</select>
+								</select>
 								</label>
 							</div>
 						</div>
-						<!-- END BEGIN STYLE CUSTOMIZER -->    
+						<!-- END BEGIN STYLE CUSTOMIZER -->
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							欢迎回来！ <small>teacherName</small>
+							欢迎回来！ <small id="teacherName">teacherName</small>
 						</h3>
 						<ul class="breadcrumb">
 							<li class="pull-right no-text-shadow">
-								<div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range"><span></span></div>
+								<div id="dashboard-report-range"
+									class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive"
+									data-tablet="" data-desktop="tooltips" data-placement="top"
+									data-original-title="Change dashboard date range">
+									<span></span>
+								</div>
 							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
 				</div>
 				<!-- END PAGE HEADER-->
-				<div id="dashboard">
-				 	<div class="demos-buttons" hidden="">
-				        <h3>Demos</h3>
-				        <a href="index.html" class="submit">Simple</a><br />
-				        <a href="flipin.html" class="submit">Flip In</a> <a href="fromright.html" class="submit">
-				            From Right</a>
-				        <br>
-				        <a href="bouncy.html" class="submit">Bouncy</a> <a href="fadein.html" class="submit">
-				            Fade In</a><br>
-				        <a href="roatebottom.html" class="submit">Rotate From Bottom</a>
-				        <br>
-				        <a href="fromtop.html" class="submit active">From Top</a><br>
-				        <a href="pagelevel01.html" class="submit">Page Level 01</a><br>
-				        <a href="pagelevel02.html" class="submit">Page Level 02</a><br>
-				        <a href="pagelevel03.html" class="submit">Page Level 03</a>
-				    </div>
-				    <section id="getintouch" class="fadeInDownBig animated">
-				        <div class="container" style="border-bottom: 0;">
-				            <h1>
-				                <label>学生信息创建</label>
-				            </h1>
-				        </div>
-				        <div class="container">
-				            <form class="contact" action="#" method="post" id="form">
-					            <div class="">
-					                <div class="ctrl">
-					                     <label for="name">班级编号:</label><input type="text" id="name" name="name" data-required="true" data-validation="text"
-					                        data-msg="Invalid Name" placeholder="Ex: John Donga">
-					                </div>
-					            </div>
-					            <div class="">
-					                <div class="ctrl">
-					                    <label for="email">班级名称:</label><input type="text" id="email" name="email" data-required="true" data-validation="email"
-					                        data-msg="Invalid E-Mail" placeholder="Ex: youremail@domain.com">
-					                </div>
-					            </div>
-					            <div class="">
-					                <div class="ctrl">
-					                    <label for="email">Phone</label><input type="text" id="phone" name="phone" data-required="true" data-validation="custom"
-					                        data-msg="Invalid Phone #" placeholder="Ex: 111-258-444">
-					                </div>
-					            </div>
-					            <div class="">
-					                <div class="ctrl">
-					                    <label for="subject">Subject</label><input type="text" name="subject" id="subject" placeholder="Ex: Quote for Project">
-					                </div>
-					            </div>
-					            <div class=""> 	
-					                <div class="ctrl">
-					                    <label for="message">Message</label><textarea id="message" name="message" rows="6" cols="10"></textarea>
-					                </div>
-					            </div>
-					            <div class="">
-					                <div class="span10 offset2">
-					                    <input type="submit" name="submit" id="submit" class="submit" value="Send Message">
-					                </div>
-					            </div>
-				            </form>
-				        </div>
-				    </section>
+				<input th:value="${teacherId}" id="teacherId" hidden="">
+				<div id="dashboard" align="center">
+					<section id="getintouch" class="fadeInDownBig animated">
+						<div class="container" style="border-bottom: 0;">
+							<h1>
+								<label>学生账号信息创建</label>
+							</h1>
+						</div>
+						<div class="container">
+							<div class="float">学生编号:</div>
+							<div>
+								<input type="text" id="studentId" />
+							</div>
+							<div>学生账号:</div>
+							<div>
+								<input type="text" id="studentAccount" />
+							</div>
+							<div>学生密码:</div>
+							<div>
+								<input type="text" id="studentPassword" />
+							</div>
+							<div>学生所属班级:</div>
+							<div>
+								<select id="classId">
+									<option value="0">请选择</option>
+								</select>
+							</div>
+							<div>创建人数:</div>
+							<div>
+								<input type="text" id="classNum" />
+							</div>
+							<div class="">
+								<div class="span10 offset2">
+									<input type="submit" name="submit" id="submit" class="submit"
+										value="create student">
+								</div>
+							</div>
+						</div>
+					</section>
 				</div>
 			</div>
 		</div>
@@ -168,68 +218,23 @@
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
 		<div class="footer-inner">
-			2013 &copy; Metronic by keenthemes.Collect from <a href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a> - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+			2013 &copy; Metronic by keenthemes.Collect from <a
+				href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a>
+			- More Templates <a href="http://www.cssmoban.com/" target="_blank"
+				title="模板之家">模板之家</a>
 		</div>
 		<div class="footer-tools">
-			<span class="go-top">
-			<i class="icon-angle-up"></i>
+			<span class="go-top"> <i class="icon-angle-up"></i>
 			</span>
 		</div>
 	</div>
-	<!-- END FOOTER -->
-	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-	<!-- BEGIN CORE PLUGINS -->
-	<script src="js/jquery-1.10.1.min.js" type="text/javascript"></script>
-	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-	<script src="js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	<!--[if lt IE 9]>
-	<script src="js/excanvas.min.js"></script>
-	<script src="js/respond.min.js"></script>  
-	<![endif]-->   
-	<script src="js/jquery.slimscroll.min.js" type="text/javascript"></script>
-	<script src="js/jquery.blockui.min.js" type="text/javascript"></script>  
-	<script src="js/jquery.cookie.min.js" type="text/javascript"></script>
-	<script src="js/jquery.uniform.min.js" type="text/javascript" ></script>
-	<!-- END CORE PLUGINS -->
-	<!-- BEGIN PAGE LEVEL PLUGINS -->
-	<script src="js/jquery.vmap.js" type="text/javascript"></script>   
-	<script src="js/jquery.vmap.russia.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.world.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.europe.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.germany.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.usa.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.sampledata.js" type="text/javascript"></script>  
-	<script src="js/jquery.flot.js" type="text/javascript"></script>
-	<script src="js/jquery.flot.resize.js" type="text/javascript"></script>
-	<script src="js/jquery.pulsate.min.js" type="text/javascript"></script>
-	<script src="js/date.js" type="text/javascript"></script>
-	<script src="js/daterangepicker.js" type="text/javascript"></script>     
-	<script src="js/jquery.gritter.js" type="text/javascript"></script>
-	<script src="js/fullcalendar.min.js" type="text/javascript"></script>
-	<script src="js/jquery.easy-pie-chart.js" type="text/javascript"></script>
-	<script src="js/jquery.sparkline.min.js" type="text/javascript"></script>  
-	<script src="js/jquery.ffform.js" type="text/javascript"></script> 
-	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui.js" type="text/javascript"></script>
-	<!-- END PAGE LEVEL PLUGINS -->
-	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+
 	<script src="js/app.js" type="text/javascript"></script>
-	<script src="js/index.js" type="text/javascript"></script>        
-	<!-- END PAGE LEVEL SCRIPTS -->  
-	<script src="js/teacher.config.js" type="text/javascript"></script> 
+	<script src="js/teacher.config.js" type="text/javascript"></script>
 	<script>
-		jQuery(document).ready(function() {    
-		   App.init(); // initlayout and core plugins
-		   Index.init();
-		   Index.initJQVMAP(); // init index page's custom scripts
-		   Index.initCalendar(); // init index page's custom scripts
-		   Index.initCharts(); // init index page's custom scripts
-		   Index.initChat();
-		   Index.initMiniCharts();
-		   Index.initDashboardDaterange();
-		   Index.initIntro();
+		jQuery(document).ready(function() {
+			App.init(); // initlayout and core plugins
 		});
 	</script>
 	<!-- END JAVASCRIPTS -->

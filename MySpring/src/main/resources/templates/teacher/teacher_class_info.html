@@ -2,29 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org" class="no-js">
 <!-- BEGIN HEAD -->
 <head>
-	<meta charset="utf-8" />
-	<title>teacher page</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
-	<!-- BEGIN GLOBAL MANDATORY STYLES -->
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style-metro.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="css/style-responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="css/uniform.default.css" rel="stylesheet" type="text/css"/>
-	<!-- END GLOBAL MANDATORY STYLES -->
-	<!-- BEGIN PAGE LEVEL STYLES --> 
-	<link href="css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-	<link href="css/daterangepicker.css" rel="stylesheet" type="text/css" />
-	<link href="css/fullcalendar.css" rel="stylesheet" type="text/css"/>
-	<link href="css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-	<!-- END PAGE LEVEL STYLES -->
-	<link rel="shortcut icon" href="teacher/images/favicon.ico" />
+<meta charset="utf-8" />
+<title>teacher page</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="css/style-metro.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/style-responsive.css" rel="stylesheet" type="text/css" />
+<link href="css/default.css" rel="stylesheet" type="text/css"
+	id="style_color" />
+<link href="css/uniform.default.css" rel="stylesheet" type="text/css" />
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link href="css/jquery.gritter.css" rel="stylesheet" type="text/css" />
+<link href="css/fullcalendar.css" rel="stylesheet" type="text/css" />
+<link href="css/jqvmap.css" rel="stylesheet" type="text/css"
+	media="screen" />
+<link href="css/jquery.easy-pie-chart.css" rel="stylesheet"
+	type="text/css" media="screen" />
+<link href="css/demo.css" rel="stylesheet" type="text/css">
+<!-- END PAGE LEVEL STYLES -->
+<link rel="shortcut icon" href="teacher/images/favicon.ico" />
+<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){  
+		getTeacherInfo();
+	});  
+	
+	function getTeacherInfo(){
+		$.ajax({
+			   type : "post",  //提交方式  
+			   url :  basePath+"teacherApi/getTeacherInfo?teacherId="+teacherId,	//路径  
+			   async:true,    //或false,是否异步
+			   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+			   success : function(res) {//返回数据根据结果进行相应的处理 
+				   console.log(res);
+				   var data = res.data;
+				   console.log(data.teacherName);
+				   $("#teacherName").html(data.teacherName);
+			   }
+		});
+	}
+	
+</script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -32,8 +60,10 @@
 	<input type="hidden" id="teacherId" th:value="${teacherId}" />
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
-	<div th:include="teacher/teacher_top :: teacher_top" class="header navbar navbar-inverse navbar-fixed-top" ></div>
-	<div th:include="teacher/teacher_menu :: teacher_menu" class="page-sidebar nav-collapse collapse" ></div>
+		<div th:include="teacher/teacher_top :: teacher_top"
+			class="header navbar navbar-inverse navbar-fixed-top"></div>
+		<div th:include="teacher/teacher_menu :: teacher_menu"
+			class="page-sidebar nav-collapse collapse"></div>
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN PAGE CONTAINER-->
@@ -48,59 +78,77 @@
 							<div class="color-mode">
 								<p>THEME COLOR</p>
 								<ul class="inline">
-									<li class="color-black current color-default" data-style="default"></li>
+									<li class="color-black current color-default"
+										data-style="default"></li>
 									<li class="color-blue" data-style="blue"></li>
 									<li class="color-brown" data-style="brown"></li>
 									<li class="color-purple" data-style="purple"></li>
 									<li class="color-grey" data-style="grey"></li>
 									<li class="color-white color-light" data-style="light"></li>
 								</ul>
-								<label>
-									<span>Layout</span>
-									<select class="layout-option m-wrap small">
+								<label> <span>Layout</span> <select
+									class="layout-option m-wrap small">
 										<option value="fluid" selected>Fluid</option>
 										<option value="boxed">Boxed</option>
-									</select>
-								</label>
-								<label>
-									<span>Header</span>
-									<select class="header-option m-wrap small">
+								</select>
+								</label> <label> <span>Header</span> <select
+									class="header-option m-wrap small">
 										<option value="fixed" selected>Fixed</option>
 										<option value="default">Default</option>
-									</select>
-								</label>
-								<label>
-									<span>Sidebar</span>
-									<select class="sidebar-option m-wrap small">
+								</select>
+								</label> <label> <span>Sidebar</span> <select
+									class="sidebar-option m-wrap small">
 										<option value="fixed">Fixed</option>
 										<option value="default" selected>Default</option>
-									</select>
-								</label>
-								<label>
-									<span>Footer</span>
-									<select class="footer-option m-wrap small">
+								</select>
+								</label> <label> <span>Footer</span> <select
+									class="footer-option m-wrap small">
 										<option value="fixed">Fixed</option>
 										<option value="default" selected>Default</option>
-									</select>
+								</select>
 								</label>
 							</div>
 						</div>
-						<!-- END BEGIN STYLE CUSTOMIZER -->    
+						<!-- END BEGIN STYLE CUSTOMIZER -->
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							欢迎回来！ <small>teacherName</small>
+							欢迎回来！ <small id="teacherName">teacherName</small>
 						</h3>
 						<ul class="breadcrumb">
 							<li class="pull-right no-text-shadow">
-								<div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range"><span></span></div>
+								<div id="dashboard-report-range"
+									class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive"
+									data-tablet="" data-desktop="tooltips" data-placement="top"
+									data-original-title="Change dashboard date range">
+									<span></span>
+								</div>
 							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
 				</div>
 				<!-- END PAGE HEADER-->
-				<div id="dashboard">
-				class_info
+				<input th:value="${teacherId}" id="teacherId" hidden="">
+				<div id="dashboard" align="center">
+					<section id="getintouch" class="fadeInDownBig animated">
+						<div class="container" style="border-bottom: 0;">
+							<h1>
+								<label>班级信息</label>
+							</h1>
+						</div>
+						<div class="container">
+							<table style="border: 5px; width: 100%;">
+								<tr>
+									<td>班级编号</td>
+									<td>班级名</td>
+									<td>班级人数</td>
+									<td>负责人编号</td>
+									<td>班级负责人</td>
+									<td>操作</td>
+								</tr>
+							</table>
+						</div>
+					</section>
 				</div>
 			</div>
 		</div>
@@ -109,65 +157,23 @@
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
 		<div class="footer-inner">
-			2013 &copy; Metronic by keenthemes.Collect from <a href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a> - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+			2013 &copy; Metronic by keenthemes.Collect from <a
+				href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a>
+			- More Templates <a href="http://www.cssmoban.com/" target="_blank"
+				title="模板之家">模板之家</a>
 		</div>
 		<div class="footer-tools">
-			<span class="go-top">
-			<i class="icon-angle-up"></i>
+			<span class="go-top"> <i class="icon-angle-up"></i>
 			</span>
 		</div>
 	</div>
-	<!-- END FOOTER -->
-	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-	<!-- BEGIN CORE PLUGINS -->
-	<script src="js/jquery-1.10.1.min.js" type="text/javascript"></script>
-	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-	<script src="js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	<!--[if lt IE 9]>
-	<script src="js/excanvas.min.js"></script>
-	<script src="js/respond.min.js"></script>  
-	<![endif]-->   
-	<script src="js/jquery.slimscroll.min.js" type="text/javascript"></script>
-	<script src="js/jquery.blockui.min.js" type="text/javascript"></script>  
-	<script src="js/jquery.cookie.min.js" type="text/javascript"></script>
-	<script src="js/jquery.uniform.min.js" type="text/javascript" ></script>
-	<!-- END CORE PLUGINS -->
-	<!-- BEGIN PAGE LEVEL PLUGINS -->
-	<script src="js/jquery.vmap.js" type="text/javascript"></script>   
-	<script src="js/jquery.vmap.russia.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.world.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.europe.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.germany.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.usa.js" type="text/javascript"></script>
-	<script src="js/jquery.vmap.sampledata.js" type="text/javascript"></script>  
-	<script src="js/jquery.flot.js" type="text/javascript"></script>
-	<script src="js/jquery.flot.resize.js" type="text/javascript"></script>
-	<script src="js/jquery.pulsate.min.js" type="text/javascript"></script>
-	<script src="js/date.js" type="text/javascript"></script>
-	<script src="js/daterangepicker.js" type="text/javascript"></script>     
-	<script src="js/jquery.gritter.js" type="text/javascript"></script>
-	<script src="js/fullcalendar.min.js" type="text/javascript"></script>
-	<script src="js/jquery.easy-pie-chart.js" type="text/javascript"></script>
-	<script src="js/jquery.sparkline.min.js" type="text/javascript"></script>  
-	<!-- END PAGE LEVEL PLUGINS -->
-	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+	
 	<script src="js/app.js" type="text/javascript"></script>
-	<script src="js/index.js" type="text/javascript"></script>        
-	<!-- END PAGE LEVEL SCRIPTS -->  
-	<script src="js/teacher.config.js" type="text/javascript"></script> 
+	<script src="js/teacher.config.js" type="text/javascript"></script>
 	<script>
-		jQuery(document).ready(function() {    
-		   App.init(); // initlayout and core plugins
-		   Index.init();
-		   Index.initJQVMAP(); // init index page's custom scripts
-		   Index.initCalendar(); // init index page's custom scripts
-		   Index.initCharts(); // init index page's custom scripts
-		   Index.initChat();
-		   Index.initMiniCharts();
-		   Index.initDashboardDaterange();
-		   Index.initIntro();
+		jQuery(document).ready(function() {
+			App.init(); // initlayout and core plugins
 		});
 	</script>
 	<!-- END JAVASCRIPTS -->

@@ -3,10 +3,6 @@
  GENERAL RESET & SETUP 
 *********************/
 
-/***
-Import fonts
-***/
-@import url(../image/css);
 
 /***
 Reset and overrides  
@@ -102,15 +98,6 @@ li [class*=" icon-"].icon-large {
 /***
 Close icon used for modal dialog and other UI element close buttons
 ***/
-.close {
-  display: inline-block;
-  margin-top: 0px;
-  margin-right: 0px;
-  width: 9px;
-  height: 9px;
-  background-repeat: no-repeat !important;
-  background-image: url("../image/remove-icon-small.png") !important;
-}
 
 /***
 ie8 & ie9 modes
@@ -513,16 +500,6 @@ ul.page-sidebar-menu > li.active > a {
   text-shadow:none;
 }  
 
-ul.page-sidebar-menu > li.active > a .selected {
-  display: block;
-  width: 8px;
-  height: 25px;
-  background-image: url("../image/sidebar-menu-arrow.png");
-  float: right;
-  position: absolute;
-  right:0px;
-  top:8px;
-}
 
 .page-sidebar ul > li > a > .arrow:before {  
    float: right;
@@ -657,16 +634,7 @@ ul.page-sidebar-menu > li > ul.sub-menu  li > ul.sub-menu > li > a > i {
   margin: 8px 20px 20px 20px;
 }
 
-.page-sidebar .sidebar-search .submit {  
-  display: block;
-  float: right;
-  margin-top: 8px;
-  width: 13px;
-  height: 13px;
-  background-image: url(../image/search-icon.png);
-  background-repeat: no-repeat;
-}
- 
+
 .page-sidebar .sidebar-search input {
   margin: 0px;
   width: 165px;
@@ -1268,32 +1236,9 @@ Portlets
   color: #000 !important;
 }
 
-.portlet-title .tools > a.remove {
-  background-image:url(../image/portlet-remove-icon.png);
-  background-repeat: no-repeat;
-  width: 11px;
-}
 
-.portlet-title .tools > a.config {
-  background-image:url(../image/portlet-config-icon.png);
-  background-repeat: no-repeat;
-  width: 12px;
-}
 
-.portlet-title .tools > a.reload {
-  background-image:url(../image/portlet-reload-icon.png);
-  width: 13px;
-}
 
-.portlet-title .tools > a.expand {
-  background-image:url(../image/portlet-expand-icon.png);
-  width: 14px;
-}
-
-.portlet-title .tools > a.collapse {
-  background-image:url(../image/portlet-collapse-icon.png);
-  width: 14px;
-}
 
 .portlet-title .tools > a:hover {
   text-decoration: none;
@@ -1480,30 +1425,9 @@ Box portlet
   margin-top: 3px;
 }
 
-.portlet.box .portlet-title .tools > a.remove, 
-.portlet.solid .portlet-title .tools > a.remove {
-  background-image:url(../image/portlet-remove-icon-white.png);
-}
 
-.portlet.box .portlet-title .tools > a.config,
-.portlet.solid .portlet-title .tools > a.config {
-  background-image:url(../image/portlet-config-icon-white.png);
-}
 
-.portlet.box .portlet-title .tools > a.reload,
-.portlet.solid .portlet-title .tools > a.reload {
-  background-image:url(../image/portlet-reload-icon-white.png);
-}
 
-.portlet.box .portlet-title .tools > a.expand,
-.portlet.solid .portlet-title .tools > a.expand {
-  background-image:url(../image/portlet-expand-icon-white.png);
-}
-
-.portlet.box .portlet-title .tools > a.collapse,
-.portlet.solid .portlet-title .tools > a.collapse {
-  background-image:url(../image/portlet-collapse-icon-white.png);
-}
 
 /* portlet buttons */
 .portlet.box .portlet-body {
@@ -2332,19 +2256,6 @@ Zoom icon overlay on images
   z-index: 5;
 }
 
-.zoom .zoom-icon {
-  background-image:url("../image/overlay-icon.png");
-  background-color: #222;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  position: absolute;
-  width: inherit;
-  height: inherit;
-  opacity: 0; 
-  filter: alpha(opacity = 0);
-  z-index: 6;  
-  top:0;  
-}
 
 /***
 Chats
@@ -3406,18 +3317,11 @@ Styler Panel
   position:absolute;
 }
 
-.color-panel .icon-color {
-  background:#c9c9c9 url(../image/icon-color.png) center no-repeat !important;
-}
 
 .color-panel .icon-color:hover {
   background-color:#3d3d3d !important;
 }
 
-.color-panel .icon-color-close {
-  display:none;
-  background:#3d3d3d url(../image/icon-color-close.png) center no-repeat !important;
-}
 
 .color-panel .icon-color-close:hover {
   background-color:#222 !important;
@@ -4424,10 +4328,6 @@ jQuery UI Datepicker(new in v1.2.2)
   height: 28px;
 }
 
-.ui-widget-header .ui-icon {
-  background-image: url(../image/ui-icons_888888_256x240.png) !important;
-}
-
 .ui-widget-header .ui-datepicker-next,
 .ui-widget-header .ui-datepicker-prev {
   margin: 2px 2px 2px 2px;
@@ -4544,13 +4444,6 @@ jQuery UI Dialogs(new in v1.2.4)
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial;
 }
 
-.ui-dialog .ui-dialog-titlebar-close {
-  outline: none !important;
-  border: 0 !important;
-  box-shadow: none;
-  background: url(../image/hor-menu-search-close.png) no-repeat center;
-  margin-top: -12px !important;
-}
 
 .ui-dialog .ui-dialog-titlebar-close:hover {
   opacity: 0.8;
@@ -4563,35 +4456,22 @@ jQuery UI Dialogs(new in v1.2.4)
   background-color: #4b8df8 !important;
 }
 
-.ui-dialog.ui-dialog-blue .ui-dialog-titlebar-close {
-  background: url(../image/hor-menu-search-close-white.png) no-repeat center;
-}
 
 .ui-dialog.ui-dialog-red .ui-dialog-titlebar {
   color: #fff !important;
   background-color: #e02222 !important;
 }
 
-.ui-dialog.ui-dialog-red .ui-dialog-titlebar-close {
-  background: url(../image/hor-menu-search-close-white.png) no-repeat center;
-}
 
 .ui-dialog.ui-dialog-yellow .ui-dialog-titlebar {
   color: #fff !important;
   background-color: #ffb848 !important;
 }
 
-.ui-dialog.ui-dialog-yellow .ui-dialog-titlebar-close {
-  background: url(../image/hor-menu-search-close-white.png) no-repeat center;
-}
 
 .ui-dialog.ui-dialog-green .ui-dialog-titlebar {
   color: #fff !important;
   background-color: #35aa47 !important;
-}
-
-.ui-dialog.ui-dialog-green .ui-dialog-titlebar-close {
-  background: url(../image/hor-menu-search-close-white.png) no-repeat center;
 }
 
 .ui-dialog.ui-dialog-purple .ui-dialog-titlebar {
@@ -4599,18 +4479,12 @@ jQuery UI Dialogs(new in v1.2.4)
   background-color: #852b99 !important;
 }
 
-.ui-dialog.ui-dialog-purple .ui-dialog-titlebar-close {
-  background: url(../image/hor-menu-search-close-white.png) no-repeat center;
-}
 
 .ui-dialog.ui-dialog-grey .ui-dialog-titlebar {
   color: #fff !important;
   background-color: #555555 !important;
 }
 
-.ui-dialog.ui-dialog-grey .ui-dialog-titlebar-close {
-  background: url(../image/hor-menu-search-close-white.png) no-repeat center;
-}
 /*dialog title bg colors*/
 
 .ui-dialog .ui-dialog-content {
@@ -4750,22 +4624,12 @@ Horezantal Menu(new in v1.2)
     border-bottom: none !important;
 }
 
-/*search*/
-.header .hor-menu .hor-menu-search-form-toggler {
-    display: inline-block;
-    padding: 11px 22px 11px 22px !important;
-    cursor: pointer;
-    background: url(../image/hor-menu-search.png) no-repeat center;
-}
 
 .header .hor-menu .hor-menu-search-form-toggler:hover {
   opacity: 0.8;
   filter: alpha(opacity=80);
 }
 
-.header .hor-menu .hor-menu-search-form-toggler.hide {
-   background: #101010 url(../image/hor-menu-search-close.png) no-repeat center;
-}
 
 .header .hor-menu a.hor-menu-search-form-toggler-close {
   display: none;
@@ -4779,15 +4643,6 @@ Horezantal Menu(new in v1.2)
   z-index:999; 
   position:absolute; 
   background:#101010; 
-}
-
-.header .hor-menu .search-form .btn {
-  color: #999;
-  padding: 7px 20px; 
-  height: 32px;
-  width: 10px;
-  display: inline-block;
-  background: #2d2d2d url(../image/search-icon.png) no-repeat center;
 }
 
 .header .hor-menu .search-form .btn:hover {
@@ -5028,36 +4883,6 @@ Social Icons(new in v1.2.2)
   background-position:0 -38px;
 }
 
-.social-icons .amazon {background: url(../image/amazon.png) no-repeat;}
-.social-icons .behance {background: url(../image/behance.png) no-repeat;}
-.social-icons .blogger {background: url(../image/blogger.png) no-repeat;}
-.social-icons .deviantart {background: url(../image/deviantart.png) no-repeat;}
-.social-icons .dribbble {background: url(../image/dribbble.png) no-repeat;}
-.social-icons .dropbox {background: url(../image/dropbox.png) no-repeat;}
-.social-icons .evernote {background: url(../image/evernote.png) no-repeat;}
-.social-icons .facebook {background: url(../image/facebook.png) no-repeat;}
-.social-icons .forrst {background: url(../image/forrst.png) no-repeat;}
-.social-icons .github {background: url(../image/github.png) no-repeat;}
-.social-icons .googleplus {background: url(../image/googleplus.png) no-repeat;}
-.social-icons .jolicloud {background: url(../image/jolicloud.png) no-repeat;}
-.social-icons .last-fm {background: url(../image/last-fm.png) no-repeat;}
-.social-icons .linkedin {background: url(../image/linkedin.png) no-repeat;}
-.social-icons .picasa {background: url(../image/picasa.png) no-repeat;}
-.social-icons .pintrest {background: url(../image/pintrest.png) no-repeat;}
-.social-icons .rss {background: url(../image/rss.png) no-repeat;}
-.social-icons .skype {background: url(../image/skype.png) no-repeat;}
-.social-icons .spotify {background: url(../image/spotify.png) no-repeat;}
-.social-icons .stumbleupon {background: url(../image/stumbleupon.png) no-repeat;}
-.social-icons .tumblr {background: url(../image/tumblr.png) no-repeat;}
-.social-icons .twitter {background: url(../image/twitter.png) no-repeat;}
-.social-icons .vimeo {background: url(../image/vimeo.png) no-repeat;}
-.social-icons .wordpress {background: url(../image/wordpress.png) no-repeat;}
-.social-icons .xing {background: url(../image/xing.png) no-repeat;}
-.social-icons .yahoo {background: url(../image/yahoo.png) no-repeat;}
-.social-icons .youtube {background: url(../image/youtube.png) no-repeat;}
-.social-icons .vk {background: url(../image/vk.png) no-repeat;}
-.social-icons .instagram {background: url(../image/instagram.png) no-repeat;}
-
 
 /***
 Responsive tables(new in v1.2.3)
@@ -5251,13 +5076,7 @@ Datatables Plugin(in v1.3)
   height: 14px;
 }
 
-.dataTable .row-details.row-details-close {
-  background: url("../image/datatable-row-openclose.png") no-repeat 0 0;
-}
 
-.dataTable .row-details.row-details-open {  
-  background: url("../image/datatable-row-openclose.png") no-repeat 0 -23px !important;
-}
 
 .dataTable .details {
   background-color: #eee !important;

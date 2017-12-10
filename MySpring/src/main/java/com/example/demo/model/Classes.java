@@ -11,6 +11,7 @@ public class Classes {
 	private int id;
 	private String classId;
 	private String className;
+	private int classNum;
 	private String teacherId;
 	private Date createTime;
 	private Date modifyTime;
@@ -65,6 +66,14 @@ public class Classes {
 
 	public void setClassName(String className) {
 		this.className = className;
+	}
+
+	public int getClassNum() {
+		return classNum;
+	}
+
+	public void setClassNum(int classNum) {
+		this.classNum = classNum;
 	}
 
 	

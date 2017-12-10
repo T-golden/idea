@@ -5,35 +5,53 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="class_id" property="classId" jdbcType="VARCHAR" />
 		<result column="class_name" property="className" jdbcType="VARCHAR" />
+		<result column="class_num" property="classNum" jdbcType="INTEGER" />
 		<result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-	id,class_id,class_name,teacher_id,create_time,modify_time
+	id,class_id,class_name,class_num,teacher_id,create_time,modify_time
 	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+	
+	<select id="selectByClassId" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from class
+		from classes
 		where class_id = #{classId,jdbcType=VARCHAR}
 	</select>
 	
+	<select id="selectPageByteacherId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from classes
+		where teacher_id = #{teacherId,jdbcType=VARCHAR} order by create_time limit #{start},#{pageSize}
+	</select>
+	
+	<select id="selectByTeacherId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from classes
+		where teacher_id = #{teacherId,jdbcType=VARCHAR}
+	</select>
+	
 	<insert id="createClass" parameterType="com.example.demo.model.Classes">
-		insert into class
-		(class_id,teacher_id,create_time,modify_time)
-		values(#{classId,jdbcType=VARCHAR},#{teacherId,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
+		insert into classes
+		(class_id,class_name,class_num,teacher_id,create_time,modify_time)
+		values(#{classId,jdbcType=VARCHAR},#{className,jdbcType=VARCHAR},#{classNum,jdbcType=INTEGER},#{teacherId,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
 	</insert>
 	
 	<update id="updateClassById" parameterType="com.example.demo.model.Classes">
-		update class set
-		class_name=#{className,jdbcType=VARCHAR},teacher_id=#{teacherId,jdbcType=VARCHAR},
+		update classes set
+		class_name=#{className,jdbcType=VARCHAR},class_name=#{className,jdbcType=VARCHAR},class_num=#{classNum,jdbcType=INTEGER},teacher_id=#{teacherId,jdbcType=VARCHAR},
 		create_time=#{createTime,jdbcType=TIMESTAMP},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
 		where class_id=#{classId,jdbcType=VARCHAR}
 	</update>
 	
 	<delete id="deleteClass" parameterType="String">
-		delete from class where class_id=#{classId,jdbcType=VARCHAR}
+		delete from classes where class_id=#{classId,jdbcType=VARCHAR}
 	</delete>
 </mapper>
