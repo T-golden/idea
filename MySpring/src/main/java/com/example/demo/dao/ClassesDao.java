@@ -1,11 +1,11 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.model.Classes;
-import com.example.demo.util.PageTool;
 @Mapper
 public interface ClassesDao {
 	
@@ -14,7 +14,7 @@ public interface ClassesDao {
 	 * @param classId
 	 * @return
 	 */
-	PageTool<Classes> selectPageByteacherId(String teacherId , int start , int pageSize);
+	List<Classes> selectPageByteacherId(Map<String, Object> map);
 	
 	/**
 	 * 班级编号查询班级信息

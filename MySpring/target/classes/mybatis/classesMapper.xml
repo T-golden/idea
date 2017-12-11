@@ -14,6 +14,13 @@
 	id,class_id,class_name,class_num,teacher_id,create_time,modify_time
 	</sql>
 	
+	<!-- mysql分页 -->
+	<sql id="page_suffix">
+		<if test="page != null">
+			<![CDATA[ limit #{page.beginRowNo},#{page.pageSize} ]]>
+		</if>
+	</sql>
+	
 	<select id="selectByClassId" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
 		select
@@ -27,7 +34,8 @@
 		select
 		<include refid="Base_Column_List" />
 		from classes
-		where teacher_id = #{teacherId,jdbcType=VARCHAR} order by create_time limit #{start},#{pageSize}
+		where teacher_id = #{teacherId,jdbcType=VARCHAR} order by create_time desc
+		<include refid="page_suffix" />
 	</select>
 	
 	<select id="selectByTeacherId" resultMap="BaseResultMap"

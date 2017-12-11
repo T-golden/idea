@@ -29,14 +29,14 @@ public interface StudentAccountDao {
 	 * @param student
 	 * @return
 	 */
-	int insertStudentAccont(Student student);
+	int insertStudentAccont(StudentAccount studentAccount);
 	
 	/**
 	 * 修改学生账号信息
 	 * @param student
 	 * @return
 	 */
-	int updateStudentAccount(Student student);
+	int updateStudentAccount(StudentAccount studentAccount);
 	
 	/**
 	 * 删除学生账号信息

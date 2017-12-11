@@ -10,7 +10,7 @@ public interface ClassesService {
 	 * @param classId
 	 * @return
 	 */
-	JsonResult selectPageByteacherId(String teacherId , int start , int pageSize);
+	PageTool<Classes> selectPageByteacherId(String teacherId , PageTool<Classes> page);
 	
 	/**
 	 * 班级编号查询班级信息

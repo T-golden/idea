@@ -1,7 +1,9 @@
 package com.example.demo.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,17 +19,15 @@ public class ClassesServiceImpl implements ClassesService{
 	
 	@Autowired
 	private ClassesDao classDao;
-
-	@Override
-	public JsonResult selectPageByteacherId(String teacherId, int start, int pageSize) {
-		JsonResult jsonResult = new JsonResult();
-		PageTool<Classes> classPage =  classDao.selectPageByteacherId(teacherId, start, pageSize);
-		jsonResult.setMsg("班级分页信息");
-		jsonResult.setStatus(0);
-		jsonResult.setData(classPage);
-		return jsonResult;
-	}
 	
+	@Override
+	public PageTool<Classes> selectPageByteacherId(String teacherId , PageTool<Classes> page) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("teacherId", teacherId);
+		map.put("page", page);
+		return null;
+	}
+
 	@Override
 	public JsonResult selectByClassId(String classId) {
 		JsonResult jsonResult = new JsonResult();
@@ -76,6 +76,8 @@ public class ClassesServiceImpl implements ClassesService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 
 

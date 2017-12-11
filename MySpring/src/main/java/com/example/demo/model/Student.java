@@ -17,6 +17,7 @@ public class Student {
 	private String studentEmail;
 	private String studentPhone;
 	private String studentQQ;
+	private String teacherId;
 	private String classId;
 	private Date createTime;
 	private Date modifyTime;
@@ -111,6 +112,14 @@ public class Student {
 
 	public void setStudentQQ(String studentQQ) {
 		this.studentQQ = studentQQ;
+	}
+
+	public String getTeacherId() {
+		return teacherId;
+	}
+
+	public void setTeacherId(String teacherId) {
+		this.teacherId = teacherId;
 	}
 
 }

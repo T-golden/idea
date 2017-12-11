@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Classes;
 import com.example.demo.model.JsonResult;
+import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
 import com.example.demo.service.ClassesService;
 import com.example.demo.service.TeacherService;
@@ -82,7 +83,6 @@ public class TeacherApiController {
 	@ResponseBody
 	public JsonResult createClass(@RequestParam("teacherId") String teacherId , Classes classes , HttpServletRequest request) {
 		JsonResult jsonResult = new JsonResult();
-		System.out.println(classes.getTeacherId() + ":::" + classes.getClassId() + ":::" + classes.getClassName() + ":::" + classes.getClassNum());
 		try {
 			jsonResult = classesService.createClass(classes);
 		} catch (Exception e) {
@@ -121,12 +121,23 @@ public class TeacherApiController {
 	@ResponseBody
 	public JsonResult getClassInfoByClassId(@RequestParam("classId") String classId ,HttpServletRequest request) {
 		JsonResult jsonResult = new JsonResult();
-		System.out.println(classId);
 		try {
 			jsonResult = classesService.selectByClassId(classId);
 		} catch (Exception e) {
 			jsonResult.setMsg("班级信息异常！");
 			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	@RequestMapping(value="createStudentAccount")
+	@ResponseBody
+	public JsonResult createStudentAccount(@RequestParam("teacherId") String teacherId , @RequestParam("classId") String classId , StudentAccount studentAccount , @RequestParam("classNum") int classNum , HttpServletRequest request) {
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = teacherService.createStudentAccount(teacherId, classId , studentAccount, classNum);
+		} catch (Exception e) {
+			jsonResult.setStatus(1);
+			jsonResult.setMsg("学生账号信息创建异常");
 		}
 		return jsonResult;
 	}
