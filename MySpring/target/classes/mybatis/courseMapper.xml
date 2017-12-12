@@ -8,12 +8,13 @@
 		<result column="course_context" property="courseContext" jdbcType="VARCHAR" />
 		<result column="course_Begin_time" property="courseBeginTime" jdbcType="TIMESTAMP" />
 		<result column="course_over_time" property="courseOverTime" jdbcType="TIMESTAMP" />
+		<result column="class_id" property="classId" jdbcType="VARCHAR" />
 		<result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-	id,course_id,course_name,course_context,course_Begin_time,course_over_time,teacher_id,create_time,modify_time
+	id,course_id,course_name,course_context,course_Begin_time,course_over_time,class_id,teacher_id,create_time,modify_time
 	</sql>
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -26,17 +27,17 @@
 	
 	<insert id="createCourse" parameterType="com.example.demo.model.Course">
 		insert into course
-		(course_id,course_name,course_context,course_Begin_time,course_over_time,teacher_id,create_time,modify_time)
+		(course_id,course_name,course_context,course_begin_time,course_over_time,class_id,teacher_id,create_time,modify_time)
 		values
 		(#{courseId,jdbcType=VARCHAR},#{courseName,jdbcType=VARCHAR},#{courseContext,jdbcType=VARCHAR},
-		#{courseBeginTime,jdbcType=TIMESTAMP},#{courseOverTime,jdbcType=TIMESTAMP},
+		#{courseBeginTime,jdbcType=TIMESTAMP},#{courseOverTime,jdbcType=TIMESTAMP},#{classId,jdbcType=VARCHAR},
 		#{teacherId,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
 	</insert>
 	
 	<update id="updateCourseById" parameterType="com.example.demo.model.Course">
 		update course set 
 		course_name=#{courseName,jdbcType=VARCHAR},course_context=#{courseContext,jdbcType=VARCHAR},
-		course_Begin_time=#{courseBeginTime,jdbcType=TIMESTAMP},course_over_time=#{courseOverTime,jdbcType=TIMESTAMP},
+		course_Begin_time=#{courseBeginTime,jdbcType=TIMESTAMP},course_over_time=#{courseOverTime,jdbcType=TIMESTAMP},class_id=#{classId,jdbcType=VARCHAR},
 		teacher_id=#{teacherId,jdbcType=VARCHAR},create_time=#{createTime,jdbcType=TIMESTAMP},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
 		where course_id=#{courseId,jdbcType=VARCHAR}
 	</update>

@@ -16,14 +16,14 @@ $("#toStudentInfo").click(function(){
 })
 
 //3.
-$("#tocourse").click(function(){
-	var url =  basePath + "teacher/tocourse?teacherId=" + teacherId ;
+$("#toCreateCourse").click(function(){
+	var url =  basePath + "teacher/toCreateCourse?teacherId=" + teacherId ;
 	console.log(url);
 	window.location.href=url;
 })
 //4.
-$("#toChapter").click(function(){
-	var url =  basePath + "teacher/toChapter?teacherId=" + teacherId ;
+$("#toCreateChapter").click(function(){
+	var url =  basePath + "teacher/toCreateChapter?teacherId=" + teacherId ;
 	console.log(url);
 	window.location.href=url;
 })
@@ -59,13 +59,8 @@ $("#toUpdatePass").click(function(){
 })
 //10.
 $("#toTeacher").click(function(){
-	$.ajax({
-		type : "post",  //提交方式  
-		url :  basePath+"teacher/toTeacher?teacherId="+teacherId,
-		success : function(res) {//返回数据根据结果进行相应的处理 
-			
-		}
-	});
+	var url =  basePath + "teacher/toTeacher?teacherId=" + teacherId ;
+	window.location.href=url;
 })
 //11.
 $("#toCreateClass").click(function(){

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Classes;
+import com.example.demo.model.Course;
 import com.example.demo.model.JsonResult;
 import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
 import com.example.demo.service.ClassesService;
+import com.example.demo.service.CourseService;
 import com.example.demo.service.TeacherService;
 
 @Controller
@@ -25,6 +27,8 @@ public class TeacherApiController {
 	private TeacherService teacherService;
 	@Autowired
 	private ClassesService classesService;
+	@Autowired
+	private CourseService courseService;
 	
 	/**
 	 * 查询教师个人信息
@@ -129,6 +133,7 @@ public class TeacherApiController {
 		}
 		return jsonResult;
 	}
+	
 	@RequestMapping(value="createStudentAccount")
 	@ResponseBody
 	public JsonResult createStudentAccount(@RequestParam("teacherId") String teacherId , @RequestParam("classId") String classId , StudentAccount studentAccount , @RequestParam("classNum") int classNum , HttpServletRequest request) {
@@ -138,6 +143,19 @@ public class TeacherApiController {
 		} catch (Exception e) {
 			jsonResult.setStatus(1);
 			jsonResult.setMsg("学生账号信息创建异常");
+		}
+		return jsonResult;
+	}
+	
+	@RequestMapping(value="createCourse")
+	@ResponseBody
+	public JsonResult createCourse(@RequestParam("teacherId") String teacherId , Course course , HttpServletRequest request) {
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = courseService.createCourse(course);
+		} catch (Exception e) {
+			jsonResult.setMsg("课程信息创建异常！");
+			jsonResult.setStatus(1);
 		}
 		return jsonResult;
 	}

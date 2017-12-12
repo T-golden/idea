@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 课程
  * @author john
@@ -13,8 +15,12 @@ public class Course {
 	private String courseId;
 	private String courseName;
 	private String courseContext;
-	private Date courseBeginTime;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private String courseBeginTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date courseOverTime;
+	private String classId;
 	private String teacherId;
 	private Date createTime;
 	private Date modifyTime;
@@ -55,12 +61,12 @@ public class Course {
 		this.courseContext = courseContext;
 	}
 
-	public Date getCourseBeginTime() {
+	public String getCourseBeginTime() {
 		return courseBeginTime;
 	}
 
-	public void setCourseBeginTime(Date courseBeginTime) {
-		this.courseBeginTime = courseBeginTime;
+	public void setCourseBeginTime(String string) {
+		this.courseBeginTime = string;
 	}
 
 	public Date getCourseOverTime() {
@@ -93,5 +99,13 @@ public class Course {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public String getClassId() {
+		return classId;
+	}
+
+	public void setClassId(String classId) {
+		this.classId = classId;
 	}
 }
