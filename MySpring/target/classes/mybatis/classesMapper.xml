@@ -29,13 +29,16 @@
 		where class_id = #{classId,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectClassPage" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List" />
-		from classes
-		where teacher_id = #{teacherId,jdbcType=VARCHAR} order by create_time desc
+	<select id="selectClassPageByTeacherId" resultMap="BaseResultMap"
+		parameterType="object">
+		select a.*,b.teacher_name
+		from classes a left join teacher b on a.teacher_id = b.teacher_id
+		where a.teacher_id = #{teacherId,jdbcType=VARCHAR} order by create_time desc
 		<include refid="page_suffix" />
+	</select>
+	
+	<select id="getCount" resultType="java.lang.Integer" parameterType="String">
+		select count(1) from classes where  teacher_id = #{teacherId,jdbcType=VARCHAR}
 	</select>
 	
 	<select id="selectByTeacherId" resultMap="BaseResultMap"

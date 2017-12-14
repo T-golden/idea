@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.model.Classes;
 import com.example.demo.model.Course;
 import com.example.demo.model.JsonResult;
+import com.example.demo.model.Student;
 import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
 import com.example.demo.service.ClassesService;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.TeacherService;
+import com.example.demo.util.PageTool;
 
 @Controller
 @RequestMapping("/teacherApi")
@@ -29,6 +31,8 @@ public class TeacherApiController {
 	private ClassesService classesService;
 	@Autowired
 	private CourseService courseService;
+	PageTool<Classes> classPage = new PageTool<Classes>(10);
+	PageTool<Student> studentPage = new PageTool<Student>(10);
 	
 	/**
 	 * 查询教师个人信息
@@ -132,6 +136,16 @@ public class TeacherApiController {
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
+	}
+	
+	@RequestMapping(value="getClassPageByTeacherId")
+	@ResponseBody
+	public PageTool<Classes> getClassPageByTeacherId(@RequestParam(value="pageno",defaultValue = "1") int pageno , @RequestParam("teacherId") String teacherId , HttpServletRequest request ){
+		System.out.println("pageno==="+pageno);
+		System.out.println("teacherId==="+teacherId);
+		classPage.setPageNo(pageno);
+		classPage = classesService.selectPageByteacherId(classPage, teacherId);
+		return classPage;
 	}
 	
 	/**

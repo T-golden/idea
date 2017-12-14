@@ -21,11 +21,22 @@ public class ClassesServiceImpl implements ClassesService{
 	private ClassesDao classDao;
 	
 	@Override
-	public PageTool<Classes> selectPageByteacherId(String teacherId , PageTool<Classes> page) {
+	public PageTool<Classes> selectPageByteacherId(PageTool<Classes> page , String teacherId) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("teacherId", teacherId);
-		map.put("page", page);
-		return null;
+		int pageCount = classDao.getCount(teacherId);
+		System.out.println(pageCount);
+		page.setTotalCount(pageCount);
+		if(pageCount>0) {
+			map.put("teacherId", teacherId);
+			map.put("page", page);
+			List<Classes> classPage = classDao.selectClassPageByTeacherId(map);
+			
+			page.setResult(classPage);
+			page.setTotalCount(pageCount);
+		}else {
+			page.setResult(null);
+		}
+		return page;
 	}
 
 	@Override

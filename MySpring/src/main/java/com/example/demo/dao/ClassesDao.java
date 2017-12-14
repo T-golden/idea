@@ -14,7 +14,14 @@ public interface ClassesDao {
 	 * @param classId
 	 * @return
 	 */
-	List<Classes> selectClassPage(Map<String, Object> map);
+	List<Classes> selectClassPageByTeacherId(Map<String, Object> map);
+	
+	/**
+	 * 获取数据总数
+	 * @param teacherId
+	 * @return
+	 */
+	int getCount(String teacherId);
 	
 	/**
 	 * 班级编号查询班级信息
