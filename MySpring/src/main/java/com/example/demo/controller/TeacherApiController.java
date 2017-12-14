@@ -134,6 +134,15 @@ public class TeacherApiController {
 		return jsonResult;
 	}
 	
+	/**
+	 * 创建学生账号信息
+	 * @param teacherId
+	 * @param classId
+	 * @param studentAccount
+	 * @param classNum
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="createStudentAccount")
 	@ResponseBody
 	public JsonResult createStudentAccount(@RequestParam("teacherId") String teacherId , @RequestParam("classId") String classId , StudentAccount studentAccount , @RequestParam("classNum") int classNum , HttpServletRequest request) {
@@ -147,6 +156,7 @@ public class TeacherApiController {
 		return jsonResult;
 	}
 	
+	//创建课程信息
 	@RequestMapping(value="createCourse")
 	@ResponseBody
 	public JsonResult createCourse(@RequestParam("teacherId") String teacherId , Course course , HttpServletRequest request) {

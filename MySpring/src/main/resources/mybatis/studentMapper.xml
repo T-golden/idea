@@ -23,6 +23,30 @@
 		id,student_id,student_name,student_pik,student_sex,student_email,student_phone,teacher_id,class_id,create_time,modify_time
 	</sql>
 	
+	<sql id="Page_Suffix">
+		<if test="page != null">
+    <![CDATA[  LIMIT #{page.beginRowNo}, #{page.pageSize} ]]>
+		</if>
+	</sql>
+	
+	<select id="selectStudentPageByteacherId" resultMap="BaseResultMap" parameterType="Object">
+		select a.*,b.class_id,b.class_name,b.class_num from student a left join classes b on a.teacher_id = b.teacher_id
+		<where>
+			a.teacher_id=#{teacherId,jdbcType=VARCHAR}
+		</where>
+		order by create_time desc
+		<include refid="Page_Suffix" />
+	</select>
+	
+	<select id="selectStudentPageByClassId"  resultMap="BaseResultMap" parameterType="Object">
+		select a.*,b.class_id,b.class_name,b.class_num from student a left join classes b on a.teacher_id = b.teacher_id
+		<where>
+			a.class_id=#{classId,jdbcType=VARCHAR}
+		</where>
+		order by create_time desc
+		<include refid="Page_Suffix" />
+	</select>
+	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />

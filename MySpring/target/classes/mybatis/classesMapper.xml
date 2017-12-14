@@ -29,7 +29,7 @@
 		where class_id = #{classId,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectPageByteacherId" resultMap="BaseResultMap"
+	<select id="selectClassPage" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
