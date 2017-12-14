@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +19,11 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public JsonResult createCourse(Course course) {
 		JsonResult jsonResult = new JsonResult();
-		SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		course.setCourseBeginTime(sdf.format(course.getCourseBeginTime()));
-		System.out.println(course.getCourseBeginTime());
 		course.setCreateTime(new Date());
 		course.setModifyTime(new Date());
-		int i = courseDao.createCourse(course);
-		if(i>0) {
-			jsonResult.setMsg("课程创建成功！");
-			jsonResult.setStatus(0);
-		}else {
-			jsonResult.setMsg("课程创建失败！");
-			jsonResult.setStatus(1);
-		}
+		courseDao.createCourse(course);
+		jsonResult.setMsg("课程创建成功！");
+		jsonResult.setStatus(0);
 		return jsonResult;
 	}
 

@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+
+
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,9 +17,8 @@ public class Course {
 	private String courseId;
 	private String courseName;
 	private String courseContext;
-	
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private String courseBeginTime;
+	private Date courseBeginTime;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date courseOverTime;
 	private String classId;
@@ -61,13 +62,14 @@ public class Course {
 		this.courseContext = courseContext;
 	}
 
-	public String getCourseBeginTime() {
+	public Date getCourseBeginTime() {
 		return courseBeginTime;
 	}
 
-	public void setCourseBeginTime(String string) {
-		this.courseBeginTime = string;
+	public void setCourseBeginTime(Date courseBeginTime) {
+		this.courseBeginTime = courseBeginTime;
 	}
+
 
 	public Date getCourseOverTime() {
 		return courseOverTime;

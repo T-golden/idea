@@ -6,7 +6,7 @@
 		<result column="course_id" property="courseId" jdbcType="VARCHAR" />
 		<result column="course_name" property="courseName" jdbcType="VARCHAR" />
 		<result column="course_context" property="courseContext" jdbcType="VARCHAR" />
-		<result column="course_Begin_time" property="courseBeginTime" jdbcType="TIMESTAMP" />
+		<result column="course_begin_time" property="courseBeginTime" jdbcType="TIMESTAMP" />
 		<result column="course_over_time" property="courseOverTime" jdbcType="TIMESTAMP" />
 		<result column="class_id" property="classId" jdbcType="VARCHAR" />
 		<result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
@@ -14,7 +14,7 @@
 		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-	id,course_id,course_name,course_context,course_Begin_time,course_over_time,class_id,teacher_id,create_time,modify_time
+	id,course_id,course_name,course_context,course_begin_time,course_over_time,class_id,teacher_id,create_time,modify_time
 	</sql>
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"

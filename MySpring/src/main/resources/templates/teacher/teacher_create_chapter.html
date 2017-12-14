@@ -27,15 +27,29 @@
 <link href="css/jquery.easy-pie-chart.css" rel="stylesheet"
 	type="text/css" media="screen" />
 <link href="css/demo.css" rel="stylesheet" type="text/css">
+
+<link href="umeditor1.2.3-utf8-jsp/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="umeditor1.2.3-utf8-jsp/third-party/jquery.min.js"></script>
+<script type="text/javascript" src="umeditor1.2.3-utf8-jsp/third-party/template.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="umeditor1.2.3-utf8-jsp/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="umeditor1.2.3-utf8-jsp/umeditor.min.js"></script>
+<script type="text/javascript" src="umeditor1.2.3-utf8-jsp/lang/zh-cn/zh-cn.js"></script>
 <!-- END PAGE LEVEL STYLES -->
-<link rel="shortcut icon" href="teacher/images/favicon.ico" />
 <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script src="My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="umeditor1.2.3-utf8-jsp/WdatePicker.js" type="text/javascript"></script>
 <style type="text/css">
 
 </style>
 <script type="text/javascript">
+
+var editor = new UE.ui.Editor();
+editor.render("myEditor");
+
 	$(document).ready(function(){
+		
+		
+		
 		getTeacherInfo();
 		getClass();
 		defaultInfo();
@@ -236,7 +250,7 @@
 								
 								<tr>
 									<td><div>课程简介:</div></td>
-									<td><div><textarea id="courseContext" ></textarea></div></td>
+									<td><div><textarea name="后台取值的key" id="myEditor">这里写你的初始化内容</textarea></div></td>
 								</tr>
 								
 								<tr>
