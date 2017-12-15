@@ -4,6 +4,7 @@ encoding//src/main/resources=UTF-8
 encoding//src/main/resources/templates/footer.html=UTF-8
 encoding//src/main/resources/templates/header_top.html=UTF-8
 encoding//src/main/resources/templates/teacher/teacher_index.html=UTF-8
+encoding//src/main/resources/templates/teacher/teacher_info_class.html=UTF-8
 encoding//src/main/resources/templates/teacher/teacher_menu.html=UTF-8
 encoding//src/main/resources/templates/teacher/teacher_top.html=UTF-8
 encoding//src/test/java=UTF-8

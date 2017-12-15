@@ -24,7 +24,6 @@ public class ClassesServiceImpl implements ClassesService{
 	public PageTool<Classes> selectPageByteacherId(PageTool<Classes> page , String teacherId) {
 		Map<String, Object> map = new HashMap<>();
 		int pageCount = classDao.getCount(teacherId);
-		System.out.println(pageCount);
 		page.setTotalCount(pageCount);
 		if(pageCount>0) {
 			map.put("teacherId", teacherId);

@@ -35,7 +35,7 @@ public class TeacherController {
 	@RequestMapping("/toStudentInfo")
 	public String toStudentInfo(@RequestParam("teacherId") String teacherId , Model model) {
 		model.addAttribute("teacherId", teacherId);
-		return "teacher/teacher_student_info";
+		return "teacher/teacher_info_student";
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class TeacherController {
 	@RequestMapping("/toClassInfo")
 	public String toClassInfo(@RequestParam("teacherId") String teacherId , Model model) {
 		model.addAttribute("teacherId", teacherId);
-		return "teacher/teacher_class_info";
+		return "teacher/teacher_info_class";
 	}
 
 	/**

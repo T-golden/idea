@@ -141,8 +141,6 @@ public class TeacherApiController {
 	@RequestMapping(value="getClassPageByTeacherId")
 	@ResponseBody
 	public PageTool<Classes> getClassPageByTeacherId(@RequestParam(value="pageno",defaultValue = "1") int pageno , @RequestParam("teacherId") String teacherId , HttpServletRequest request ){
-		System.out.println("pageno==="+pageno);
-		System.out.println("teacherId==="+teacherId);
 		classPage.setPageNo(pageno);
 		classPage = classesService.selectPageByteacherId(classPage, teacherId);
 		return classPage;

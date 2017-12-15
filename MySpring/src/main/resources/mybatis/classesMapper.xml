@@ -38,7 +38,7 @@
 	</select>
 	
 	<select id="getCount" resultType="java.lang.Integer" parameterType="String">
-		select count(1) from classes where  teacher_id = #{teacherId,jdbcType=VARCHAR}
+		select count(1) from classes where teacher_id = #{teacherId,jdbcType=VARCHAR}
 	</select>
 	
 	<select id="selectByTeacherId" resultMap="BaseResultMap"
