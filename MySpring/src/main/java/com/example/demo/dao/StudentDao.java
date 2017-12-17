@@ -10,6 +10,8 @@ import com.example.demo.model.Student;
 @Mapper
 public interface StudentDao {
 	
+	int getCount(String teacherId);
+	
 	/**
 	 * 查询学生信息
 	 * @param studentId

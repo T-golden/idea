@@ -21,6 +21,9 @@ public class Student {
 	private String classId;
 	private Date createTime;
 	private Date modifyTime;
+	
+	private String teacherName;
+	private String className;
 
 	public void student() {
 
@@ -120,6 +123,22 @@ public class Student {
 
 	public void setTeacherId(String teacherId) {
 		this.teacherId = teacherId;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
 	}
 
 }

@@ -9,6 +9,8 @@
 		<result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+		
+		<result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 	id,class_id,class_name,class_num,teacher_id,create_time,modify_time
@@ -23,9 +25,7 @@
 	
 	<select id="selectByClassId" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List" />
-		from classes
+		select a.*,b.teacher_name from classes where classes a left join teacher b on a.teacher_id = b.teacher_id
 		where class_id = #{classId,jdbcType=VARCHAR}
 	</select>
 	

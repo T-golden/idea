@@ -16,6 +16,8 @@ public class Classes {
 	private Date createTime;
 	private Date modifyTime;
 	
+	private String teacherName;
+	
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -74,6 +76,14 @@ public class Classes {
 
 	public void setClassNum(int classNum) {
 		this.classNum = classNum;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
 	}
 
 	

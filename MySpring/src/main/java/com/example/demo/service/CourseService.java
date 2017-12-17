@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Course;
 import com.example.demo.model.JsonResult;
+import com.example.demo.util.PageTool;
 
 public interface CourseService {
 	/**
@@ -10,4 +11,12 @@ public interface CourseService {
 	 * @return
 	 */
 	JsonResult createCourse(Course course);
+	
+	/**
+	 * 分页课程信息
+	 * @param page
+	 * @param teacherId
+	 * @return
+	 */
+	PageTool<Course> selectCoursePageByTeacherId(PageTool<Course> page , String teacherId);
 }

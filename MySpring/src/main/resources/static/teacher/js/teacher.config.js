@@ -8,13 +8,6 @@ $("#toCreateStudent").click(function(){
 	window.location.href=url;
 })
 
-//2.
-$("#toStudentInfo").click(function(){
-	var url =  basePath + "teacher/toStudentInfo?teacherId=" + teacherId ;
-	console.log(url);
-	window.location.href=url;
-})
-
 //3.
 $("#toCreateCourse").click(function(){
 	var url =  basePath + "teacher/toCreateCourse?teacherId=" + teacherId ;
@@ -45,6 +38,26 @@ $("#toAssignmentUpload").click(function(){
 	console.log(url);
 	window.location.href=url;
 })
+
+//2.
+$("#toStudentInfo").click(function(){
+	var url =  basePath + "teacher/toStudentInfo?teacherId=" + teacherId ;
+	console.log(url);
+	window.location.href=url;
+})
+
+$("#toCourseInfo").click(function(){
+	var url =  basePath + "teacher/toCourseInfo?teacherId=" + teacherId ;
+	console.log(url);
+	window.location.href=url;
+})
+
+$("#toChapterInfo").click(function(){
+	var url =  basePath + "teacher/toChapterInfo?teacherId=" + teacherId ;
+	console.log(url);
+	window.location.href=url;
+})
+
 //8.
 $("#toAssignmentInfo").click(function(){
 	var url =  basePath + "teacher/toAssignmentInfo?teacherId=" + teacherId ;

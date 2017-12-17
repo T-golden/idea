@@ -18,6 +18,7 @@ import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
 import com.example.demo.service.ClassesService;
 import com.example.demo.service.CourseService;
+import com.example.demo.service.StudentService;
 import com.example.demo.service.TeacherService;
 import com.example.demo.util.PageTool;
 
@@ -31,8 +32,11 @@ public class TeacherApiController {
 	private ClassesService classesService;
 	@Autowired
 	private CourseService courseService;
+	@Autowired
+	private StudentService studentService;
 	PageTool<Classes> classPage = new PageTool<Classes>(10);
 	PageTool<Student> studentPage = new PageTool<Student>(10);
+	PageTool<Course> coursePage = new PageTool<Course>(10);
 	
 	/**
 	 * 查询教师个人信息
@@ -138,12 +142,34 @@ public class TeacherApiController {
 		return jsonResult;
 	}
 	
+	/**
+	 * 分页班级信息
+	 * @param pageno
+	 * @param teacherId
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="getClassPageByTeacherId")
 	@ResponseBody
 	public PageTool<Classes> getClassPageByTeacherId(@RequestParam(value="pageno",defaultValue = "1") int pageno , @RequestParam("teacherId") String teacherId , HttpServletRequest request ){
 		classPage.setPageNo(pageno);
 		classPage = classesService.selectPageByteacherId(classPage, teacherId);
 		return classPage;
+	}
+	
+	/**
+	 * 分页学生信息
+	 * @param pageno
+	 * @param teacherId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="getStudentPageByTeacherId")
+	@ResponseBody
+	public PageTool<Student> getStudentPageByTeacherId(@RequestParam(value="pageno",defaultValue = "1") int pageno , @RequestParam("teacherId") String teacherId , HttpServletRequest request ){
+		studentPage.setPageNo(pageno);
+		studentPage = studentService.selectStudentPageByteacherId(studentPage, teacherId);
+		return studentPage;
 	}
 	
 	/**
@@ -180,5 +206,20 @@ public class TeacherApiController {
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
+	}
+	
+	/**
+	 * 分页课程信息
+	 * @param pageno
+	 * @param teacherId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="selectCoursePageByTeacherId")
+	@ResponseBody
+	public PageTool<Course> selectCoursePageByTeacherId(@RequestParam(value="pageno",defaultValue = "1") int pageno , @RequestParam("teacherId") String teacherId , HttpServletRequest request ){
+		coursePage.setPageNo(pageno);
+		coursePage = courseService.selectCoursePageByTeacherId(coursePage, teacherId);
+		return coursePage;
 	}
 }

@@ -70,9 +70,15 @@ public class TeacherController {
 		model.addAttribute("teacherId", teacherId);
 		return "teacher/teacher_create_course";
 	}
-
+	
+	@RequestMapping("/toCourseInfo")
+	public String toCourseInfo(@RequestParam("teacherId") String teacherId , Model model) {
+		model.addAttribute("teacherId", teacherId);
+		return "teacher/teacher_info_course";
+	}
+	
 	/**
-	 * 章节信息
+	 * 创建章节信息
 	 * 
 	 * @return
 	 */
@@ -80,6 +86,12 @@ public class TeacherController {
 	public String toChapter(@RequestParam("teacherId") String teacherId , Model model) {
 		model.addAttribute("teacherId", teacherId);
 		return "teacher/teacher_create_chapter";
+	}
+	
+	@RequestMapping("/toChapterInfo")
+	public String toChapterInfo(@RequestParam("teacherId") String teacherId , Model model) {
+		model.addAttribute("teacherId", teacherId);
+		return "teacher/teacher_info_chapter";
 	}
 
 	/**
