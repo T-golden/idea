@@ -61,7 +61,6 @@ public class ClassesServiceImpl implements ClassesService{
 	@Override
 	public JsonResult createClass(Classes classes) {
 		JsonResult jsonResult = new JsonResult();
-		System.out.println(classes.getTeacherId() + ":::" + classes.getClassId() + ":::" + classes.getClassName() + ":::" + classes.getClassNum());
 		classes.setCreateTime(new Date());
 		classes.setModifyTime(new Date());
 		int i = classDao.createClass(classes);

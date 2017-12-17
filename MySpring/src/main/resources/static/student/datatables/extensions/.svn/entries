@@ -1,0 +1,55 @@
+10
+
+dir
+26872
+svn://10.162.62.230/03_Code/th_activity_branch/th_activity_admin/src/main/resources/static/plugins/datatables/extensions
+svn://10.162.62.230
+
+
+
+2017-05-16T03:17:36.724985Z
+18968
+huangyw
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+88b57163-946c-44b1-9207-dc65aee3f693
+
+AutoFill
+dir
+
+ColReorder
+dir
+
+ColVis
+dir
+
+FixedColumns
+dir
+
+FixedHeader
+dir
+
+KeyTable
+dir
+
+Responsive
+dir
+
+Scroller
+dir
+
+TableTools
+dir
+

@@ -48,7 +48,7 @@ public class HomeController {
 					model.addAttribute("status", status);
 					return "login";
 				}
-				model.addAttribute("studentAccount", studentAccount);
+				model.addAttribute("studentId", studentAccount.getStudentId());
 				return "student/student_index";
 			}
 			model.addAttribute("status", status);

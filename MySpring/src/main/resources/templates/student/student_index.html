@@ -1,10 +1,252 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>student_index</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
+<!-- BEGIN HEAD -->
 
+<head>
+
+	<meta charset="utf-8" />
+	<title>student page</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="student/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="student/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="student/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="student/css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="student/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="student/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="student/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="student/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<!-- END GLOBAL MANDATORY STYLES -->
+	<!-- BEGIN PAGE LEVEL STYLES --> 
+	<link href="student/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+	<link href="student/css/daterangepicker.css" rel="stylesheet" type="text/css" />
+	<link href="student/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
+	<link href="student/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="student/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+	<!-- END PAGE LEVEL STYLES -->
+	<link rel="shortcut icon" href="student/images/favicon.ico" />
+	<style>
+	/* Border styles */
+	#table-1 thead, #table-1 tr {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: rgb(230, 189, 189);
+	}
+	#table-1 {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(230, 189, 189);
+	}
+	
+	/* Padding and font style */
+	#table-1 td, #table-1 th {
+	padding: 5px 10px;
+	font-size: 12px;
+	font-family: Verdana;
+	color: rgb(177, 106, 104);
+	}
+	
+	/* Alternating background colors */
+	#table-1 tr:nth-child(even) {
+	background: rgb(238, 211, 210)
+	}
+	#table-1 tr:nth-child(odd) {
+	background: #FFF
+	}
+	</style>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-header-fixed">
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+	<div th:include="student/student_top :: student_top" class="header navbar navbar-inverse navbar-fixed-top" ></div>
+	<div th:include="student/student_menu :: student_menu" class="page-sidebar nav-collapse collapse" ></div>
+		<!-- BEGIN PAGE -->
+		<div class="page-content">
+			<!-- BEGIN PAGE CONTAINER-->
+			<div class="container-fluid">
+				<!-- BEGIN PAGE HEADER-->
+				<div class="row-fluid">
+					<div class="span12">
+						<!-- BEGIN STYLE CUSTOMIZER -->
+						<div class="color-panel hidden-phone">
+							<div class="color-mode-icons icon-color"></div>
+							<div class="color-mode-icons icon-color-close"></div>
+							<div class="color-mode">
+								<p>THEME COLOR</p>
+								<ul class="inline">
+									<li class="color-black current color-default" data-style="default"></li>
+									<li class="color-blue" data-style="blue"></li>
+									<li class="color-brown" data-style="brown"></li>
+									<li class="color-purple" data-style="purple"></li>
+									<li class="color-grey" data-style="grey"></li>
+									<li class="color-white color-light" data-style="light"></li>
+								</ul>
+								<label>
+									<span>Layout</span>
+									<select class="layout-option m-wrap small">
+										<option value="fluid" selected>Fluid</option>
+										<option value="boxed">Boxed</option>
+									</select>
+								</label>
+								<label>
+									<span>Header</span>
+									<select class="header-option m-wrap small">
+										<option value="fixed" selected>Fixed</option>
+										<option value="default">Default</option>
+									</select>
+								</label>
+								<label>
+									<span>Sidebar</span>
+									<select class="sidebar-option m-wrap small">
+										<option value="fixed">Fixed</option>
+										<option value="default" selected>Default</option>
+									</select>
+								</label>
+								<label>
+									<span>Footer</span>
+									<select class="footer-option m-wrap small">
+										<option value="fixed">Fixed</option>
+										<option value="default" selected>Default</option>
+									</select>
+								</label>
+							</div>
+						</div>
+						<!-- END BEGIN STYLE CUSTOMIZER -->    
+						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+						<h3 class="page-title">
+							欢迎回来！ <input  type="text" readonly="readonly" class="studentName" style="border: 0;"></input>
+						</h3>
+						<ul class="breadcrumb">
+							<li class="pull-right no-text-shadow">
+								<div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range"><span></span></div>
+							</li>
+						</ul>
+						<!-- END PAGE TITLE & BREADCRUMB-->
+					</div>
+				</div>
+				<!-- END PAGE HEADER-->
+				<h5>学生编号  : <input  type="text"  disabled="true" class="studentId" id="studentId" th:value="${studentId}"></input></h5>
+				<div id="dashboard" align="center">
+					<table id="table-1" border="1" style="width: 100%;">
+						<thead>
+							<tr>
+								<td align="center" colspan="4">个人信息</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>姓名 : <input type="text" id="studentName" class="studentName"></input></td>
+								<td>性别 : 
+									<select id="studentSex">
+									<option value="0">请选择</option>
+									<option value="1">男</option>
+									<option value="2">女</option>
+									</select>
+								</td>
+								<td>年龄 : <input id="studentAge" class="studentAge"></input> 岁</td>
+								<td rowspan="3"><input type="file" id="studentPik" name="studentPik"></td>
+							</tr>
+							<tr>
+								<td align="center" colspan="3">联系方式</td>
+							</tr>
+							<tr>
+								<td>Email : <input id="studentEmail" class="studentEmail"></input></td>
+								<td>手机 : <input id="studentPhone" class="studentPhone"></input></td>
+								<td>QQ : <input id="studentQQ" class="studentQQ"></input></td>
+							</tr>
+							<tr>
+								<td>创建时间 : <span id="createTime" class="createTime"></span></td>
+								<td>上次修改时间 : <span id="modifyTime" class="modifyTime"></span></td>
+							</tr>
+						</tbody>
+					</table>
+					<div style="position: absolute; bottom: 0;"><button id="update_submit">提交修改</button></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END CONTAINER -->
+	<!-- BEGIN FOOTER -->
+	<div class="footer">
+		<div class="footer-inner">
+			2017 &copy; graduation project by Xuyixin from <a href="javascript:volid(0);" title="信息科技学院" target="_blank">信息科技学院</a> - 
+		</div>
+		<div class="footer-tools">
+			<span class="go-top">
+			<i class="icon-angle-up"></i>
+			</span>
+		</div>
+	</div>
+	<!-- END FOOTER -->
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+	<!-- BEGIN CORE PLUGINS -->
+	<script src="student/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="student/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+	<script src="student/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="student/js/bootstrap.min.js" type="text/javascript"></script>
+	<!--[if lt IE 9]>
+	<script src="student/js/excanvas.min.js"></script>
+	<script src="student/js/respond.min.js"></script>  
+	<![endif]-->   
+	<script src="student/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="student/js/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="student/js/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="student/js/jquery.uniform.min.js" type="text/javascript" ></script>
+	<!-- END CORE PLUGINS -->
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script src="student/js/jquery.vmap.js" type="text/javascript"></script>   
+	<script src="student/js/jquery.vmap.russia.js" type="text/javascript"></script>
+	<script src="student/js/jquery.vmap.world.js" type="text/javascript"></script>
+	<script src="student/js/jquery.vmap.europe.js" type="text/javascript"></script>
+	<script src="student/js/jquery.vmap.germany.js" type="text/javascript"></script>
+	<script src="student/js/jquery.vmap.usa.js" type="text/javascript"></script>
+	<script src="student/js/jquery.vmap.sampledata.js" type="text/javascript"></script>  
+	<script src="student/js/jquery.flot.js" type="text/javascript"></script>
+	<script src="student/js/jquery.flot.resize.js" type="text/javascript"></script>
+	<script src="student/js/jquery.pulsate.min.js" type="text/javascript"></script>
+	<script src="student/js/date.js" type="text/javascript"></script>
+	<script src="student/js/daterangepicker.js" type="text/javascript"></script>     
+	<script src="student/js/jquery.gritter.js" type="text/javascript"></script>
+	<script src="student/js/fullcalendar.min.js" type="text/javascript"></script>
+	<script src="student/js/jquery.easy-pie-chart.js" type="text/javascript"></script>
+	<script src="student/js/jquery.sparkline.min.js" type="text/javascript"></script>  
+	<!-- END PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="student/js/app.js" type="text/javascript"></script>
+	<script src="student/js/index.js" type="text/javascript"></script>        
+	<!-- END PAGE LEVEL SCRIPTS -->  
+	<script src="student/js/student.config.js" type="text/javascript"></script>   
+	<script>
+		jQuery(document).ready(function() {    
+		   App.init(); // initlayout and core plugins
+		   getStudentInfo();
+		   $("#update_submit").click(function(){
+			   updateStudentInfo();
+		   });
+		});
+		
+		function getStudentInfo(){
+			$.ajax({
+				   type : "post",  //提交方式  
+				   url :  basePath+"studentApi/getStudentInfo?studentId="+studentId,	//路径  
+				   async:true,    //或false,是否异步
+				   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+				   success : function(res) {
+					   var data = res.data;
+					   console.log(data);
+				   }
+			});
+		}
+		
+		function updateStudentInfo(){
+		}
+	</script>
+	<!-- END JAVASCRIPTS -->
 </body>
+<!-- END BODY -->
 </html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.Classes;
 import com.example.demo.model.Course;
@@ -72,8 +73,9 @@ public class TeacherApiController {
 	 */
 	@RequestMapping(value="updateTeacherInfo")
 	@ResponseBody
-	public JsonResult updateTeacherInfo(@RequestParam("teacherId") String teacherId , Teacher teacher , HttpServletRequest request) {
+	public JsonResult updateTeacherInfo(@RequestParam("teacherId") String teacherId , Teacher teacher , @RequestParam("teacherPik") MultipartFile teacherPik , HttpServletRequest request) {
 		JsonResult jsonResult = new JsonResult();
+		System.out.println(teacherPik);
 		teacher.setModifyTime(new Date());
 		try {
 			jsonResult = teacherService.updateTeacherInfo(teacher);

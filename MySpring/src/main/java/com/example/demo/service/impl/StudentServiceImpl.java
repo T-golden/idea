@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.StudentAccountDao;
 import com.example.demo.dao.StudentDao;
+import com.example.demo.model.JsonResult;
 import com.example.demo.model.Student;
 import com.example.demo.model.StudentAccount;
 import com.example.demo.service.StudentService;
@@ -47,6 +48,21 @@ public class StudentServiceImpl implements StudentService{
 			page.setResult(null);
 		}
 		return page;
+	}
+
+	@Override
+	public JsonResult selectByPrimaryKey(String studentId) {
+		JsonResult jsonResult = new JsonResult();
+		Student student = studentDao.selectByPrimaryKey(studentId);
+		if(student != null) {
+			jsonResult.setMsg("学生信息");
+			jsonResult.setStatus(0);
+			jsonResult.setData(student);
+		}else {
+			jsonResult.setMsg("学生信息不存在");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
 	}
 
 }
