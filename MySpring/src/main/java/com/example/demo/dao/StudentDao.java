@@ -20,6 +20,13 @@ public interface StudentDao {
 	Student selectByPrimaryKey(String studentId);
 	
 	/**
+	 *  班级编号查询学生信息
+	 * @param classId
+	 * @return
+	 */
+	List<Student> selectByClassId(String classId);
+	
+	/**
 	 * 通过教师编号分页查询学生信息
 	 * @param map
 	 * @return
@@ -52,5 +59,5 @@ public interface StudentDao {
 	 * @param studentId
 	 * @return
 	 */
-	int deleteStudent(String studentId);
+	int deleteStudent(Map<String, Object> map);
 }

@@ -65,4 +65,21 @@ public class StudentServiceImpl implements StudentService{
 		return jsonResult;
 	}
 
+	@Override
+	public JsonResult selectStudentByClassId(String classId) {
+		JsonResult jsonResult = new JsonResult();
+		System.out.println(classId);
+		List<Student> studentList = studentDao.selectByClassId(classId);
+		if(studentList.size() >0){
+			jsonResult.setData(studentList);
+			jsonResult.setMsg("学生信息");
+			jsonResult.setStatus(0);
+		}else{
+			jsonResult.setData(null);
+			jsonResult.setMsg("无学生信息");
+			jsonResult.setStatus(0);
+		}
+		return jsonResult;
+	}
+
 }

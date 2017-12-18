@@ -196,6 +196,23 @@ public class TeacherApiController {
 		return jsonResult;
 	}
 	
+	/**
+	 * 班级编号查询学生信息
+	 * @return
+	 */
+	@RequestMapping(value="selectStudentByClassId")
+	@ResponseBody
+	public JsonResult selectStudentByClassId(@RequestParam("classId") String classId , HttpServletRequest request){
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = studentService.selectStudentByClassId(classId);
+		} catch (Exception e) {
+			jsonResult.setMsg("学生信息查询异常");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	
 	//创建课程信息
 	@RequestMapping(value="createCourse")
 	@ResponseBody
@@ -223,5 +240,46 @@ public class TeacherApiController {
 		coursePage.setPageNo(pageno);
 		coursePage = courseService.selectCoursePageByTeacherId(coursePage, teacherId);
 		return coursePage;
+	}
+	
+	/**
+	 * 删除学生账号信息
+	 * 先删除学生信息
+	 * 再删除账号信息
+	 * @param teacherId
+	 * @param studentId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="deleteStudentAccount")
+	@ResponseBody
+	public JsonResult deleteStudentAccount(@RequestParam("teacherId") String teacherId , @RequestParam("studentId") String studentId , HttpServletRequest request ){
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = teacherService.deleteStudentAccount(teacherId, studentId);
+		} catch (Exception e) {
+			jsonResult.setMsg("学生账号信息删除异常");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	
+	/**
+	 * 删除班级信息
+	 * @param classId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="deleteClassByClassId")
+	@ResponseBody
+	public JsonResult deleteClassByClassId(@RequestParam("classId") String classId ,  HttpServletRequest request ){
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = classesService.deleteClass(classId);
+		} catch (Exception e) {
+			jsonResult.setMsg("班级信息删除异常");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
 	}
 }

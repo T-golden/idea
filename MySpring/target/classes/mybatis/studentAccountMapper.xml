@@ -42,6 +42,6 @@
 	</update>
 	
 	<delete id="deleteStudentAccount" parameterType="String">
-		delete from student where student_id=#{studentId,jdbcType=VARCHAR}
+		delete from student where teacher_id=#{teacherId,jdbcType=VARCHAR} and student_id=#{studentId,jdbcType=VARCHAR}
 	</delete>
 </mapper>

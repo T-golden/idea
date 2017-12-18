@@ -10,6 +10,8 @@ public interface StudentService {
 	
 	StudentAccount studentLogin(String account , String password);
 	
+	JsonResult selectStudentByClassId(String classId);
+	
 	PageTool<Student> selectStudentPageByteacherId(PageTool<Student> page , String teacherId );
 	
 	/**

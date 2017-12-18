@@ -23,10 +23,9 @@
 		</if>
 	</sql>
 	
-	<select id="selectByClassId" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
-		select a.*,b.teacher_name from classes where classes a left join teacher b on a.teacher_id = b.teacher_id
-		where class_id = #{classId,jdbcType=VARCHAR}
+	<select id="selectByClassId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select <include refid="Base_Column_List" />
+		from classes where class_id = #{classId,jdbcType=VARCHAR}
 	</select>
 	
 	<select id="selectClassPageByTeacherId" resultMap="BaseResultMap"
@@ -41,8 +40,7 @@
 		select count(1) from classes where teacher_id = #{teacherId,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectByTeacherId" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
+	<select id="selectByTeacherId" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
 		from classes

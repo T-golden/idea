@@ -42,5 +42,5 @@ public interface StudentAccountDao {
 	 * @param studentId
 	 * @return
 	 */
-	int deleteStudentAccount(String studentId);
+	int deleteStudentAccount(Map<String, Object> map);
 }

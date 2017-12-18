@@ -57,6 +57,13 @@
 		where student_id = #{studentId,jdbcType=VARCHAR}
 	</select>
 	
+	<select id="selectByClassId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from student
+		where class_id = #{classId,jdbcType=VARCHAR}
+	</select>
+	
 	<insert id="insertStudent" parameterType="com.example.demo.model.Student">
 		insert into student 
 		(student_id,student_name,student_pik,student_sex,student_email,student_phone,student_qq,teacher_id,class_id,create_time,modify_time)
@@ -78,6 +85,6 @@
 	</update>
 	
 	<delete id="deleteStudent" parameterType="String">
-		delete from student where student_id=#{studentId,jdbcType=VARCHAR}
+		delete from student where teacher_id=#{teacherId,jdbcType=VARCHAR} and student_id=#{studentId,jdbcType=VARCHAR}
 	</delete>
 </mapper>

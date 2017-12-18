@@ -82,8 +82,16 @@ public class ClassesServiceImpl implements ClassesService{
 
 	@Override
 	public JsonResult deleteClass(String classId) {
-		// TODO Auto-generated method stub
-		return null;
+		JsonResult jsonResult = new JsonResult();
+		int i  = classDao.deleteClass(classId);
+		if(i>0){
+			jsonResult.setMsg("班级信息删除成功");
+			jsonResult.setStatus(0);
+		}else{
+			jsonResult.setMsg("班级信息删除失败");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
 	}
 
 

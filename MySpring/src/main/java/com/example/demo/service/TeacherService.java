@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Map;
+
 import com.example.demo.model.JsonResult;
 import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
@@ -34,4 +36,27 @@ public interface TeacherService {
 	 * @return
 	 */
 	JsonResult createStudentAccount(String teacherId , String classId , StudentAccount studentAccount , int num);
+	
+	/**
+	 * 删除学生账号信息
+	 * @param teacherId
+	 * @param studentId
+	 * @return
+	 */
+	JsonResult deleteStudentAccount(String teacherId ,String studentId);
+	
+	/**
+	 * 删除学生信息
+	 * @param teacherId
+	 * @param studentId
+	 * @return
+	 */
+	int deleteStudent(Map<String , Object> map);
+	
+	/**
+	 * 删除班级信息
+	 * @param map
+	 * @return
+	 */
+	int deleteClass(Map<String, Object> map);
 }

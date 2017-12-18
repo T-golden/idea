@@ -93,7 +93,7 @@
 				   $("#classId").change(function(){
 					   var classId = $("#classId").val();
 					   $.ajax({
-						   type : "get",
+						   type : "post",
 						   url :  basePath+"teacherApi/getClassInfoByClassId?classId="+classId,
 						   async:true,
 						   success : function(res) {
@@ -131,7 +131,7 @@
 					   alert(msg);
 				   }
 				   alert(msg);
-				   defaultInfo();
+				   window.location.href = basePath + "teacher/toStudentInfo?teacherId=" + teacherId ;
 			   }
 		});
 	}

@@ -108,4 +108,40 @@ public class TeacherServiceImpl implements TeacherService {
 		return jsonResult;
 	}
 
+	@Override
+	public JsonResult deleteStudentAccount(String teacherId, String studentId) {
+		JsonResult jsonResult = new JsonResult();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tacherId",teacherId);
+		map.put("studentId", studentId);
+		int i = deleteStudent(map);
+		if(i>0){
+			i = studentAccountDao.deleteStudentAccount(map);
+			if(i>0){
+				jsonResult.setMsg("学生账号信息删除成功");
+				jsonResult.setStatus(0);
+			}else {
+				jsonResult.setMsg("学生账号信息删除失败");
+				jsonResult.setStatus(1);
+			}
+		}else{
+			jsonResult.setMsg("学生信息删除失败");
+			jsonResult.setStatus(0);
+		}
+		return jsonResult;
+	}
+
+	@Override
+	public int deleteStudent(Map<String, Object> map) {
+		return studentDao.deleteStudent(map);
+	}
+
+	@Override
+	public int deleteClass(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+
 }
