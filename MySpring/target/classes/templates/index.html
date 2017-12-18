@@ -19,6 +19,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--Animation-->
 <script src="home/js/wow.min.js"></script>
 <link href="home/css/animate.css" rel='stylesheet' type='text/css' />
+<script src="home/js/responsiveslides.min.js"></script>
+<script src="home/js/home.config.js"></script>
+<script>
+$(function () {
+	getFiveTeacherInfo();
+});
+
+function getFiveTeacherInfo() {
+	$.ajax({
+		type : "post", //提交方式  
+		url : basePath + "homeApi/getFiveTeacher", //路径  
+		async : true, //或false,是否异步
+		data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+		success : function(res) {//返回数据根据结果进行相应的处理 
+			var status = res.status;
+			if(status!=0){
+				alert(res.msg);
+				return false;
+			}
+			var data = res.data;
+			console.log(data);
+			for(var i = 0 ; i < data.length; i++){
+				$("#slider").prepend("<li><img src='home/images/teacher"+(i+1)+".jpg' class='img-responsive'  /><div><span>"+data[i].teacherName+"</span></div></li>");
+			}
+			$("#slider").responsiveSlides({
+				auto: true,
+				nav: true,
+				speed: 5,
+				namespace: "callbacks",
+				pager: true,
+			});
+		}
+	});
+}
+
+</script>
 <script>
 	new WOW().init();
 </script>
@@ -36,33 +72,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 			<div class="grid-1">
 				<div class="col-md-5 left-grid-1 wow bounceInLeft" data-wow-delay="0.4s">
-					<h1>WELCOME</h1>	
-					<h2>TO THE</h2><h3>STUDEON</h3>
+					<h1>欢迎来到</h1>	
+					<h2>网页制作</h2><h3>课程网站</h3>
 				</div>
 				<div class="col-md-7 right-grid-1 wow bounceInRight" data-wow-delay="0.7s">
 					<div class="slider">
-						<div class="callbacks_container">
+						<div class="callbacks_container" style="width: 250px; height: 400px;">
 							<ul class="rslides" id="slider">
-								<li><img src="home/images/slide1.png" class="img-responsive" alt="" /></li>
-								<li><img src="home/images/slide2.png" class="img-responsive" alt="" /></li>
-								<li><img src="home/images/slide3.png" class="img-responsive" alt="" /></li>
-								<li><img src="home/images/slide1.png" class="img-responsive" alt="" /></li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<script src="home/js/responsiveslides.min.js"></script>
-				<script>
-					$(function () {
-						$("#slider").responsiveSlides({
-							auto: true,
-					      	nav: true,
-					      	speed: 500,
-					        namespace: "callbacks",
-					        pager: true,
-					    });
-					});
-				</script>
+				
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -152,21 +173,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	<!--//end-services-->
-	<!--start-mid-section-->
-	<div class="container">
-		<div class="mid-section">
-			<div class="mid-top wow fadeInUpBig animated animated" data-wow-delay="0.4s">
-				<div class="col-md-10 mid-text">
-					<h3>Hi there. I am a theme, with attitude. I am also responsive, easy do edit. Why don't you try me ?</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nulla vel dolor  blandit nec Quisque quis nulla vel dolor ultrices sit amet.</p>
-				</div>
-				<div class="col-md-2 mid-button">
-					<a href="#">BUY NOW !</a>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
 	<!--//end-mid-section-->  
     <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
 	<!--/port-section-->

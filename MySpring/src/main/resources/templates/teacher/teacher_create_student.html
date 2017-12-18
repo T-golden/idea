@@ -118,8 +118,6 @@
 		var password = $("#studentPassword").val();
 		var classId = $("#classId").val();
 		var classNum = $("#classNum").val();
-		
-		alert(studentId+":"+account+":"+password+":"+classId+":"+classNum+":")
 		$.ajax({
 			   type : "get",
 			   url :  basePath+"teacherApi/createStudentAccount?teacherId="+teacherId+"&classId="+classId+"&studentId="+studentId+"&account="+account+"&password="+password+"&classNum="+classNum,

@@ -84,180 +84,143 @@
 	$(function() {
 		getTeacherInfo();
 
-		var $tables = $('#classList')
-				.DataTable(
-						{
-							serverSide : true,//分页，取数据等等的都放到服务端去
-							processing : true,//载入数据的时候是否显示“载入中”
-							pageLength : 10, //首次加载的数据条数
-							ordering : false, //排序操作在服务端进行，所以可以关了。
-							pagingType : "full_numbers",
-							autoWidth : false,
-							stateSave : false,//保持翻页状态，和comTable.fnDraw(false);结合使用
-							searching : false,//禁用datatables搜索
-							striped : true,
-							sidePagination : "server",
-							lengthChange : false,
-							showRefresh : true,
-							info : true,
-							ajax : function(data, callback, settings) {
-								//封装请求参数
-								//console.log((data.start / data.length) + 1);
-								var param = {};
-								param.limit = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
-								param.start = data.start;//开始的记录序号
-								param.pageno = (data.start / data.length) + 1;//当前页码
-								var formData = $("#queryForm").serializeArray();//把form里面的数据序列化成数组
-								formData.forEach(function(e) {
-									param[e.name] = e.value;
-								});
-								console.log(param);
-								//ajax请求数据
-								$
-										.ajax({
-											type : "GET",
-											url : "/teacherApi/getClassPageByTeacherId?teacherId="
-													+ teacherId,
-											cache : false, //禁用缓存
-											data : param, //传入组装的参数
-											dataType : "json",
-											success : function(result) {
-												console.log(result);
-												var returnData = {};
-												if (result.result == null) {
-													returnData.draw = data.draw;
-													returnData.recordsTotal = 0;
-													returnData.recordsFiltered = 0;
-													returnData.data = {};//返回的数据列表
-													callback(returnData);
-													//$.alert("该活动不存在");
-												}
-												//封装返回数据
-												returnData.draw = data.draw;
-												returnData.recordsTotal = result.totalCount;
-												returnData.recordsFiltered = result.totalCount;
-												returnData.data = result.result;//返回的数据列表
-												//调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
-												//此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
-												callback(returnData);
-
-												$("#activityList tbody a")
-														.each(
-																function() {
-																	var $o = $(this);
-																	// console.log($o.attr("data-auth"));
-																	if ($o
-																			.attr("data-auth") != null) {
-																		var r1 = isUserPermissionAuth(
-																				userPermissionJSON,
-																				$o
-																						.attr("data-auth"));
-																		var r2 = isRolePermissionAuth(
-																				userPermissionJSON,
-																				$o
-																						.attr("data-auth"));
-																		if (!r1
-																				&& !r2) {
-																			$o
-																					.hide();
-																		}
-																	}
-																});
-											}
-										});
-							},
-							"fnDrawCallback" : function(oSettings) {
-							},
-							"columnDefs" : [ {
-								"defaultContent" : "",
-								"targets" : "_all"
-							} ],
-							columns : [//对应上面thead里面的序列
-									{
-										"data" : "classId",
-										"width" : "60px"
-									},
-									{
-										"data" : "className",
-										"width" : "60px"
-									},
-									{
-										"data" : 'classNum',
-										"width" : "60px"
-									},
-									{
-										"data" : 'teacherId',
-										"width" : "60px"
-									},
-									{
-										"data" : 'createTime',
-										"render" : function(data, type, full,
-												callback) {
-											return moment(data).format(
-													"YYYY-MM-DD HH:mm");
-										}
-									},
-									{
-										"data" : 'modifyTime',
-										"render" : function(data, type, full,
-												callback) {
-											return moment(data).format(
-													"YYYY-MM-DD HH:mm");
-										}
-									},
-									{
-										"data" : null,
-										"width" : "130px",
-										"render" : function(data, type, full,
-												callback) {
-											var _html = [];
-											_html.push("<a>编辑</a>");
-											_html.push("<a>删除</a>");
-											return _html.join("");
-										}
-									} ],
-							language : {
-								"sProcessing" : "处理中...",
-								"sLengthMenu" : "显示 _MENU_ 项结果",
-								"sZeroRecords" : "没有匹配结果",
-								"sInfo" : "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-								"sInfoEmpty" : "显示第 0 至 0 项结果，共 0 项",
-								"sInfoFiltered" : "(由 _MAX_ 项结果过滤)",
-								"sInfoPostFix" : "",
-								"sSearch" : "搜索:",
-								"sUrl" : "",
-								"sEmptyTable" : "表中数据为空",
-								"sLoadingRecords" : "载入中...",
-								"sInfoThousands" : ",",
-								"oPaginate" : {
-									"sFirst" : "首页",
-									"sPrevious" : "上页",
-									"sNext" : "下页",
-									"sLast" : "末页"
-								},
-								"oAria" : {
-									"sSortAscending" : ": 以升序排列此列",
-									"sSortDescending" : ": 以降序排列此列"
-								}
+		var $tables = $('#classList').DataTable({
+			serverSide : true,//分页，取数据等等的都放到服务端去
+			processing : true,//载入数据的时候是否显示“载入中”
+			pageLength : 10, //首次加载的数据条数
+			ordering : false, //排序操作在服务端进行，所以可以关了。
+			pagingType : "full_numbers",
+			autoWidth : false,
+			stateSave : false,//保持翻页状态，和comTable.fnDraw(false);结合使用
+			searching : false,//禁用datatables搜索
+			striped : true,
+			sidePagination : "server",
+			lengthChange : false,
+			showRefresh : true,
+			info : true,
+			//封装请求参数
+			ajax : function(data, callback, settings) {
+				var param = {};
+				param.limit = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
+				param.start = data.start;//开始的记录序号
+				param.pageno = (data.start / data.length) + 1;//当前页码
+				var formData = $("#queryForm").serializeArray();//把form里面的数据序列化成数组
+				formData.forEach(function(e) {
+					param[e.name] = e.value;
+				});
+				console.log(param);
+				//ajax请求数据
+				$.ajax({
+					type : "GET",
+					url : "/teacherApi/getClassPageByTeacherId?teacherId="+ teacherId,
+					cache : false, //禁用缓存
+					data : param, //传入组装的参数
+					dataType : "json",
+					success : function(result) {
+					console.log(result);
+					var returnData = {};
+					if (result.result == null) {
+						returnData.draw = data.draw;
+						returnData.recordsTotal = 0;
+						returnData.recordsFiltered = 0;
+						returnData.data = {};//返回的数据列表
+						callback(returnData);
+					}
+					//封装返回数据
+					returnData.draw = data.draw;
+					returnData.recordsTotal = result.totalCount;
+					returnData.recordsFiltered = result.totalCount;
+					returnData.data = result.result;//返回的数据列表
+					//调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+					//此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+					callback(returnData);
+					$("#activityList tbody a").each(function() {
+						var $o = $(this);
+						if ($o.attr("data-auth") != null) {
+							var r1 = isUserPermissionAuth(userPermissionJSON,$o.attr("data-auth"));
+							var r2 = isRolePermissionAuth(userPermissionJSON,$o.attr("data-auth"));
+							if (!r1&& !r2) {
+								$o.hide();
 							}
-						});
-
+						}
+					});
+				}
+			});
+		},"fnDrawCallback" : function(oSettings) {
+			
+		},"columnDefs" : [ {
+			"defaultContent" : "",
+			"targets" : "_all"
+		} ],columns : [//对应上面thead里面的序列
+		{
+			"data" : "classId",
+			"width" : "60px"
+		},{
+			"data" : "className",
+			"width" : "60px"
+		},{
+			"data" : 'classNum',
+			"width" : "60px"
+		},{
+			"data" : 'teacherId',
+			"width" : "60px"
+		},{
+			"data" : 'createTime',
+			"render" : function(data, type, full,callback) {
+				return moment(data).format("YYYY-MM-DD HH:mm");
+			}
+		},{
+			"data" : 'modifyTime',
+			"render" : function(data, type, full,callback) {
+				return moment(data).format("YYYY-MM-DD HH:mm");
+			}
+		},{
+			"data" : null,
+			"width" : "130px",
+			"render" : function(data, type, full,callback) {
+				var _html = [];
+				_html.push("<a>编辑</a>");
+				_html.push("<a>删除</a>");
+				return _html.join("");
+				}
+		} ],language : {
+			"sProcessing" : "处理中...",
+			"sLengthMenu" : "显示 _MENU_ 项结果",
+			"sZeroRecords" : "没有匹配结果",
+			"sInfo" : "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+			"sInfoEmpty" : "显示第 0 至 0 项结果，共 0 项",
+			"sInfoFiltered" : "(由 _MAX_ 项结果过滤)",
+			"sInfoPostFix" : "",
+			"sSearch" : "搜索:",
+			"sUrl" : "",
+			"sEmptyTable" : "表中数据为空",
+			"sLoadingRecords" : "载入中...",
+			"sInfoThousands" : ",",
+			"oPaginate" : {
+				"sFirst" : "首页",
+				"sPrevious" : "上页",
+				"sNext" : "下页",
+				"sLast" : "末页"
+			},"oAria" : {
+				"sSortAscending" : ": 以升序排列此列",
+				"sSortDescending" : ": 以降序排列此列"
+			}
+		}
 	});
+});
 
 	function getTeacherInfo() {
-		$
-				.ajax({
-					type : "post", //提交方式  
-					url : basePath + "teacherApi/getTeacherInfo?teacherId="
-							+ teacherId, //路径  
-					async : true, //或false,是否异步
-					data : "jsonResult",//数据，这里使用的是Json格式进行传输  
-					success : function(res) {//返回数据根据结果进行相应的处理 
-						console.log(res);
-						var data = res.data;
-						$("#teacherName").html(data.teacherName);
-					}
-				});
+		$.ajax({
+			type : "post", //提交方式  
+			url : basePath + "teacherApi/getTeacherInfo?teacherId="+ teacherId, //路径  
+			async : true, //或false,是否异步
+			data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+			success : function(res) {//返回数据根据结果进行相应的处理 
+				console.log(res);
+				var data = res.data;
+				$("#teacherName").html(data.teacherName);
+			}
+		});
 	}
 
 	function getClassPage() {

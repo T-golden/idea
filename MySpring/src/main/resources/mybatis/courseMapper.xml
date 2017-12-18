@@ -47,6 +47,14 @@
 		where course_id = #{courseId,jdbcType=VARCHAR}
 	</select>
 	
+	<select id="selectByTeacherId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from course
+		where teacher_id=#{teacherId,jdbcType=VARCHAR}
+	</select>
+	
 	<insert id="createCourse" parameterType="com.example.demo.model.Course">
 		insert into course
 		(course_id,course_name,course_context,course_begin_time,course_over_time,class_id,teacher_id,create_time,modify_time)

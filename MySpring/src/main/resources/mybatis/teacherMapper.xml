@@ -28,6 +28,13 @@
 		from teacher where teacher_id = #{teacherId,jdbcType=VARCHAR}
 	</select>
 	
+	<select id="selectFiveTeacher" resultMap="BaseResultMap"
+		parameterType="String">
+		select
+		<include refid="Base_Column_List" />
+		from teacher order by create_time desc limit 0,5
+	</select>
+	
 	<update id="updateById" parameterType="com.example.demo.model.Teacher">
 		update teacher 
 		set

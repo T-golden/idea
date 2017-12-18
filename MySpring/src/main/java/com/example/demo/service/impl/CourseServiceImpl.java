@@ -48,4 +48,20 @@ public class CourseServiceImpl implements CourseService{
 		return page;
 	}
 
+	@Override
+	public JsonResult selectCourseByTeacherId(String teacherId) {
+		JsonResult jsonResult = new JsonResult();
+		List<Course> courseList = courseDao.selectByTeacherId(teacherId);
+		if(courseList.size()>0) {
+			jsonResult.setData(courseList);
+			jsonResult.setMsg("课程信息");
+			jsonResult.setStatus(0);
+		}else {
+			jsonResult.setData(null);
+			jsonResult.setMsg("课程信息为空");
+			jsonResult.setStatus(0);
+		}
+		return jsonResult;
+	}
+
 }

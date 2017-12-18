@@ -8,6 +8,9 @@ import com.example.demo.model.Teacher;
 import com.example.demo.model.TeacherAccount;
 
 public interface TeacherService {
+	
+	JsonResult selectFiveTeacher();
+	
 	/**
 	 * 教师登录
 	 * @param account

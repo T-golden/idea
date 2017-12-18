@@ -13,8 +13,7 @@
 	id,chapter_id,chapter_context,course_id,create_time,modify_time
 	</sql>
 	
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
 		from chapter

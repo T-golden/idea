@@ -227,8 +227,8 @@
 										"render" : function(data, type, full,
 												callback) {
 											var _html = [];
-											_html.push("<a>编辑</a>");
-											_html.push("<a>删除</a>");
+											_html.push("<a onclick='' style='margin-left:5px;'>编辑</a>");
+											_html.push("<a onclick='deleteCourse("+data.courseId+")' style='margin-left:5px;'>删除</a>");
 											return _html.join("");
 										}
 									} ],
@@ -261,22 +261,20 @@
 	});
 
 	function getTeacherInfo() {
-		$
-				.ajax({
-					type : "post", //提交方式  
-					url : basePath + "teacherApi/getTeacherInfo?teacherId="
-							+ teacherId, //路径  
-					async : true, //或false,是否异步
-					data : "jsonResult",//数据，这里使用的是Json格式进行传输  
-					success : function(res) {//返回数据根据结果进行相应的处理 
-						console.log(res);
-						var data = res.data;
-						$("#teacherName").html(data.teacherName);
-					}
-				});
+		$.ajax({
+			type : "post", //提交方式  
+			url : basePath + "teacherApi/getTeacherInfo?teacherId="+ teacherId, //路径  
+			async : true, //或false,是否异步
+			data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+			success : function(res) {//返回数据根据结果进行相应的处理 
+				console.log(res);
+				var data = res.data;
+				$("#teacherName").html(data.teacherName);
+			}
+		});
 	}
 
-	function getClassPage() {
+	function deleteCourse(courseId) {
 
 	}
 </script>

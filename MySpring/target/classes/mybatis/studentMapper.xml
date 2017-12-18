@@ -84,7 +84,7 @@
 		where student_id=#{studentId,jdbcType=VARCHAR}
 	</update>
 	
-	<delete id="deleteStudent" parameterType="String">
+	<delete id="deleteStudent" parameterType="object">
 		delete from student where teacher_id=#{teacherId,jdbcType=VARCHAR} and student_id=#{studentId,jdbcType=VARCHAR}
 	</delete>
 </mapper>

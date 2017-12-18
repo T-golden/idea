@@ -148,7 +148,8 @@
 									</select>
 								</td>
 								<td>年龄 : <input id="teacherAge" class="teacherAge"></input> 岁</td>
-								<td rowspan="3"><input type="file" id="teacherPik" name="teacherPik"></td>
+								<td rowspan="3"><a><img id="teacherPic" alt="" src=""></a></td>
+								<!-- <input type="file" id="teacherPik" name="teacherPik"> -->
 							</tr>
 							<tr>
 								<td align="center" colspan="3">联系方式</td>
@@ -247,6 +248,7 @@
 					   $("#teacherEmail").val(data.teacherEmail);
 					   $("#teacherPhone").val(data.teacherPhone);
 					   $("#teacherQQ").val(data.teacherQQ);
+					   $("#teacherPic").attr("src","home/images/teacher"+(data.id)+".jpg"); 
 					   
 					   
 					   var createTime = new Date(data.createTime);

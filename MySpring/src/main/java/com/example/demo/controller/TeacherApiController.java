@@ -243,6 +243,26 @@ public class TeacherApiController {
 	}
 	
 	/**
+	 * 课程信息
+	 * @param pageno
+	 * @param teacherId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="selectCourseByTeacherId")
+	@ResponseBody
+	public JsonResult selectCourseByTeacherId(@RequestParam("teacherId") String teacherId , HttpServletRequest request ){
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = courseService.selectCourseByTeacherId(teacherId);
+		} catch (Exception e) {
+			jsonResult.setMsg("课程信息查询异常");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	
+	/**
 	 * 删除学生账号信息
 	 * 先删除学生信息
 	 * 再删除账号信息

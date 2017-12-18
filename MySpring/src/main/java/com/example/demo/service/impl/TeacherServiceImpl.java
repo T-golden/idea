@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,22 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacherAccount;
 	}
 
+	@Override
+	public JsonResult selectFiveTeacher() {
+		JsonResult jsonResult = new JsonResult();
+		List<Teacher> teacherList = teacherDao.selectFiveTeacher();
+		if(teacherList.size()>0) {
+			jsonResult.setData(teacherList);
+			jsonResult.setMsg("教师信息");
+			jsonResult.setStatus(0);
+		}else {
+			jsonResult.setData(teacherList);
+			jsonResult.setMsg("教师信息为空");
+			jsonResult.setStatus(0);
+		}
+		return jsonResult;
+	}
+	
 	/**
 	 * 获取教师信息
 	 */
@@ -112,7 +129,7 @@ public class TeacherServiceImpl implements TeacherService {
 	public JsonResult deleteStudentAccount(String teacherId, String studentId) {
 		JsonResult jsonResult = new JsonResult();
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("tacherId",teacherId);
+		map.put("teacherId",teacherId);
 		map.put("studentId", studentId);
 		int i = deleteStudent(map);
 		if(i>0){
@@ -126,7 +143,7 @@ public class TeacherServiceImpl implements TeacherService {
 			}
 		}else{
 			jsonResult.setMsg("学生信息删除失败");
-			jsonResult.setStatus(0);
+			jsonResult.setStatus(1);
 		}
 		return jsonResult;
 	}
@@ -141,6 +158,8 @@ public class TeacherServiceImpl implements TeacherService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 	
 	
 

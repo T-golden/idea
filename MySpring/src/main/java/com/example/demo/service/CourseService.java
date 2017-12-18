@@ -13,6 +13,13 @@ public interface CourseService {
 	JsonResult createCourse(Course course);
 	
 	/**
+	 * 教师编号查询课程信息
+	 * @param teacherId
+	 * @return
+	 */
+	JsonResult selectCourseByTeacherId(String teacherId);
+	
+	/**
 	 * 分页课程信息
 	 * @param page
 	 * @param teacherId
