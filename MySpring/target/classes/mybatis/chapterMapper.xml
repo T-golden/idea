@@ -4,14 +4,38 @@
 	<resultMap id="BaseResultMap" type="com.example.demo.model.Chapter">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="chapter_id" property="chapterId" jdbcType="VARCHAR" />
+		<result column="chapter_name" property="chapterName" jdbcType="VARCHAR" />
 		<result column="chapter_context" property="chapterContext" jdbcType="VARCHAR" />
 		<result column="course_id" property="courseId" jdbcType="VARCHAR" />
+		<result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+		
+		<result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+		<result column="course_name" property="courseName" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-	id,chapter_id,chapter_context,course_id,create_time,modify_time
+	id,chapter_id,chapter_name,chapter_context,course_id,teacher_id,create_time,modify_time
 	</sql>
+	
+	<!-- mysql分页 -->
+	<sql id="page_suffix">
+		<if test="page != null">
+			<![CDATA[ limit #{page.beginRowNo},#{page.pageSize} ]]>
+		</if>
+	</sql>	
+	
+	<select id="selectChapterPageByTeacherId" resultMap="BaseResultMap"
+		parameterType="object">
+		select a.*,b.teacher_name,c.course_name
+		from chapter a left join teacher b on a.teacher_id = b.teacher_id left join course c on a.teacher_id = c.teacher_id
+		where a.teacher_id = #{teacherId,jdbcType=VARCHAR} order by create_time desc
+		<include refid="page_suffix" />
+	</select>
+	
+	<select id="getCount" resultType="java.lang.Integer" parameterType="String">
+		select count(1) from chapter where teacher_id = #{teacherId,jdbcType=VARCHAR}
+	</select>
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
@@ -20,22 +44,29 @@
 		where chapter_id = #{chapterId,jdbcType=VARCHAR}
 	</select>
 	
+	<select id="selectByCourseId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from chapter
+		where course_id = #{courseId,jdbcType=VARCHAR}
+	</select>
+	
 	<insert id="createChapter" parameterType="com.example.demo.model.Chapter">
 		insert into chapter
-		(chapter_id,chapter_context,course_id,create_time,modify_time)
+		(chapter_id,chapter_name,chapter_context,course_id,teacher_id,create_time,modify_time)
 		values
-		(#{chapterId,jdbcType=VARCHAR},#{chapterContext,jdbcType=VARCHAR},#{courseId,jdbcType=VARCHAR},
+		(#{chapterId,jdbcType=VARCHAR},#{chapterName,jdbcType=VARCHAR},#{chapterContext,jdbcType=VARCHAR},#{courseId,jdbcType=VARCHAR},#{teacherId,jdbcType=VARCHAR},
 		#{createTime,jdbcType=TIMESTAMP},#{modifyTime,jdbcType=TIMESTAMP})
 	</insert>
 	
 	<update id="updateChapter" parameterType="com.example.demo.model.Chapter">
 		update chapter set
-		chapter_id=#{chapterId,jdbcType=VARCHAR},chapter_context=#{chapterContext,jdbcType=VARCHAR},course_id=#{courseId,jdbcType=VARCHAR},
+		chapter_id=#{chapterId,jdbcType=VARCHAR},chapter_name=#{chapterName,jdbcType=VARCHAR},chapter_context=#{chapterContext,jdbcType=VARCHAR},course_id=#{courseId,jdbcType=VARCHAR},teacher_id=#{teacherId,jdbcType=VARCHAR}
 		create_time=#{createTime,jdbcType=TIMESTAMP},modify_time=#{modifyTime,jdbcType=TIMESTAMP}
 		where chapter_id=#{chapterId,jdbcType=VARCHAR}
 	</update>
 	
-	<delete id="deleteChapter" parameterType="String">
-		delete from chapter where chapter_id=#{chapterId,jdbcType=VARCHAR}
+	<delete id="deleteChapter" parameterType="object">
+		delete from chapter where course_id=#{courseId,jdbcType=VARCHAR} and chapter_id=#{chapterId,jdbcType=VARCHAR}
 	</delete>
 </mapper>

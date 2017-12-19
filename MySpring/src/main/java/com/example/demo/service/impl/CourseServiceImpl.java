@@ -25,9 +25,14 @@ public class CourseServiceImpl implements CourseService{
 		JsonResult jsonResult = new JsonResult();
 		course.setCreateTime(new Date());
 		course.setModifyTime(new Date());
-		courseDao.createCourse(course);
-		jsonResult.setMsg("课程创建成功！");
-		jsonResult.setStatus(0);
+		int i = courseDao.createCourse(course);
+		if(i>0){
+			jsonResult.setMsg("课程创建成功！");
+			jsonResult.setStatus(0);
+		}else{
+			jsonResult.setMsg("课程创建失败！");
+			jsonResult.setStatus(1);
+		}
 		return jsonResult;
 	}
 
@@ -52,15 +57,34 @@ public class CourseServiceImpl implements CourseService{
 	public JsonResult selectCourseByTeacherId(String teacherId) {
 		JsonResult jsonResult = new JsonResult();
 		List<Course> courseList = courseDao.selectByTeacherId(teacherId);
-		if(courseList.size()>0) {
+		if(courseList.size() > 0) {
 			jsonResult.setData(courseList);
 			jsonResult.setMsg("课程信息");
 			jsonResult.setStatus(0);
 		}else {
-			jsonResult.setData(null);
 			jsonResult.setMsg("课程信息为空");
 			jsonResult.setStatus(0);
 		}
+		return jsonResult;
+	}
+
+	@Override
+	public JsonResult updateCourseInfo(Course course) {
+		JsonResult jsonResult = new JsonResult();
+		int i = courseDao.updateCourseById(course);
+		if(i>0){
+			jsonResult.setMsg("课程信息修改成功");
+			jsonResult.setStatus(0);
+		}else{
+			jsonResult.setMsg("课程信息修改失败");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+
+	@Override
+	public JsonResult deleteCourse(Map<String, Object> map) {
+		JsonResult jsonResult = new JsonResult();
 		return jsonResult;
 	}
 

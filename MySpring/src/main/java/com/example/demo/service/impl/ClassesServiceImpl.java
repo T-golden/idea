@@ -68,15 +68,23 @@ public class ClassesServiceImpl implements ClassesService{
 			jsonResult.setStatus(0);
 			jsonResult.setMsg("班级创建成功！");
 		}else {
-			jsonResult.setStatus(0);
-			jsonResult.setMsg("班级创建成功！");
+			jsonResult.setStatus(1);
+			jsonResult.setMsg("班级创建失败！");
 		}
 		return jsonResult;
 	}
 
 	@Override
-	public JsonResult updateClassById(String classId) {
-		// TODO Auto-generated method stub
+	public JsonResult updateClassById(Classes classes) {
+		JsonResult jsonResult = new JsonResult();
+		int i = classDao.updateClassById(classes);
+		if(i>0){
+			jsonResult.setMsg("班级信息修改成功");
+			jsonResult.setStatus(0);
+		}else{
+			jsonResult.setMsg("班级信息修改失败");
+			jsonResult.setStatus(1);
+		}
 		return null;
 	}
 
@@ -93,13 +101,5 @@ public class ClassesServiceImpl implements ClassesService{
 		}
 		return jsonResult;
 	}
-
-
-
-
-
-
-
-
 
 }

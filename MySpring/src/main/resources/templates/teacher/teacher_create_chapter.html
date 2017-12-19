@@ -61,7 +61,7 @@
 		$("#chapterId").val(account);
 	}
 	
-	//获取班级信息
+	//获取课程信息
 	function getCourse(){
 		$.ajax({
 			   type : "get",
@@ -104,9 +104,26 @@
 	}
 	
 	function createChapter(){
-	
+		var chapterId = $("#chapterId").val();
+		var chapterName = $("#chapterName").val();
+		var chapterContext = $("#chapterContext").val();
+		var courseId = $("#courseId").val();
+		$.ajax({
+			   type : "post",  //提交方式  
+			   url :  basePath+"teacherApi/createChapter?teacherId="+teacherId+"&chapterId="+chapterId+"&chapterName="+chapterName+"&chapterContext="+chapterContext+"&courseId="+courseId,	//路径  
+			   async:true,    //或false,是否异步
+			   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+			   success : function(res) {//返回数据根据结果进行相应的处理 
+				   var status = res.status;
+				   var msg = res.msg;
+				   if(status != 0){
+					   alert(msg);
+				   }
+				   alert(msg)
+				   window.location.href =  basePath + "teacher/toChapterInfo?teacherId=" + teacherId ;
+			   }
+		});
 	}
-	
 </script>
 </head>
 <!-- END HEAD -->
@@ -211,13 +228,13 @@
 								
 								<tr>
 									<td><div>章节内容:</div></td>
-									<td><div><textarea name="后台取值的key" id="chapterContexr">这里写你的初始化内容</textarea></div></td>
+									<td><div><textarea name="后台取值的key" id="chapterContext">这里写你的初始化内容</textarea></div></td>
 								</tr>
 							</table>
 							<div class="">
 								<div class="span10 offset2">
 									<input type="submit" name="submit" id="submit" class="submit"
-											value="create student">
+											value="create chapter">
 								</div>
 							</div>
 						</div>

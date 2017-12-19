@@ -28,8 +28,7 @@
 		</if>
 	</sql>
 	
-	<select id="selectCoursePageByTeacherId" resultMap="BaseResultMap"
-		parameterType="object">
+	<select id="selectCoursePageByTeacherId" resultMap="BaseResultMap" parameterType="object">
 		select a.*,b.class_name,c.teacher_name from course a left join classes b on a.class_id = b.class_id left join teacher c on a.teacher_id = c.teacher_id
 		where a.teacher_id = #{teacherId,jdbcType=VARCHAR} order by create_time desc
 		<include refid="page_suffix" />
@@ -47,12 +46,11 @@
 		where course_id = #{courseId,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectByTeacherId" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
+	<select id="selectByTeacherId" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
 		from course
-		where teacher_id=#{teacherId,jdbcType=VARCHAR}
+		where teacher_id = #{teacherId,jdbcType=VARCHAR}
 	</select>
 	
 	<insert id="createCourse" parameterType="com.example.demo.model.Course">
@@ -72,7 +70,7 @@
 		where course_id=#{courseId,jdbcType=VARCHAR}
 	</update>
 	
-	<delete id="deleteCourseById" parameterType="String">
-		delete from course where course_id=#{courseId,jdbcType=VARCHAR}
+	<delete id="deleteCourseById" parameterType="object">
+		delete from course where teacher_id=#{teacherId,jdbcType=VARCHAR} and course_id=#{courseId,jdbcType=VARCHAR}
 	</delete>
 </mapper>

@@ -49,7 +49,7 @@ public interface ClassesDao {
 	 * @param classId
 	 * @return
 	 */
-	int updateClassById(String classId);
+	int updateClassById(Classes classes);
 	
 	/**
 	 * 删除班级信息

@@ -84,7 +84,7 @@
 	$(function() {
 		getTeacherInfo();
 
-		var $tables = $('#classList').DataTable({
+		var $tables = $('#chapterList').DataTable({
 			serverSide : true,//分页，取数据等等的都放到服务端去
 			processing : true,//载入数据的时候是否显示“载入中”
 			pageLength : 10, //首次加载的数据条数
@@ -112,7 +112,7 @@
 				//ajax请求数据
 				$.ajax({
 					type : "GET",
-					url : "/teacherApi/getClassPageByTeacherId?teacherId="+ teacherId,
+					url : "/teacherApi/getCoursePageByTeacherId?teacherId="+ teacherId,
 					cache : false, //禁用缓存
 					data : param, //传入组装的参数
 					dataType : "json",
@@ -153,17 +153,17 @@
 			"targets" : "_all"
 		} ],columns : [//对应上面thead里面的序列
 		{
-			"data" : "classId",
-			"width" : "60px"
+			"data" : "chapterId",
+			"width" : "70px"
 		},{
-			"data" : "className",
-			"width" : "60px"
+			"data" : "chapterName",
+			"width" : "120px"
 		},{
-			"data" : 'classNum',
-			"width" : "60px"
+			"data" : 'courseName',
+			"width" : "120px"
 		},{
-			"data" : 'teacherId',
-			"width" : "60px"
+			"data" : 'teacherName',
+			"width" : "80px"
 		},{
 			"data" : 'createTime',
 			"render" : function(data, type, full,callback) {
@@ -179,8 +179,8 @@
 			"width" : "130px",
 			"render" : function(data, type, full,callback) {
 				var _html = [];
-				_html.push("<a>编辑</a>");
-				_html.push("<a>删除</a>");
+				_html.push("<a onclick='' style='margin-left:5px;'>编辑</a>");
+				_html.push("<a onclick='deleteChapter("+data.chapterId+","+data.courseId+")' style='margin-left:5px;'>删除</a>");
 				return _html.join("");
 				}
 		} ],language : {
@@ -209,23 +209,37 @@
 	});
 });
 
-	function getTeacherInfo() {
-		$.ajax({
-			type : "post", //提交方式  
-			url : basePath + "teacherApi/getTeacherInfo?teacherId="+ teacherId, //路径  
-			async : true, //或false,是否异步
-			data : "jsonResult",//数据，这里使用的是Json格式进行传输  
-			success : function(res) {//返回数据根据结果进行相应的处理 
-				console.log(res);
-				var data = res.data;
-				$("#teacherName").html(data.teacherName);
+function getTeacherInfo() {
+	$.ajax({
+		type : "post", //提交方式  
+		url : basePath + "teacherApi/getTeacherInfo?teacherId="+ teacherId, //路径  
+		async : true, //或false,是否异步
+		data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+		success : function(res) {//返回数据根据结果进行相应的处理 
+			console.log(res);
+			var data = res.data;
+			$("#teacherName").html(data.teacherName);
+		}
+	});
+}
+
+function deleteChapter(chapterId,courseId){
+	$.ajax({
+		type : "post", //提交方式  
+		url : basePath + "teacherApi/deleteChapter?chapterId="+ chapterId+"&courseId="+courseId, //路径  
+		async : true, //或false,是否异步
+		data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+		success : function(res) {//返回数据根据结果进行相应的处理 
+			var status = res.status;
+			if(status!=0){
+				alert(res.msg);
+				return false;
 			}
-		});
-	}
-
-	function getClassPage() {
-
-	}
+			alert(res.msg);
+			window.location.href =  basePath + "teacher/toChapterInfo?teacherId=" + teacherId ;
+		}
+	});
+}
 </script>
 </head>
 <!-- END HEAD -->
@@ -304,7 +318,7 @@
 				<!-- END PAGE HEADER-->
 				<input th:value="${teacherId}" id="teacherId" hidden="">
 				<div id="dashboard" align="center">
-					<section class="content" style="width: 75%;">
+					<section style="width: 95%; float: right;">
 						<section id="getintouch" class="fadeInDownBig animated">
 							<div class="container" style="border-bottom: 0;">
 								<h1>
@@ -315,13 +329,13 @@
 								<div class="col-xs-12">
 									<div class="box">
 										<div class="box-body">
-											<table id="classList"
+											<table id="chapterList"
 												class="table table-bordered table-hover">
 												<thead>
 													<tr>
-														<th>班级编号</th>
-														<th>班级名称</th>
-														<th>班级人数</th>
+														<th>章节编号</th>
+														<th>章节名称</th>
+														<th>所属课程</th>
 														<th>创建人</th>
 														<th>创建时间</th>
 														<th>修改时间</th>

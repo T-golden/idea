@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.model.Chapter;
 import com.example.demo.model.Classes;
 import com.example.demo.model.Course;
 import com.example.demo.model.JsonResult;
 import com.example.demo.model.Student;
 import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
+import com.example.demo.service.ChapterService;
 import com.example.demo.service.ClassesService;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.StudentService;
@@ -35,9 +37,12 @@ public class TeacherApiController {
 	private CourseService courseService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private ChapterService chapterService;
 	PageTool<Classes> classPage = new PageTool<Classes>(10);
 	PageTool<Student> studentPage = new PageTool<Student>(10);
 	PageTool<Course> coursePage = new PageTool<Course>(10);
+	PageTool<Chapter> chapterPage = new PageTool<Chapter>(10);
 	
 	/**
 	 * 查询教师个人信息
@@ -188,7 +193,7 @@ public class TeacherApiController {
 	public JsonResult createStudentAccount(@RequestParam("teacherId") String teacherId , @RequestParam("classId") String classId , StudentAccount studentAccount , @RequestParam("classNum") int classNum , HttpServletRequest request) {
 		JsonResult jsonResult = new JsonResult();
 		try {
-			jsonResult = teacherService.createStudentAccount(teacherId, classId , studentAccount, classNum);
+			jsonResult = studentService.createStudentAccount(teacherId, classId , studentAccount, classNum);
 		} catch (Exception e) {
 			jsonResult.setStatus(1);
 			jsonResult.setMsg("学生账号信息创建异常");
@@ -213,7 +218,13 @@ public class TeacherApiController {
 		return jsonResult;
 	}
 	
-	//创建课程信息
+	/**
+	 * 创建课程信息
+	 * @param teacherId
+	 * @param course
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="createCourse")
 	@ResponseBody
 	public JsonResult createCourse(@RequestParam("teacherId") String teacherId , Course course , HttpServletRequest request) {
@@ -222,6 +233,80 @@ public class TeacherApiController {
 			jsonResult = courseService.createCourse(course);
 		} catch (Exception e) {
 			jsonResult.setMsg("课程信息创建异常！");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	
+	/**
+	 * 获取章节分页信息
+	 * @param teacherId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="getCoursePageByTeacherId")
+	@ResponseBody
+	public PageTool<Chapter> getCoursePageByTeacherId(@RequestParam(value="pageno",defaultValue = "1") int pageno ,@RequestParam("teacherId") String teacherId , HttpServletRequest request){
+		chapterPage.setPageNo(pageno);
+		chapterPage = chapterService.selectChapterPageByTeacherId(chapterPage, teacherId);
+		return chapterPage;
+	}
+	
+	/**
+	 * 课程编号查询章节信息
+	 * @param courseId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="selectChapterByCourseId")
+	@ResponseBody
+	public JsonResult selectChapterByCourseId(@RequestParam("courseId") String courseId , HttpServletRequest request){
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = chapterService.selectByCourseId(courseId);
+		} catch (Exception e) {
+			jsonResult.setMsg("查询章节信息异常");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	
+	/**
+	 * 创建章节信息
+	 * @param teacherId
+	 * @param chapter
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="createChapter")
+	@ResponseBody
+	public JsonResult createChapter(@RequestParam("teacherId") String teacherId , Chapter chapter , HttpServletRequest request){
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = chapterService.createChapter(chapter);
+		} catch (Exception e) {
+			jsonResult.setMsg("课程信息创建异常！");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	
+	
+	/**
+	 * 删除章节信息
+	 * @param courseId
+	 * @param chapterId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="deleteChapter")
+	@ResponseBody
+	public JsonResult deleteChapter(@RequestParam("courseId") String courseId , @RequestParam("chapterId") String chapterId ,  HttpServletRequest request){
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = chapterService.deleteChapter(courseId, chapterId);
+		} catch (Exception e) {
+			jsonResult.setMsg("课程信息删除异常！");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
@@ -262,6 +347,7 @@ public class TeacherApiController {
 		return jsonResult;
 	}
 	
+	
 	/**
 	 * 删除学生账号信息
 	 * 先删除学生信息
@@ -276,7 +362,7 @@ public class TeacherApiController {
 	public JsonResult deleteStudentAccount(@RequestParam("teacherId") String teacherId , @RequestParam("studentId") String studentId , HttpServletRequest request ){
 		JsonResult jsonResult = new JsonResult();
 		try {
-			jsonResult = teacherService.deleteStudentAccount(teacherId, studentId);
+			jsonResult = studentService.deleteStudentAccount(teacherId, studentId);
 		} catch (Exception e) {
 			jsonResult.setMsg("学生账号信息删除异常");
 			jsonResult.setStatus(1);
@@ -302,4 +388,6 @@ public class TeacherApiController {
 		}
 		return jsonResult;
 	}
+	
+	//删除课程信息
 }

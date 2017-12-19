@@ -84,7 +84,7 @@
 	$(function() {
 		getTeacherInfo();
 
-		var $tables = $('#classList')
+		var $tables = $('#courseList')
 				.DataTable(
 						{
 							serverSide : true,//分页，取数据等等的都放到服务端去
@@ -275,7 +275,33 @@
 	}
 
 	function deleteCourse(courseId) {
-
+		$.ajax({
+			type : "post", //提交方式  
+			url : basePath + "teacherApi/selectChapterByCourseId?courseId="+ courseId, //路径  
+			async : true, //或false,是否异步
+			data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+			success : function(res) {//返回数据根据结果进行相应的处理 
+				console.log(res);
+				if(res.data == ""){
+					$.ajax({
+						type : "post", //提交方式  
+						url : basePath + "teacherApi/deleteClassByClassId?classId="+classId, //路径  
+						async : true, 
+						success : function(res) {
+							var status = res.status;
+							if(status!=0){
+								alert(res.msg);
+								return false;
+							}
+							alert(res.msg);
+							window.location.href =  basePath + "teacher/toClassInfo?teacherId=" + teacherId ;
+						}
+					});
+				}else{
+					alert("请先管理课程中关联的章节信息！");
+				}
+			}
+		});
 	}
 </script>
 </head>
@@ -366,7 +392,7 @@
 								<div class="col-xs-12">
 									<div class="box">
 										<div class="box-body">
-											<table id="classList"
+											<table id="courseList"
 												class="table table-bordered table-hover">
 												<thead>
 													<tr>

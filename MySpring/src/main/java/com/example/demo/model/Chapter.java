@@ -11,10 +11,15 @@ public class Chapter {
 	
 	private int id;
 	private String chapterId;
+	private String chapterName;
 	private String chapterContext;
 	private String courseId;
+	private String teacherId;
 	private Date createTime;
 	private Date modifyTime;
+	
+	private String teacherName;
+	private String courseName;
 	
 	public void chapter(){
 		
@@ -66,5 +71,37 @@ public class Chapter {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public String getTeacherId() {
+		return teacherId;
+	}
+
+	public void setTeacherId(String teacherId) {
+		this.teacherId = teacherId;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public String getChapterName() {
+		return chapterName;
+	}
+
+	public void setChapterName(String chapterName) {
+		this.chapterName = chapterName;
 	}
 }

@@ -38,7 +38,7 @@ public interface ClassesService {
 	 * @param classId
 	 * @return
 	 */
-	JsonResult updateClassById(String classId);
+	JsonResult updateClassById(Classes classes);
 	
 	/**
 	 * 删除班级信息

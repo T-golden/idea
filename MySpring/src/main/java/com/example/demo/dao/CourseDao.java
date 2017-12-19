@@ -45,12 +45,12 @@ public interface CourseDao {
 	 * @param courseId
 	 * @return
 	 */
-	int updateCourseById(String courseId);
+	int updateCourseById(Course course);
 	
 	/**
 	 * 删除课程信息
 	 * @param courseId
 	 * @return
 	 */
-	int deleteCourseById(String courseId);
+	int deleteCourseById(Map<String, Object> map);
 }
