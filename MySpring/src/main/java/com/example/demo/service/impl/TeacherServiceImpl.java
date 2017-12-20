@@ -47,15 +47,9 @@ public class TeacherServiceImpl implements TeacherService {
 	public JsonResult selectFiveTeacher() {
 		JsonResult jsonResult = new JsonResult();
 		List<Teacher> teacherList = teacherDao.selectFiveTeacher();
-		if(teacherList.size()>0) {
-			jsonResult.setData(teacherList);
-			jsonResult.setMsg("教师信息");
-			jsonResult.setStatus(0);
-		}else {
-			jsonResult.setData(teacherList);
-			jsonResult.setMsg("教师信息为空");
-			jsonResult.setStatus(0);
-		}
+		jsonResult.setData(teacherList);
+		jsonResult.setMsg("教师信息");
+		jsonResult.setStatus(0);
 		return jsonResult;
 	}
 	

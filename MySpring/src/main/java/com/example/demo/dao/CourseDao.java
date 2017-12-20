@@ -19,6 +19,8 @@ public interface CourseDao {
 	
 	int getCount(String teacherId);
 	
+	List<Course> selectSixCourse();
+	
 	/**
 	 * 教师编号查询课程信息
 	 * @param teacherId

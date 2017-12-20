@@ -24,6 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>
 $(function () {
 	getFiveTeacherInfo();
+	getSixCourse();
 });
 
 function getFiveTeacherInfo() {
@@ -41,7 +42,7 @@ function getFiveTeacherInfo() {
 			var data = res.data;
 			console.log(data);
 			for(var i = 0 ; i < data.length; i++){
-				$("#slider").prepend("<li><img src='home/images/teacher"+(i+1)+".jpg' class='img-responsive'  /><div><span>"+data[i].teacherName+"</span></div></li>");
+				$("#slider").prepend("<li><div><img src='home/images/teacher"+(i+1)+".jpg' class='img-responsive'  /></div><div><span>教师姓名："+data[i].teacherName+"</span></div></li>");
 			}
 			$("#slider").responsiveSlides({
 				auto: true,
@@ -53,7 +54,29 @@ function getFiveTeacherInfo() {
 		}
 	});
 }
-
+	function getSixCourse(){
+		$.ajax({
+			type : "post", //提交方式  
+			url : basePath + "homeApi/getSixCourse", //路径  
+			async : true, //或false,是否异步
+			data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+			success : function(res) {//返回数据根据结果进行相应的处理 
+				var status = res.status;
+				if(status!=0){
+					alert(res.msg);
+					return false;
+				}
+				var data = res.data;
+				for(var i = 0 ; i<data.length; i++){
+					$("#courseContext").prepend("<div class='col-md-4 services-section-grid'><div class='services-section-grid-head'><div class='service-icon'><i class='book'></i></div><div class='service-icon-heading'><a href='#' onclick='toChapterContext("+data[i].courseId+")'><h4>"+data[i].courseName+"---"+data[i].teacherName+"</h4></a><p style='width:260px; height:65px; text-overflow:ellipsis; /* for internet explorer */ overflow:hidden; display:block;'>"+data[i].courseContext+"</p></div><div class='clearfix'></div></div></div>");	
+				}
+			}
+		})
+	}
+	
+	function toChapterContext(courseId){
+		alert(courseId);
+	}
 </script>
 <script>
 	new WOW().init();
@@ -92,83 +115,8 @@ function getFiveTeacherInfo() {
 	<!--start-services-->
 	<div id="about" class="service-section">
 		<div class="container">
-			<div class="serve-grids wow bounceIn animated" data-wow-delay="0.4s">
-				<div class="col-md-4 services-section-grid">
-					<div class="services-section-grid-head">
-						<div class="service-icon">
-							<i class="rocket"></i>
-						</div>
-						<div class="service-icon-heading">
-							<h4>Events Planning</h4>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="col-md-4 services-section-grid">
-					<div class="services-section-grid-head">
-						<div class="service-icon">
-							<i class="plan"></i>
-						</div>
-						<div class="service-icon-heading">
-							<h4>MASTERING DESIGN</h4>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="col-md-4 services-section-grid lost">
-					<div class="services-section-grid-head">
-						<div class="service-icon">
-							<i class="book"></i>
-						</div>
-						<div class="service-icon-heading">
-							<h4>EXPERT DEVELOPERS</h4>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			<div class="serve-grids two  wow bounceIn animated" data-wow-delay="0.4s">
-				<div class="col-md-4 services-section-grid act">
-					<div class="services-section-grid-head">
-						<div class="service-icon">
-							<i class="arrow"></i>
-						</div>
-						<div class="service-icon-heading">
-							<h4>ATTENSION TO DETAILS</h4>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="col-md-4 services-section-grid">
-					<div class="services-section-grid-head">
-						<div class="service-icon">
-							<i class="download"></i>
-						</div>
-						<div class="service-icon-heading">
-							<h4>ANOTHER COOL SERVICE.</h4>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="col-md-4 services-section-grid lost">
-					<div class="services-section-grid-head">
-						<div class="service-icon">
-							<i class="cloud"></i>
-						</div>
-						<div class="service-icon-heading">
-							<h4>Events Planning</h4>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
+			<div id="courseContext" class="serve-grids wow bounceIn animated" data-wow-delay="0.4s">
+				
 			</div>
 		</div>
 	</div>

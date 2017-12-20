@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.JsonResult;
+import com.example.demo.service.CourseService;
 import com.example.demo.service.TeacherService;
 
 @Controller
@@ -13,6 +14,8 @@ import com.example.demo.service.TeacherService;
 public class HomeApiController {
 	@Autowired
 	private TeacherService teacherService;
+	@Autowired
+	private CourseService courseService;
 	
 	@RequestMapping(value="getFiveTeacher")
 	@ResponseBody
@@ -22,6 +25,19 @@ public class HomeApiController {
 			jsonResult = teacherService.selectFiveTeacher();
 		} catch (Exception e) {
 			jsonResult.setMsg("教师信息异常");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	
+	@RequestMapping(value="getSixCourse")
+	@ResponseBody
+	public JsonResult getSixCourse() {
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = courseService.selectSixCourse();
+		} catch (Exception e) {
+			jsonResult.setMsg("课程信息异常");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;

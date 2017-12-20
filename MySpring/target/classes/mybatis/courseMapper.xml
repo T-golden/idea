@@ -28,6 +28,13 @@
 		</if>
 	</sql>
 	
+	<select id="selectSixCourse" resultMap="BaseResultMap"
+		parameterType="String">
+		select
+		<include refid="Base_Column_List" />
+		from course order by create_time desc limit 0,6
+	</select>
+	
 	<select id="selectCoursePageByTeacherId" resultMap="BaseResultMap" parameterType="object">
 		select a.*,b.class_name,c.teacher_name from course a left join classes b on a.class_id = b.class_id left join teacher c on a.teacher_id = c.teacher_id
 		where a.teacher_id = #{teacherId,jdbcType=VARCHAR} order by create_time desc

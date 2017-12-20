@@ -96,4 +96,14 @@ public class CourseServiceImpl implements CourseService{
 		return jsonResult;
 	}
 
+	@Override
+	public JsonResult selectSixCourse() {
+		JsonResult jsonResult = new JsonResult();
+		List<Course> courseList = courseDao.selectSixCourse();
+		jsonResult.setData(courseList);
+		jsonResult.setMsg("课程信息");
+		jsonResult.setStatus(0);
+		return jsonResult;
+	}
+
 }
