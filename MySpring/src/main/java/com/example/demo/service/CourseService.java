@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.util.Map;
 
 import com.example.demo.model.Course;
 import com.example.demo.model.JsonResult;
@@ -41,5 +40,5 @@ public interface CourseService {
 	 * @param map
 	 * @return
 	 */
-	JsonResult deleteCourse(Map<String, Object> map);
+	JsonResult deleteCourse(String courseId);
 }

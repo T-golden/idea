@@ -171,8 +171,10 @@ public class TeacherController {
 	public String toUpdateStudent(@RequestParam("studentId") String studentId , Model model) {
 		Student student = studentService.selectStudentInfo(studentId);
 		StudentAccount studentAccount = studentService.selectByStudentId(studentId);
+		Classes classes = classesService.selectClassesByClassId(student.getClassId());
 		model.addAttribute("student", student);
 		model.addAttribute("studentAccount", studentAccount);
+		model.addAttribute("classes", classes);
 		return "teacher/teacher_update_student";
 	}
 

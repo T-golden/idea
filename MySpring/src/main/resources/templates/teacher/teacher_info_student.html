@@ -183,7 +183,17 @@
 									},
 									{
 										"data" : 'studentSex',
-										"width" : "60px"
+										"width" : "60px",
+										"render" : function(data, type, full, callback) {
+											switch (data) {
+											case 0:
+												return "未填写";
+											case 1:
+												return "男";
+											case 2:
+												return "女";
+											}
+										}
 									},
 									{
 										"data" : 'studentEmail',

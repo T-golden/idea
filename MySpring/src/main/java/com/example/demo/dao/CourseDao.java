@@ -52,5 +52,5 @@ public interface CourseDao {
 	 * @param courseId
 	 * @return
 	 */
-	int deleteCourseById(Map<String, Object> map);
+	int deleteCourseById(String courseId);
 }

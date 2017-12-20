@@ -70,7 +70,7 @@
 		where course_id=#{courseId,jdbcType=VARCHAR}
 	</update>
 	
-	<delete id="deleteCourseById" parameterType="object">
-		delete from course where teacher_id=#{teacherId,jdbcType=VARCHAR} and course_id=#{courseId,jdbcType=VARCHAR}
+	<delete id="deleteCourseById" parameterType="java.lang.String">
+		delete from course where course_id=#{courseId,jdbcType=VARCHAR}
 	</delete>
 </mapper>

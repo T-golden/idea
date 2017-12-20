@@ -27,7 +27,19 @@ public interface StudentService {
 	 */
 	JsonResult selectByPrimaryKey(String studentId);
 	
-	JsonResult upateStudentInfo(Student Student);
+	/**
+	 * 修改学生信息
+	 * @param Student
+	 * @return
+	 */
+	int upateStudentInfo(Student Student);
+	
+	/**
+	 * 修改学生账号信息
+	 * @param studentAccount
+	 * @return
+	 */
+	int updateStudentAccount(StudentAccount studentAccount);
 	
 	/**
 	 * 创建学生账号信息

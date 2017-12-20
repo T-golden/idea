@@ -118,7 +118,7 @@ public class TeacherApiController {
 			jsonResult = teacherService.getTeacherInfo(teacherId);
 		} catch (Exception e) {
 			jsonResult.setStatus(1);
-			jsonResult.setMsg("教师信息获取异常");
+			jsonResult.setMsg("教师信息获取异常！");
 		}
 		return jsonResult;
 	}	
@@ -175,7 +175,7 @@ public class TeacherApiController {
 		try {
 			jsonResult = courseService.selectCourseByTeacherId(teacherId);
 		} catch (Exception e) {
-			jsonResult.setMsg("课程信息查询异常");
+			jsonResult.setMsg("课程信息查询异常!");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
@@ -194,7 +194,7 @@ public class TeacherApiController {
 		try {
 			jsonResult = chapterService.selectByCourseId(courseId);
 		} catch (Exception e) {
-			jsonResult.setMsg("查询章节信息异常");
+			jsonResult.setMsg("查询章节信息异常!");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
@@ -211,7 +211,7 @@ public class TeacherApiController {
 		try {
 			jsonResult = studentService.selectStudentByClassId(classId);
 		} catch (Exception e) {
-			jsonResult.setMsg("学生信息查询异常");
+			jsonResult.setMsg("学生信息查询异常!");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
@@ -254,7 +254,7 @@ public class TeacherApiController {
 			jsonResult = studentService.createStudentAccount(teacherId, classId , studentAccount, classNum);
 		} catch (Exception e) {
 			jsonResult.setStatus(1);
-			jsonResult.setMsg("学生账号信息创建异常");
+			jsonResult.setMsg("学生账号信息创建异常!");
 		}
 		return jsonResult;
 	}
@@ -358,8 +358,14 @@ public class TeacherApiController {
 	 */
 	@RequestMapping(value="updateStudentInfo")
 	@ResponseBody
-	public JsonResult updateStudentInfo(@RequestParam("teacherId") String teacherId , Student student , HttpServletRequest request){
+	public JsonResult updateStudentInfo(@RequestParam("teacherId") String teacherId , Student student , StudentAccount studentAccount , HttpServletRequest request){
 		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = teacherService.updateStudentInfo(student, studentAccount);
+		} catch (Exception e) {
+			jsonResult.setMsg("学生信息修改异常！");
+			jsonResult.setStatus(1);
+		}
 		return jsonResult;
 	}
 	
@@ -376,7 +382,7 @@ public class TeacherApiController {
 		try {
 			jsonResult = classesService.deleteClass(classId);
 		} catch (Exception e) {
-			jsonResult.setMsg("班级信息删除异常");
+			jsonResult.setMsg("班级信息删除异常！");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
@@ -398,7 +404,7 @@ public class TeacherApiController {
 		try {
 			jsonResult = studentService.deleteStudentAccount(teacherId, studentId);
 		} catch (Exception e) {
-			jsonResult.setMsg("学生账号信息删除异常");
+			jsonResult.setMsg("学生账号信息删除异常！");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
@@ -414,8 +420,11 @@ public class TeacherApiController {
 	@ResponseBody
 	public JsonResult deleteCourse(@RequestParam("courseId") String courseId ,HttpServletRequest request){
 		JsonResult jsonResult = new JsonResult();
-		
-		
+		try {
+			jsonResult = courseService.deleteCourse(courseId);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return jsonResult;
 	}
 	

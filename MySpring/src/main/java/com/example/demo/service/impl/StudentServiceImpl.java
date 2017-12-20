@@ -84,18 +84,13 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public JsonResult upateStudentInfo(Student student) {
-		JsonResult jsonResult = new JsonResult();
-		student.setModifyTime(new Date());
-		int i = studentDao.updateStudent(student);
-		if(i>0){
-			jsonResult.setMsg("学生信息修改成功");
-			jsonResult.setStatus(0);
-		}else{
-			jsonResult.setMsg("学生信息修改失败");
-			jsonResult.setStatus(1);
-		}
-		return jsonResult;
+	public int upateStudentInfo(Student student) {
+		return studentDao.updateStudent(student);
+	}
+	
+	@Override
+	public int updateStudentAccount(StudentAccount studentAccount) {
+		return studentAccountDao.updateStudentAccount(studentAccount);
 	}
 	
 	@Override
@@ -169,5 +164,7 @@ public class StudentServiceImpl implements StudentService{
 	public StudentAccount selectByStudentId(String studentId) {
 		return studentAccountDao.selectByStudentId(studentId);
 	}
+
+
 
 }

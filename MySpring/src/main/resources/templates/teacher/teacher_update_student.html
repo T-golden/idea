@@ -35,10 +35,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){  
 		getTeacherInfo();
-		
-		$("#submit").click(function(){
-			updateStudent();
-		});
+		$("#update_submit").off("click").on("click",updateStudent);
 	});  
 	
 	function getTeacherInfo(){
@@ -55,22 +52,28 @@
 	}
 	
 	function updateStudent(){
-		var classId = $("#classId").val();
-		var className = $("#className").val();
-		var classNum = $("#classNum").val();
+		var studentId = $("#studentId").val();
+		var studentName = $("#studentName").val();
+		var studentSex = $("#studentSex").val();
+		var studentAge = $("#studentAge").val();
+		var studentEmail = $("#studentEmail").val();
+		var studentPhone = $("#studentPhone").val();
+		var studentQQ = $("#studentQQ").val();
+		var studentAccount = $("#studentAccount").val();
+		var studentPassword = $("#studentPassword").val();
 		$.ajax({
-			   type : "get",  //提交方式  
-			   url :  basePath+"teacherApi/updateClassesInfo?teacherId="+teacherId+"&classId="+classId+"&className="+className+"&classNum="+classNum,	//路径  
-			   async:true,    //或false,是否异步
-			   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
-			   success : function(res) {//返回数据根据结果进行相应的处理 
-				   var status = res.status;
-			   		if(status!=0){
-			   			alert(res.msg);
-			   			return false;
-			   		}
-			   		alert(res.msg);
-			   	 window.location.href = basePath + "teacher/toClassInfo?teacherId=" + teacherId ;
+			type : "get",  //提交方式  
+			url :  basePath+"teacherApi/updateStudentInfo?teacherId="+teacherId+"&studentId="+studentId+"&studentName="+studentName+"&studentSex="+studentSex+"&studentAge="+studentAge+"&studentEmail="+studentEmail+"&studentPhone="+studentPhone+"&studentQQ="+studentQQ+"&account="+studentAccount+"&password="+studentPassword,	//路径  
+			async:true,    //或false,是否异步
+			data : "jsonResult",//数据，这里使用的是Json格式进行传输 
+			success : function(res) {//返回数据根据结果进行相应的处理 
+				var status = res.status;
+				if(status!=0){
+					alert(res.msg);
+					return false;
+				}
+				alert(res.msg);
+				window.location.href = basePath + "teacher/toStudentInfo?teacherId=" + teacherId ;
 			   }
 		});
 	}
@@ -182,14 +185,15 @@
 									<tr>
 										<td>使用账号:<input  th:value="${studentAccount.account}" id="studentAccount" class="studentAccount"></td>
 										<td>密码:<input th:value="${studentAccount.password}" id="studentPassword" class="studentPassword"></td>
+										<td id="classInfo">所属班级:<span th:value="${classes.classId}" th:text="${classes.className}" id="classId" class="classId"></span></td>
 									</tr>
 									<tr>
 										<td align="center" colspan="3">联系方式</td>
 									</tr>
 									<tr>
-										<td>Email : <input th:value="${student.studentEmail}" id="teacherEmail" class="teacherEmail"></input></td>
-										<td>手机 : <input th:value="${student.studentPhone}" id="teacherPhone" class="teacherPhone"></input></td>
-										<td>QQ : <input th:value="${student.studentQQ}" id="teacherQQ" class="teacherQQ"></input></td>
+										<td>Email : <input th:value="${student.studentEmail}" id="studentEmail" class="studentEmail"></input></td>
+										<td>手机 : <input th:value="${student.studentPhone}" id="studentPhone" class="studentPhone"></input></td>
+										<td>QQ : <input th:value="${student.studentQQ}" id="studentQQ" class="studentQQ"></input></td>
 									</tr>
 									<tr>
 										<td>创建时间 : <span  th:text="${#dates.format(student.createTime, 'yyyy-MM-dd HH:mm:ss')}" id="createTime" class="createTime"></span></td>

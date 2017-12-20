@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 
 import com.example.demo.model.JsonResult;
+import com.example.demo.model.Student;
+import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
 import com.example.demo.model.TeacherAccount;
 
@@ -31,6 +33,12 @@ public interface TeacherService {
 	 */
 	JsonResult updateTeacherInfo(Teacher teacher);
 	
-
+	/**
+	 * 修改学生信息
+	 * @param student
+	 * @param studentAccount
+	 * @return
+	 */
+	JsonResult updateStudentInfo(Student student , StudentAccount studentAccount);
 	
 }

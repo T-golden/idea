@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import com.example.demo.dao.StudentDao;
 import com.example.demo.dao.TeacherAccountDao;
 import com.example.demo.dao.TeacherDao;
 import com.example.demo.model.JsonResult;
+import com.example.demo.model.Student;
+import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
 import com.example.demo.model.TeacherAccount;
 import com.example.demo.service.TeacherService;
@@ -83,6 +86,28 @@ public class TeacherServiceImpl implements TeacherService {
 			jsonResult.setStatus(0);
 		}else {
 			jsonResult.setMsg("教师信息修改失败！");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+
+	@Override
+	public JsonResult updateStudentInfo(Student student , StudentAccount studentAccount) {
+		JsonResult jsonResult = new JsonResult();
+		studentAccount.setModifyTime(new Date());
+		int i = studentAccountDao.updateStudentAccount(studentAccount);
+		if(i>0){
+			student.setModifyTime(studentAccount.getModifyTime());
+			i = studentDao.updateStudent(student);
+			if(i>0){
+				jsonResult.setMsg("学生信息修改成功！");
+				jsonResult.setStatus(0);
+			}else{
+				jsonResult.setMsg("学生信息修改失败！");
+				jsonResult.setStatus(1);
+			}
+		}else{
+			jsonResult.setMsg("学生账号信息修改失败！");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
