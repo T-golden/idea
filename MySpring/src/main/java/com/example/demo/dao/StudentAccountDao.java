@@ -16,6 +16,8 @@ public interface StudentAccountDao {
 	 */
 	StudentAccount selectByPrimaryKey(String studentId);
 	
+	StudentAccount selectByStudentId(String studentId);
+	
 	/**
 	 * 账号查询学生账号信息
 	 * @param map

@@ -14,6 +14,7 @@ public class Student {
 	private String studentName;
 	private String studentPik;
 	private int studentSex;
+	private int studentAge;
 	private String studentEmail;
 	private String studentPhone;
 	private String studentQQ;
@@ -139,6 +140,14 @@ public class Student {
 
 	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
+	}
+
+	public int getStudentAge() {
+		return studentAge;
+	}
+
+	public void setStudentAge(int studentAge) {
+		this.studentAge = studentAge;
 	}
 
 }

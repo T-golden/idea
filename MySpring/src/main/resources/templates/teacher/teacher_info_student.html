@@ -227,7 +227,7 @@
 										"render" : function(data, type, full,
 												callback) {
 											var _html = [];
-											_html.push("<a onclick='' style='margin-left:5px;'>编辑</a>");
+											_html.push("<a href='/teacher/toUpdateStudent?studentId="+data.studentId+"' style='margin-left:5px;'>编辑</a>");
 											_html.push("<a onclick='deleteStudent("+data.studentId+")' style='margin-left:5px;'>删除</a>");
 											return _html.join("");
 										}

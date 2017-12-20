@@ -77,6 +77,7 @@ public class ClassesServiceImpl implements ClassesService{
 	@Override
 	public JsonResult updateClassById(Classes classes) {
 		JsonResult jsonResult = new JsonResult();
+		classes.setModifyTime(new Date());
 		int i = classDao.updateClassById(classes);
 		if(i>0){
 			jsonResult.setMsg("班级信息修改成功");
@@ -85,7 +86,7 @@ public class ClassesServiceImpl implements ClassesService{
 			jsonResult.setMsg("班级信息修改失败");
 			jsonResult.setStatus(1);
 		}
-		return null;
+		return jsonResult;
 	}
 
 	@Override
@@ -100,6 +101,11 @@ public class ClassesServiceImpl implements ClassesService{
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
+	}
+
+	@Override
+	public Classes selectClassesByClassId(String classId) {
+		return classDao.selectByClassId(classId);
 	}
 
 }

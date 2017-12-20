@@ -34,12 +34,9 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){  
-		var date = new Date().getTime();
-		$("#classId").val(date);
-		
 		getTeacherInfo();
 		$("#submit").click(function(){
-			createClass();
+			updateClass();
 		});
 	});  
 	
@@ -50,32 +47,29 @@
 			   async:true,    //或false,是否异步
 			   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
 			   success : function(res) {//返回数据根据结果进行相应的处理 
-				   console.log(res);
 				   var data = res.data;
-				   console.log(data.teacherName);
 				   $("#teacherName").html(data.teacherName);
 			   }
 		});
 	}
 	
-	function createClass(){
+	function updateClass(){
 		var classId = $("#classId").val();
 		var className = $("#className").val();
 		var classNum = $("#classNum").val();
 		$.ajax({
-			   type : "post", 
-			   url :  basePath+"teacherApi/createClass?teacherId="+teacherId+"&classId="+classId+"&className="+className+"&classNum="+classNum,	//路径  
-			   async:true,   
-			   data : "jsonResult",
-			   success : function(res) {
+			   type : "get",  //提交方式  
+			   url :  basePath+"teacherApi/updateClassesInfo?teacherId="+teacherId+"&classId="+classId+"&className="+className+"&classNum="+classNum,	//路径  
+			   async:true,    //或false,是否异步
+			   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+			   success : function(res) {//返回数据根据结果进行相应的处理 
 				   var status = res.status;
-				   var msg = res.msg;
-				   if(status != 0){
-					   alert(msg);
-				   }else{
-					   alert(msg);
-					   window.location.href = basePath + "teacher/toClassInfo?teacherId=" + teacherId ;
-				   }
+			   		if(status!=0){
+			   			alert(res.msg);
+			   			return false;
+			   		}
+			   		alert(res.msg);
+			   	 window.location.href = basePath + "teacher/toClassInfo?teacherId=" + teacherId ;
 			   }
 		});
 	}
@@ -84,7 +78,7 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
-	<input type="hidden" id="teacherId" th:value="${teacherId}" />
+	<input type="hidden" id="teacherId" th:value="${classes.teacherId}" />
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
 		<div th:include="teacher/teacher_top :: teacher_top"
@@ -160,26 +154,26 @@
 					<section id="getintouch" class="fadeInDownBig animated">
 						<div class="container" style="border-bottom: 0;">
 							<h1>
-								<label>班级信息创建</label>
+								<label>班级信息修改</label>
 							</h1>
 						</div>
 						<div class="container">
 							<div class="float">班级编号:</div>
 							<div>
-								<input type="text" id="classId" />
+								<input type="text" id="classId" th:value="${classes.classId}" />
 							</div>
 							<div>班级名:</div>
 							<div>
-								<input type="text" id="className" />
+								<input type="text" id="className" th:value="${classes.className}" />
 							</div>
 							<div>班级人数:</div>
 							<div>
-								<input type="text" id="classNum" />
+								<input type="text" id="classNum" th:value="${classes.classNum}" />
 							</div>
 							<div class="">
 								<div class="span10 offset2">
 									<input type="submit" name="submit" id="submit" class="submit"
-										value="create Class">
+										value="update Class">
 								</div>
 							</div>
 						</div>

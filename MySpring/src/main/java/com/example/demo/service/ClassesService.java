@@ -46,4 +46,11 @@ public interface ClassesService {
 	 * @return
 	 */
 	JsonResult deleteClass(String classId);
+	
+	/**
+	 * 获取班级对象信息
+	 * @param classId
+	 * @return
+	 */
+	Classes selectClassesByClassId(String classId);
 }

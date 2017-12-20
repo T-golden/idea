@@ -86,6 +86,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public JsonResult upateStudentInfo(Student student) {
 		JsonResult jsonResult = new JsonResult();
+		student.setModifyTime(new Date());
 		int i = studentDao.updateStudent(student);
 		if(i>0){
 			jsonResult.setMsg("学生信息修改成功");
@@ -157,6 +158,16 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public int deleteStudent(Map<String, Object> map) {
 		return studentDao.deleteStudent(map);
+	}
+
+	@Override
+	public Student selectStudentInfo(String studentId) {
+		return studentDao.selectByPrimaryKey(studentId);
+	}
+
+	@Override
+	public StudentAccount selectByStudentId(String studentId) {
+		return studentAccountDao.selectByStudentId(studentId);
 	}
 
 }

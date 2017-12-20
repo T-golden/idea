@@ -180,7 +180,7 @@
 				"width" : "130px",
 				"render" : function(data, type, full,callback) {
 					var _html = [];
-					_html.push("<a onclick='' style='margin-left:5px;'>编辑</a>");
+					_html.push("<a href='/teacher/toUpdateClass?teacherId="+data.teacherId+"&classId="+data.classId+"' style='margin-left:5px;'>编辑</a>");
 					_html.push("<a onclick='deleteClass("+data.classId+")' style='margin-left:5px;'>删除</a>");
 					return _html.join("");
 				}
@@ -211,7 +211,6 @@
 	});
 	
 	function deleteClass(classId){
-		alert(classId);
 		$.ajax({
 			type : "post", //提交方式  
 			url : basePath + "teacherApi/selectStudentByClassId?classId="+classId, //路径  

@@ -1,14 +1,26 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.model.Classes;
+import com.example.demo.model.Student;
+import com.example.demo.model.StudentAccount;
+import com.example.demo.service.ClassesService;
+import com.example.demo.service.StudentService;
+
 
 @Controller
 @RequestMapping("/teacher")
 public class TeacherController {
+	
+	@Autowired
+	private ClassesService classesService;
+	@Autowired
+	private StudentService studentService;
 	
 	@RequestMapping("toTeacher")
 	public String toTeacher(@RequestParam ("teacherId") String teacherId ,Model model) {
@@ -136,6 +148,32 @@ public class TeacherController {
 	public String toAssignmentInfo(@RequestParam("teacherId") String teacherId , Model model) {
 		model.addAttribute("teacherId", teacherId);
 		return "teacher/teacher_assignment_info";
+	}
+	
+	/**
+	 * 修改班级信息
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/toUpdateClass")
+	public String toUpdateClass(@RequestParam("classId") String classId , Model model) {
+		Classes classes = classesService.selectClassesByClassId(classId);
+		model.addAttribute("classes", classes);
+		return "teacher/teacher_update_class";
+	}
+	
+	/**
+	 * 修改学生信息
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/toUpdateStudent")
+	public String toUpdateStudent(@RequestParam("studentId") String studentId , Model model) {
+		Student student = studentService.selectStudentInfo(studentId);
+		StudentAccount studentAccount = studentService.selectByStudentId(studentId);
+		model.addAttribute("student", student);
+		model.addAttribute("studentAccount", studentAccount);
+		return "teacher/teacher_update_student";
 	}
 
 	/**
