@@ -106,4 +106,9 @@ public class CourseServiceImpl implements CourseService{
 		return jsonResult;
 	}
 
+	@Override
+	public Course selectByCourseId(String courseId) {
+		return courseDao.selectByCourseId(courseId);
+	}
+
 }

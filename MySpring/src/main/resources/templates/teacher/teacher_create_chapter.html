@@ -69,9 +69,7 @@
 				console.log(res.data);
 				var data = res.data;
 				for (var i = 0; i < data.length; i++) {
-					$("#courseId").append(
-							"<option value='"+data[i].courseId+"'>"
-									+ data[i].courseName + "</option>");
+					$("#courseId").append("<option value='"+data[i].courseId+"'>"+ data[i].courseName + "</option>");
 				}
 			}
 		});
@@ -119,9 +117,8 @@
 				if (status != 0) {
 					alert(msg);
 				}
-				alert(msg)
-				window.location.href = basePath
-						+ "teacher/toChapterInfo?teacherId=" + teacherId;
+				alert(msg);
+				window.location.href = basePath + "teacher/toChapterInfo?teacherId=" + teacherId;
 			}
 		});
 	}
@@ -241,23 +238,27 @@
 								</tr>
 								<tr>
 									<td>
-									<!-- 配置文件 --> 
+										<input type="hidden" class="" name="chapterContext" id="chapterContext" value="" />
+										<!-- 配置文件 --> 
 										<script type="text/javascript" src="utf8-jsp/ueditor.config.js"></script>
 										<!-- 编辑器源码文件 --> 
 										<script type="text/javascript" src="utf8-jsp/ueditor.all.min.js"></script> 
 										<!-- 实例化编辑器 -->
 										<script type="text/javascript">
-											var ue = UE.getEditor('chapterContext');
-											alert(UE.getEditor('chapterContext').getAllHtml())
+											var ue = UE.getEditor('content');
+											function getAllHtml() {
+												$("#chapterContext").val(UE.getEditor('content').getContent());
+												console.log($("#chapterContext").val());
+											}
 										</script>
 										<!-- 加载编辑器的容器 --> 
-										<script id="chapterContext" name="content" type="text/plain"> 这里写你的初始化内容 </script> 
+										<script id="content" name="content" type="text/plain"> 这里写你的初始化内容 </script> 
 									</td>
 								</tr>
 							</table>
 							<div class="">
 								<div class="span10 offset2">
-									<input type="submit" name="submit" id="submit" class="submit" value="create chapter">
+									<input type="submit" onclick="getAllHtml()" name="submit" id="submit" class="submit" value="create chapter">
 								</div>
 							</div>
 						</div>

@@ -21,6 +21,8 @@ public interface CourseDao {
 	
 	List<Course> selectSixCourse();
 	
+	Course selectByCourseId(String courseId);
+	
 	/**
 	 * 教师编号查询课程信息
 	 * @param teacherId

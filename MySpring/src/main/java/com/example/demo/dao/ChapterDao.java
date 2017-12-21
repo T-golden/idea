@@ -51,5 +51,5 @@ public interface ChapterDao {
 	 * @param chapterId
 	 * @return
 	 */
-	int deleteChapter(Map<String, Object> map);
+	int deleteChapter(String chapterId);
 }

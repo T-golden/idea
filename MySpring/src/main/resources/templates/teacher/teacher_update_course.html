@@ -30,55 +30,72 @@
 <!-- END PAGE LEVEL STYLES -->
 <link rel="shortcut icon" href="teacher/images/favicon.ico" />
 <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 <style type="text/css">
+
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){  
-		getTeacherInfo();
-		$("#submit").click(function(){
-			updateClass();
-		});
-	});  
+$(document).ready(function(){
+	getTeacherInfo();
+	$("#submit").click(function(){
+		updateCourse();
+	});
+});  
 	
-	function getTeacherInfo(){
-		$.ajax({
-			   type : "post",  //提交方式  
-			   url :  basePath+"teacherApi/getTeacherInfo?teacherId="+teacherId,	//路径  
-			   async:true,    //或false,是否异步
-			   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
-			   success : function(res) {//返回数据根据结果进行相应的处理 
-				   var data = res.data;
-				   $("#teacherName").html(data.teacherName);
-			   }
-		});
-	}
+
+//获取教师信息
+function getTeacherInfo(){
+	$.ajax({
+		type : "post",  //提交方式 
+		url :  basePath+"teacherApi/getTeacherInfo?teacherId="+teacherId,	//路径  
+		async:true,    //或false,是否异步
+		data : "jsonResult",//数据，这里使用的是Json格式进行传输  
+		success : function(res) {//返回数据根据结果进行相应的处理 
+			var status = res.status;
+			var msg = res.msg;
+			if(status != 0){
+				alert(msg);
+			}
+			console.log(res);
+			var data = res.data;
+			$("#teacherName").html(data.teacherName);
+		}
+	});
+}
+
+function updateCourse(){
+	var courseId = $("#courseId").val();
+	var courseName = $("#courseName").val();
+	var courseContext = $("#courseContext").val();
+	var courseBeginTime = $("#courseBeginTime").val();
+	var courseOverTime = $("#courseOverTime").val();
+	var classId = $("#classId").val();
+	alert(courseId+":::"+courseName+":::"+courseContext+":::"+courseBeginTime+":::"+courseOverTime+":::"+classId)
+	$.ajax({
+		type : "post",  //提交方式  
+		url :  basePath+"teacherApi/updateCourse?teacherId="+teacherId+"&courseId="+courseId+"&courseName="+courseName+"&courseContext="+courseContext+"&courseBeginTime="+courseBeginTime+"&courseOverTime="+courseOverTime+"&classId="+classId,	//路径  
+		async:true,    //或false,是否异步
+		data : "jsonresult",//数据，这里使用的是json格式进行传输  
+		success : function(res) {//返回数据根据结果进行相应的处理 
+			var status = res.status;
+			console.log(res);
+			var msg = res.msg;
+			if(status != 0){
+				alert(msg);
+				return false;
+			}
+			alert(msg);
+			window.location.href = basePath + "teacher/toCourseInfo?teacherId=" + teacherId ;
+		   }
+	});
+}
 	
-	function updateClass(){
-		var classId = $("#classId").val();
-		var className = $("#className").val();
-		var classNum = $("#classNum").val();
-		$.ajax({
-			   type : "get",  //提交方式  
-			   url :  basePath+"teacherApi/updateClassesInfo?teacherId="+teacherId+"&classId="+classId+"&className="+className+"&classNum="+classNum,	//路径  
-			   async:true,    //或false,是否异步
-			   data : "jsonResult",//数据，这里使用的是Json格式进行传输  
-			   success : function(res) {//返回数据根据结果进行相应的处理 
-				   var status = res.status;
-			   		if(status!=0){
-			   			alert(res.msg);
-			   			return false;
-			   		}
-			   		alert(res.msg);
-			   	 window.location.href = basePath + "teacher/toClassInfo?teacherId=" + teacherId ;
-			   }
-		});
-	}
 </script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
-	<input type="hidden" id="teacherId" th:value="${classes.teacherId}" />
+	<input type="hidden" id="teacherId" th:value="${teacherId}" />
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
 		<div th:include="teacher/teacher_top :: teacher_top"
@@ -133,7 +150,7 @@
 						<!-- END BEGIN STYLE CUSTOMIZER -->
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							欢迎回来！ <small id="teacherName">teacherName</small>
+							欢迎回来！ <small><span id="teacherName"></span></small>
 						</h3>
 						<ul class="breadcrumb">
 							<li class="pull-right no-text-shadow">
@@ -154,26 +171,44 @@
 					<section id="getintouch" class="fadeInDownBig animated">
 						<div class="container" style="border-bottom: 0;">
 							<h1>
-								<label>班级信息修改</label>
+								<label>课程信息修改</label>
 							</h1>
 						</div>
 						<div class="container">
-							<div class="float">班级编号:</div>
-							<div>
-								<input type="text" id="classId" th:value="${classes.classId}" />
-							</div>
-							<div>班级名:</div>
-							<div>
-								<input type="text" id="className" th:value="${classes.className}" />
-							</div>
-							<div>班级人数:</div>
-							<div>
-								<input type="text" id="classNum" th:value="${classes.classNum}" />
-							</div>
+							<table>
+								<tr>
+									<td><div class="float">课程编号:</div></td>
+									<td><div><input type="text" id="courseId" th:value="${course.courseId}" /></div></td>
+								</tr>
+								
+								<tr>
+									<td><div>课程名称:</div></td>
+									<td><div><input type="text" id="courseName" th:value="${course.courseName}" /></div></td>
+								</tr>
+								
+								<tr>
+									<td><div>课程简介:</div></td>
+									<td><div><textarea id="courseContext" th:text="${course.courseContext}" cols="20" rows="10"></textarea></div></td>
+								</tr>
+								
+								<tr>
+									<td><div>课程开始时间:</div></td>
+									<td><input id="courseBeginTime" th:value="${#dates.format(course.courseBeginTime,'yyyy-MM-dd HH:mm:ss')}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" readonly="readonly"  ></td>
+								</tr>
+								
+								<tr>
+									<td><div>课程结束时间:</div></td>
+									<td><input id="courseOverTime" th:value="${#dates.format(course.courseOverTime,'yyyy-MM-dd HH:mm:ss')}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" readonly="readonly" ></td>
+								</tr>
+								<tr>
+									<td><div>所属班级:</div></td>
+									<td><select id="classId"><option th:value="${course.classId}" th:text="${classes.className}" th:selected="${classes.classId}?'selected'">>请选择</option></select></td>
+								</tr>
+							</table>
 							<div class="">
 								<div class="span10 offset2">
 									<input type="submit" name="submit" id="submit" class="submit"
-										value="update classInfo">
+											value="update courseInfo">
 								</div>
 							</div>
 						</div>
@@ -197,11 +232,11 @@
 		</div>
 	</div>
 
-	
+
 	<script src="js/app.js" type="text/javascript"></script>
 	<script src="js/teacher.config.js" type="text/javascript"></script>
 	<script>
-		jQuery(document).ready(function() {
+		$(function() {
 			App.init(); // initlayout and core plugins
 		});
 	</script>

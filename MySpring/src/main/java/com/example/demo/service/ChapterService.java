@@ -33,5 +33,9 @@ public interface ChapterService {
 	 * @param map
 	 * @return
 	 */
-	JsonResult deleteChapter(String courseId , String chapterId);
+	JsonResult deleteChapter(String chapterId);
+	
+	Chapter selectByPrimaryKey(String chapterId);
+	
+	JsonResult updateChapter(Chapter chapter);
 }

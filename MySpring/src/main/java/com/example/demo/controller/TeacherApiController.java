@@ -302,13 +302,8 @@ public class TeacherApiController {
 	/**
 	 * 修改教师信息
 	 * @param teacherId
-	 * @param teacherName
+	 * @param teacher
 	 * @param teacherPik
-	 * @param teacherSex
-	 * @param teacherAge
-	 * @param teacherEmail
-	 * @param teacherPhone
-	 * @param teacherQQ
 	 * @param request
 	 * @return
 	 */
@@ -370,6 +365,46 @@ public class TeacherApiController {
 	}
 	
 	/**
+	 * 修改课程信息
+	 * @param teacherId
+	 * @param course
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="updateCourse")
+	@ResponseBody
+	public JsonResult updateCourse(@RequestParam("teacherId") String teacherId , Course course , HttpServletRequest request){
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = courseService.updateCourseInfo(course);
+		} catch (Exception e) {
+			jsonResult.setMsg("课程信息修改异常！");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	
+	/**
+	 * 修改章节信息
+	 * @param teacherId
+	 * @param chapter
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="updateChapter")
+	@ResponseBody
+	public JsonResult updateChapter(@RequestParam("teacherId") String teacherId , Chapter chapter , HttpServletRequest request){
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult = chapterService.updateChapter(chapter);
+		} catch (Exception e) {
+			jsonResult.setMsg("章节信息修改异常！");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+	
+	/**
 	 * 删除班级信息
 	 * @param classId
 	 * @param request
@@ -423,7 +458,8 @@ public class TeacherApiController {
 		try {
 			jsonResult = courseService.deleteCourse(courseId);
 		} catch (Exception e) {
-			// TODO: handle exception
+			jsonResult.setMsg("课程信息删除异常！");
+			jsonResult.setStatus(1);
 		}
 		return jsonResult;
 	}
@@ -437,12 +473,12 @@ public class TeacherApiController {
 	 */
 	@RequestMapping(value="deleteChapter")
 	@ResponseBody
-	public JsonResult deleteChapter(@RequestParam("courseId") String courseId , @RequestParam("chapterId") String chapterId ,  HttpServletRequest request){
+	public JsonResult deleteChapter(@RequestParam("chapterId") String chapterId ,  HttpServletRequest request){
 		JsonResult jsonResult = new JsonResult();
 		try {
-			jsonResult = chapterService.deleteChapter(courseId, chapterId);
+			jsonResult = chapterService.deleteChapter(chapterId);
 		} catch (Exception e) {
-			jsonResult.setMsg("课程信息删除异常！");
+			jsonResult.setMsg("章节信息删除异常！");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;

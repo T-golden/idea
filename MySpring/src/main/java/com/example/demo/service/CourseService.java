@@ -43,4 +43,6 @@ public interface CourseService {
 	 * @return
 	 */
 	JsonResult deleteCourse(String courseId);
+	
+	Course selectByCourseId(String courseId);
 }

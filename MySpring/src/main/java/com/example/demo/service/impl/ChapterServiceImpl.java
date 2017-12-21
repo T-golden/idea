@@ -21,12 +21,9 @@ public class ChapterServiceImpl implements ChapterService{
 	private ChapterDao chapterDao;
 
 	@Override
-	public JsonResult deleteChapter(String courseId , String chapterId) {
+	public JsonResult deleteChapter(String chapterId) {
 		JsonResult jsonResult = new JsonResult();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("courseId", courseId);
-		map.put("courseId", chapterId);
-		int i = chapterDao.deleteChapter(map);
+		int i = chapterDao.deleteChapter(chapterId);
 		if(i>0){
 			jsonResult.setMsg("课程信息删除成功！");
 			jsonResult.setStatus(0);
@@ -80,6 +77,25 @@ public class ChapterServiceImpl implements ChapterService{
 		}else{
 			jsonResult.setData(null);
 			jsonResult.setMsg("章节信息为空");
+			jsonResult.setStatus(1);
+		}
+		return jsonResult;
+	}
+
+	@Override
+	public Chapter selectByPrimaryKey(String chapterId) {
+		return chapterDao.selectByPrimaryKey(chapterId);
+	}
+
+	@Override
+	public JsonResult updateChapter(Chapter chapter) {
+		JsonResult jsonResult = new JsonResult();
+		int i = chapterDao.updateChapter(chapter);
+		if(i>0){
+			jsonResult.setMsg("章节信息修改成功！");
+			jsonResult.setStatus(0);
+		}else{
+			jsonResult.setMsg("章节信息修改失败！");
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
