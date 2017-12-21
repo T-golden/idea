@@ -30,8 +30,8 @@ public class TeacherController {
 	@Autowired
 	private ChapterService chapterService;
 	
-	@RequestMapping("toTeacher")
-	public String toTeacher(@RequestParam ("teacherId") String teacherId ,Model model) {
+	@RequestMapping("toTeacherInfo")
+	public String toTeacherInfo(@RequestParam ("teacherId") String teacherId ,Model model) {
 		model.addAttribute("teacherId", teacherId);
 		return "teacher/teacher_info";
 	}

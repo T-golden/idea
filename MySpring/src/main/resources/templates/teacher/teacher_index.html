@@ -134,12 +134,13 @@
 					<table id="table-1" border="1" style="width: 100%;">
 						<thead>
 							<tr>
-								<td align="center" colspan="4">个人信息</td>
+								<td align="center" colspan="5">个人信息</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>姓名 : <input type="text" id="teacherName" class="teacherName"></input></td>
+								<td>个人简介 : <textarea rows="10" id="teacherContext" class="teacherContext"></textarea></td>
 								<td>性别 : 
 									<select id="teacherSex">
 									<option value="0">请选择</option>
@@ -148,11 +149,11 @@
 									</select>
 								</td>
 								<td>年龄 : <input id="teacherAge" class="teacherAge"></input> 岁</td>
-								<td rowspan="3"><a><img id="teacherPic" alt="" src=""></a></td>
-								<!-- <input type="file" id="teacherPik" name="teacherPik"> -->
+								<!-- <td rowspan="4"><a><img id="teacherPic" alt="" src=""></a></td>
+								 --><!-- <input type="file" id="teacherPik" name="teacherPik"> -->
 							</tr>
 							<tr>
-								<td align="center" colspan="3">联系方式</td>
+								<td align="center" colspan="4">联系方式</td>
 							</tr>
 							<tr>
 								<td>Email : <input id="teacherEmail" class="teacherEmail"></input></td>
@@ -162,9 +163,6 @@
 							<tr>
 								<td>创建时间 : <span id="createTime" class="createTime"></span></td>
 								<td>上次修改时间 : <span id="modifyTime" class="modifyTime"></span></td>
-							</tr>
-							<tr>
-								<td><button id="update_submit">提交修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -229,9 +227,6 @@
 		jQuery(document).ready(function() {    
 		   App.init(); // initlayout and core plugins
 		   getTeacherInfo();
-		   $("#update_submit").click(function(){
-			   updateTeacherInfo();
-		   });
 		});
 		
 		function getTeacherInfo(){
@@ -245,6 +240,7 @@
 					   var data = res.data;
 					   console.log(data.teacherName);
 					   $(".teacherName").val(data.teacherName);
+					   $("#teacherContext").val(data.teacherContext);
 					   $("#teacherSex").val(data.teacherSex);
 					   $("#teacherAge").val(data.teacherAge);
 					   $("#teacherEmail").val(data.teacherEmail);
@@ -259,31 +255,6 @@
 					   var _modifyTime = modifyTime.getFullYear() + '-' + (modifyTime.getMonth() + 1) + '-' + modifyTime.getDate() + ' ' + modifyTime.getHours() + ':' + modifyTime.getMinutes() + ':' + modifyTime.getSeconds();
 					   $(".createTime").text(_createTime);
 					   $(".modifyTime").text(_modifyTime);
-				   }
-			});
-		}
-		
-		function updateTeacherInfo(){
-			var teacherName = $("#teacherName").val();
-			var teacherPik = $("#teacherPik").val();
-			var teacherSex = $("#teacherSex").val();
-			var teacherAge = $("#teacherAge").val();
-			var teacherEmail = $("#teacherEmail").val();
-			var teacherPhone = $("#teacherPhone").val();
-			var teacherQQ = $("#teacherQQ").val();
-			$.ajax({
-				   type : "post",
-				   url :  basePath+"teacherApi/updateTeacherInfo?teacherId="+teacherId+"&teacherName="+teacherName+"&teacherPik="+teacherPik+"&teacherSex="+teacherSex+"&teacherAge="+teacherAge+"&teacherEmail="+teacherEmail+"&teacherPhone="+teacherPhone+"&teacherQQ="+teacherQQ,
-				   async:false,
-				   success : function(res) {
-					   var status = res.status;
-					   var msg = res.msg;
-					   if(status !=0){
-						   alert(msg);
-					   }else{
-						   alert(msg);
-					   }
-					   getTeacherInfo();
 				   }
 			});
 		}

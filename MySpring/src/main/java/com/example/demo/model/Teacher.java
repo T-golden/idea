@@ -12,6 +12,7 @@ public class Teacher {
 	private String teacherId;
 	private String teacherPik;
 	private String teacherName;
+	private String teacherContext;
 	private int teacherSex;
 	private int teacherAge;
 	private String teacherEmail;
@@ -110,5 +111,13 @@ public class Teacher {
 
 	public void setTeacherQQ(String teacherQQ) {
 		this.teacherQQ = teacherQQ;
+	}
+
+	public String getTeacherContext() {
+		return teacherContext;
+	}
+
+	public void setTeacherContext(String teacherContext) {
+		this.teacherContext = teacherContext;
 	}
 }

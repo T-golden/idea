@@ -26,8 +26,8 @@ $("#toCreateChapter").click(function(){
 
 
 //查
-$("#toTeacher").click(function(){
-	var url =  basePath + "teacher/toTeacher?teacherId=" + teacherId ;
+$("#toTeacherInfo").click(function(){
+	var url =  basePath + "teacher/toTeacherInfo?teacherId=" + teacherId ;
 	window.location.href=url;
 })
 $("#toClassInfo").click(function(){

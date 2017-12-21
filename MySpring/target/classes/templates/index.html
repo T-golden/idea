@@ -67,6 +67,7 @@ function getFiveTeacherInfo() {
 					return false;
 				}
 				var data = res.data;
+				console.log(data);
 				for(var i = 0 ; i<data.length; i++){
 					$("#courseContext").prepend("<div class='col-md-4 services-section-grid'><div class='services-section-grid-head'><div class='service-icon'><i class='book'></i></div><div class='service-icon-heading'><a href='#' onclick='toChapterContext("+data[i].courseId+")'><h4>"+data[i].courseName+"---"+data[i].teacherName+"</h4></a><p style='width:260px; height:65px; text-overflow:ellipsis; /* for internet explorer */ overflow:hidden; display:block;'>"+data[i].courseContext+"</p></div><div class='clearfix'></div></div></div>");	
 				}
@@ -115,6 +116,7 @@ function getFiveTeacherInfo() {
 	<!--start-services-->
 	<div id="about" class="service-section">
 		<div class="container">
+			<h2>新晋课程</h2>
 			<div id="courseContext" class="serve-grids wow bounceIn animated" data-wow-delay="0.4s">
 				
 			</div>
@@ -126,7 +128,7 @@ function getFiveTeacherInfo() {
 	<!--/port-section-->
 	<div id="features" class="port-section">
 		<div class="container">
-			<h2>THE PORTFOLIO</h2>
+			<h2>新晋教师</h2>
 			<div class="port-grids">
 				<div class="col-md-3 port-grid wow zoomInLeft animated">
 					<a href="portfolio.html"><img src="home/images/p1.jpg" class="img-responsive" alt="" /></a>
@@ -184,6 +186,20 @@ function getFiveTeacherInfo() {
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nulla amet. turpis. </p>
 					</div>
 				</div>
+				<div class="col-md-3 port-grid lost wow zoomInRight animated">
+					<a href="portfolio.html"><img src="home/images/p4.jpg" class="img-responsive" alt="" /></a>
+					<div class="box_type">WEB DESIGN</div>
+					<div class="box-hover">
+						<ul class="port-icons">
+							<li><i class="per"></i></li>
+							<li><i class="loca"></i></li>
+						</ul>
+					</div>
+					<div class="text">
+						<a href="portfolio.html"><h3>I am an amazing project</h3></a>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nulla amet. turpis. </p>
+					</div>
+				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -193,8 +209,8 @@ function getFiveTeacherInfo() {
 		<div class="bottom-section">
 			<div class="bottom-top wow fadeInDownBig animated animated" data-wow-delay="0.4s">
 				<div class="col-md-10 bottom-text">
-					<h3>Subscribe to our newsletter. We hate spam as much as you do, so no worries.</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nulla vel dolor  blandit nec Quisque quis nulla vel dolor ultrices sit amet.</p>
+					<h3>《网页设计与制作》课程简介</h3>
+					<p>本课程以学生能独立完成静态网站开发和维护的实际工作能力为学习目标，要求学生掌握HTML语言的文档结构和基本标签使用。能综合应用Dreamweaver软件、HTML和CSS技术制作网页，掌握规划、开发、发布和管理静态网站的专业知识和技能。通过小组合作完成主题网站的建设，培养学生团队协作精神、责任感、克服困难的精神、理论应用于实践和解决实际问题的能力，为今后学习进一步动态网页的制作打下良好的基础。</p>
 				</div>
 				<div class="col-md-2 story"><h4 class="stories"><span><a href="#"><img src="home/images/mail.png" class="img-responsive" alt="" /></a></span></h4></div>
 				<div class="clearfix"></div>
@@ -202,64 +218,7 @@ function getFiveTeacherInfo() {
 		</div>
 	</div>
 	<!--//end-bottom-section-->
-	<!--/start-blog-section-->
-	<div id="blog" class="blog-section">
-		<div class="container">
-			<h3>OUR BLOGGY</h3>
-			<div class="blog-grids">
-				<div class="col-md-8 blog-left">
-					<div class="col-md-6 left-img wow bounceInLeft animated" data-wow-delay="0.4s">
-						<a href="single.html"><img src="home/images/b1.jpg" class="img-responsive" alt="" /></a>
-						<a href="single.html"><h4>Just a cool blog post title here.</h4></a>
-						<ul class="blog-icons">
-							<li><i class="pencil"></i></li>
-							<li><i class="date"></i></li>
-						</ul>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nulla vel dolor ultrices blandit nec sit amet. turpis, ipsum dolor sit amet, consectetur adipiscing elit. </p>
-						<a class="read" href="single.html">Read more <span> </span></a>
-					</div>
-					<div class="col-md-6 left-img two wow bounceIn animated" data-wow-delay="0.4s">
-						<a href="single.html"><img src="home/images/b2.jpg" class="img-responsive" alt="" /></a>
-						<a href="single.html"><h4>Just a cool blog post title here.</h4></a>
-						<ul class="blog-icons">
-							<li><a href="single.html"><i class="cam"></i></a></li>
-							<li><i class="date"></i></li>
-						</ul>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nulla vel dolor ultrices blandit nec sit amet. turpis, ipsum dolor sit amet, consectetur adipiscing elit. </p>
-						<a class="read" href="single.html">Read more <span> </span></a>
-					</div>
-				</div>
-				<div class="col-md-4 testimonal wow bounceInRight animated" data-wow-delay="0.4s">
-					<h3>testimonials</h3>
-					<div class="test-grid">
-						<div class="col-md-3 test-img">
-							<img src="home/images/t1.jpg" class="img-responsive" alt="" />
-						</div>
-						<div class="col-md-9 test-text">
-							<h4>Very pleased with the cool services provided.</h4>
-							<p>Linda Scott / Webdesigner <a href="#">http://www.mywebsite.com</a></p>
-						</div>
-						<div class="clearfix"> </div><p class="test"><span> </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nulla vel dolor ultrices blandit nec sit amet. turpis. </p>
-					</div>
-					<div class="test-grid second">
-						<div class="col-md-3 test-img">
-							<img src="home/images/p3.jpg" class="img-responsive" alt="" />
-						</div>
-						<div class="col-md-9 test-text">
-							<h4>Very pleased with the cool services provided.</h4>
-							<p>Linda Scott / Webdesigner <a href="#">http://www.mywebsite.com</a></p>
-						</div>
-						<div class="clearfix"> </div>
-						<p class="test"><span> </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nulla vel dolor ultrices blandit nec sit amet. turpis. </p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-	
-	<div th:replace="footer :: #main-footer"></div>
+	<div th:replace="footer :: #main-footer"></div> 
 	<!--start-smoth-scrolling-->
 	<script type="text/javascript" src="home/js/move-top.js"></script>
 	<script type="text/javascript" src="home/js/easing.js"></script>

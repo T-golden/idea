@@ -10,23 +10,20 @@
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
-	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/style-metro.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/style-responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="/teacher/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/teacher/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/teacher/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/teacher/css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="/teacher/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="/teacher/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="/teacher/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="/teacher/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 	<!-- END GLOBAL MANDATORY STYLES -->
 	<!-- BEGIN PAGE LEVEL STYLES --> 
-	<link href="/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/daterangepicker.css" rel="stylesheet" type="text/css" />
-	<link href="/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-	<!-- END PAGE LEVEL STYLES -->
-	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<link href="/teacher/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+	<link href="/teacher/css/daterangepicker.css" rel="stylesheet" type="text/css" />
+	<link href="/teacher/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="/teacher/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
 	<style>
 	/* Border styles */
 	#table-1 thead, #table-1 tr {
@@ -129,17 +126,19 @@
 					</div>
 				</div>
 				<!-- END PAGE HEADER-->
-				<h5>教师编号  : <input  type="text"  disabled="true" class="teacherId" id="teacherId" th:value="${teacherId}"></input></h5>
+				<div align="center"><h2>教师信息修改</h2></div>
+				<h5>教师编号  : <input  type="text"  disabled="" class="teacherId" id="teacherId" th:value="${teacherId}"></input></h5>
 				<div id="dashboard" align="center">
 					<table id="table-1" border="1" style="width: 100%;">
 						<thead>
 							<tr>
-								<td align="center" colspan="4">个人信息</td>
+								<td align="center" colspan="5">个人信息</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>姓名 : <input type="text" id="teacherName" class="teacherName"></input></td>
+								<td>个人简介 : <textarea rows="10" id="teacherContext" class="teacherContext"></textarea></td>
 								<td>性别 : 
 									<select id="teacherSex">
 									<option value="0">请选择</option>
@@ -148,10 +147,10 @@
 									</select>
 								</td>
 								<td>年龄 : <input id="teacherAge" class="teacherAge"></input> 岁</td>
-								<td rowspan="3"><input type="file" id="teacherPik"></td>
+								<!-- <td rowspan="3"><input type="file" id="teacherPik"></td> -->
 							</tr>
 							<tr>
-								<td align="center" colspan="3">联系方式</td>
+								<td align="center" colspan="4">联系方式</td>
 							</tr>
 							<tr>
 								<td>Email : <input id="teacherEmail" class="teacherEmail"></input></td>
@@ -162,9 +161,11 @@
 								<td>创建时间 : <span id="createTime" class="createTime"></span></td>
 								<td>上次修改时间 : <span id="modifyTime" class="modifyTime"></span></td>
 							</tr>
+							<tr>
+								<td><button id="update_submit">提交修改</button></td>
+							</tr>
 						</tbody>
 					</table>
-					<div style="position: absolute; bottom: 0;"><button id="update_submit">提交修改</button></div>
 				</div>
 			</div>
 		</div>
@@ -184,44 +185,44 @@
 	<!-- END FOOTER -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 	<!-- BEGIN CORE PLUGINS -->
-	<script src="/js/jquery-1.10.1.min.js" type="text/javascript"></script>
-	<script src="/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-	<script src="/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
-	<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="/teacher/js/bootstrap.min.js" type="text/javascript"></script>
 	<!--[if lt IE 9]>
 	<script src="/js/excanvas.min.js"></script>
 	<script src="/js/respond.min.js"></script>  
 	<![endif]-->   
-	<script src="/js/jquery.slimscroll.min.js" type="text/javascript"></script>
-	<script src="/js/jquery.blockui.min.js" type="text/javascript"></script>  
-	<script src="/js/jquery.cookie.min.js" type="text/javascript"></script>
-	<script src="/js/jquery.uniform.min.js" type="text/javascript" ></script>
+	<script src="/teacher/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="/teacher/js/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.uniform.min.js" type="text/javascript" ></script>
 	<!-- END CORE PLUGINS -->
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
-	<script src="/js/jquery.vmap.js" type="text/javascript"></script>   
-	<script src="/js/jquery.vmap.russia.js" type="text/javascript"></script>
-	<script src="/js/jquery.vmap.world.js" type="text/javascript"></script>
-	<script src="/js/jquery.vmap.europe.js" type="text/javascript"></script>
-	<script src="/js/jquery.vmap.germany.js" type="text/javascript"></script>
-	<script src="/js/jquery.vmap.usa.js" type="text/javascript"></script>
-	<script src="/js/jquery.vmap.sampledata.js" type="text/javascript"></script>  
-	<script src="/js/jquery.flot.js" type="text/javascript"></script>
-	<script src="/js/jquery.flot.resize.js" type="text/javascript"></script>
-	<script src="/js/jquery.pulsate.min.js" type="text/javascript"></script>
-	<script src="/js/date.js" type="text/javascript"></script>
-	<script src="/js/daterangepicker.js" type="text/javascript"></script>     
-	<script src="/js/jquery.gritter.js" type="text/javascript"></script>
-	<script src="/js/fullcalendar.min.js" type="text/javascript"></script>
-	<script src="/js/jquery.easy-pie-chart.js" type="text/javascript"></script>
-	<script src="/js/jquery.sparkline.min.js" type="text/javascript"></script>  
+	<script src="/teacher/js/jquery.vmap.js" type="text/javascript"></script>   
+	<script src="/teacher/js/jquery.vmap.russia.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.vmap.world.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.vmap.europe.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.vmap.germany.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.vmap.usa.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.vmap.sampledata.js" type="text/javascript"></script>  
+	<script src="/teacher/js/jquery.flot.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.flot.resize.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.pulsate.min.js" type="text/javascript"></script>
+	<script src="/teacher/js/date.js" type="text/javascript"></script>
+	<script src="/teacher/js/daterangepicker.js" type="text/javascript"></script>     
+	<script src="/teacher/js/jquery.gritter.js" type="text/javascript"></script>
+	<script src="/teacher/js/fullcalendar.min.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.easy-pie-chart.js" type="text/javascript"></script>
+	<script src="/teacher/js/jquery.sparkline.min.js" type="text/javascript"></script>  
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="/js/app.js" type="text/javascript"></script>
-	<script src="/js/index.js" type="text/javascript"></script>        
+	<script src="/teacher/js/app.js" type="text/javascript"></script>
+	<script src="/teacher/js/index.js" type="text/javascript"></script>        
 	<!-- END PAGE LEVEL SCRIPTS -->  
-	<script src="/js/teacher.config.js" type="text/javascript"></script>
-	<script src="/js/teacher.config.api.js" type="text/javascript"></script>      
+	<script src="/teacher/js/teacher.config.js" type="text/javascript"></script>
+	<script src="/teacher/js/teacher.config.api.js" type="text/javascript"></script>      
 	<script>
 		jQuery(document).ready(function() {    
 		   App.init(); // initlayout and core plugins
@@ -242,6 +243,7 @@
 					   var data = res.data;
 					   console.log(data.teacherName);
 					   $(".teacherName").val(data.teacherName);
+					   $("#teacherContext").val(data.teacherContext);
 					   $("#teacherSex").val(data.teacherSex);
 					   $("#teacherAge").val(data.teacherAge);
 					   $("#teacherEmail").val(data.teacherEmail);
@@ -260,8 +262,10 @@
 		}
 		
 		function updateTeacherInfo(){
+			alert("123");
 			var teacherName = $("#teacherName").val();
-			var teacherPik = $("#teacherPik").val();
+			var teacherContext = $("#teacherContext").val();
+			//var teacherPik = $("#teacherPik").val();
 			var teacherSex = $("#teacherSex").val();
 			var teacherAge = $("#teacherAge").val();
 			var teacherEmail = $("#teacherEmail").val();
@@ -269,16 +273,15 @@
 			var teacherQQ = $("#teacherQQ").val();
 			$.ajax({
 				   type : "post",
-				   url :  basePath+"teacherApi/updateTeacherInfo?teacherId="+teacherId+"&teacherName="+teacherName+"&teacherPik="+teacherPik+"&teacherSex="+teacherSex+"&teacherAge="+teacherAge+"&teacherEmail="+teacherEmail+"&teacherPhone="+teacherPhone+"&teacherQQ="+teacherQQ,
+				   url :  basePath+"teacherApi/updateTeacherInfo?teacherId="+teacherId+"&teacherName="+teacherName+"&teacherContext="+teacherContext+/* "&teacherPik="+teacherPik+ */"&teacherSex="+teacherSex+"&teacherAge="+teacherAge+"&teacherEmail="+teacherEmail+"&teacherPhone="+teacherPhone+"&teacherQQ="+teacherQQ,
 				   async:false,
 				   success : function(res) {
 					   var status = res.status;
 					   var msg = res.msg;
 					   if(status !=0){
 						   alert(msg);
-					   }else{
-						   alert(msg);
 					   }
+					   alert(msg);
 					   getTeacherInfo();
 				   }
 			});

@@ -65,6 +65,7 @@ public class TeacherServiceImpl implements TeacherService {
 			jsonResult.setMsg("教师个人信息");
 			jsonResult.setData(teacher);
 		}else {
+			jsonResult.setData(null);
 			jsonResult.setStatus(1);
 			jsonResult.setMsg("教师信息不存在！");
 		}

@@ -36,9 +36,7 @@
 	
 	<select id="selectSixCourse" resultMap="BaseResultMap"
 		parameterType="String">
-		select
-		<include refid="Base_Column_List" />
-		from course order by create_time desc limit 0,6
+		select a.* , b.teacher_name from course a left join teacher b on a.teacher_id = b.teacher_id order by create_time desc limit 0,6
 	</select>
 	
 	<select id="selectCoursePageByTeacherId" resultMap="BaseResultMap" parameterType="object">
