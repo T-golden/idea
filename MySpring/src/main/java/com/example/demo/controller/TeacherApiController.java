@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.Chapter;
 import com.example.demo.model.Classes;
@@ -306,13 +308,13 @@ public class TeacherApiController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="updateTeacherInfo")
+	@RequestMapping(value="updateTeacherInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult updateTeacherInfo(@RequestParam("teacherId") String teacherId , Teacher teacher , HttpServletRequest request) {
+	public JsonResult updateTeacherInfo(@RequestParam("teacherId") String teacherId , Teacher teacher , @RequestParam("file") MultipartFile file, HttpServletRequest request) {
 		JsonResult jsonResult = new JsonResult();
 		teacher.setModifyTime(new Date());
 		try {
-			jsonResult = teacherService.updateTeacherInfo(teacher);
+			jsonResult = teacherService.updateTeacherInfo(teacher,file);
 		} catch (Exception e) {
 			jsonResult.setMsg("教师信息修改异常！");
 			jsonResult.setStatus(1);

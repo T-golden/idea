@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,7 @@ import com.example.demo.service.TeacherService;
 @Controller
 @RequestMapping("/homeApi")
 public class HomeApiController {
+	
 	@Autowired
 	private TeacherService teacherService;
 	@Autowired
@@ -41,5 +45,17 @@ public class HomeApiController {
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
+	}
+	
+	@RequestMapping(value="uploadSave")
+	@ResponseBody
+	public JsonResult uploadSave(HttpServletRequest request, HttpServletResponse response){
+		JsonResult jsonResult = new JsonResult();
+		 try {
+			 
+		 } catch (Exception e) {
+			 
+		 }
+		 return jsonResult;
 	}
 }

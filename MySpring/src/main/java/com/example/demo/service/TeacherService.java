@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.demo.model.JsonResult;
 import com.example.demo.model.Student;
 import com.example.demo.model.StudentAccount;
@@ -31,7 +33,7 @@ public interface TeacherService {
 	 * @param teacherId
 	 * @return
 	 */
-	JsonResult updateTeacherInfo(Teacher teacher);
+	JsonResult updateTeacherInfo(Teacher teacher , MultipartFile file);
 	
 	/**
 	 * 修改学生信息

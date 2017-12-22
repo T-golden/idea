@@ -30,6 +30,11 @@ public class HomeController {
 		model.addAttribute("status", status);
 		return "login";
 	}
+	
+	@RequestMapping("toUpload")
+	public String toUpload( Model model) {
+		return "teacher/upload";
+	}
 
 	@RequestMapping("login")
 	public String login(@RequestParam("status") int status, @RequestParam("account") String account, @RequestParam("password") String password, Model model) {

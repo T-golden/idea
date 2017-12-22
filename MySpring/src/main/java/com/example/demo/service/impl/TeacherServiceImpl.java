@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dao.StudentAccountDao;
 import com.example.demo.dao.StudentDao;
@@ -73,7 +74,7 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public JsonResult updateTeacherInfo(Teacher teacher) {
+	public JsonResult updateTeacherInfo(Teacher teacher , MultipartFile file) {
 		JsonResult jsonResult = new JsonResult();
 		boolean b = teacherDao.updateById(teacher);
 		if(b) {
