@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.JsonResult;
 import com.example.demo.service.CourseService;
@@ -49,10 +50,11 @@ public class HomeApiController {
 	
 	@RequestMapping(value="uploadSave")
 	@ResponseBody
-	public JsonResult uploadSave(HttpServletRequest request, HttpServletResponse response){
+	public JsonResult uploadSave(MultipartFile myfile ,HttpServletRequest request, HttpServletResponse response){
 		JsonResult jsonResult = new JsonResult();
 		 try {
-			 
+			 String oldFileName = myfile.getOriginalFilename(); 
+			 System.out.println(oldFileName);
 		 } catch (Exception e) {
 			 
 		 }
