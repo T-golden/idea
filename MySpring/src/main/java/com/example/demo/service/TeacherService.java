@@ -8,10 +8,13 @@ import com.example.demo.model.Student;
 import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
 import com.example.demo.model.TeacherAccount;
+import com.example.demo.util.PageTool;
 
 public interface TeacherService {
 	
 	JsonResult selectFiveTeacher();
+	
+	PageTool<Teacher> getTeacherPage(PageTool<Teacher> page);
 	
 	/**
 	 * 教师登录

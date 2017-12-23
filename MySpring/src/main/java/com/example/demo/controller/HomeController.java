@@ -62,4 +62,19 @@ public class HomeController {
 			return "";
 		}
 	}
+	
+	@RequestMapping("toTeacherPage")
+	public String toTeacherPage() {
+		return "home_teacher_info";
+	}
+	
+	@RequestMapping("toCoursePage")
+	public String toCoursePage() {
+		return "homde_course_info";
+	}
+	
+	@RequestMapping("toChapterPage")
+	public String toChapterPage() {
+		return "home_chapter_info";
+	}
 }

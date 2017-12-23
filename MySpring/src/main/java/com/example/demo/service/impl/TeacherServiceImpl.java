@@ -19,6 +19,7 @@ import com.example.demo.model.StudentAccount;
 import com.example.demo.model.Teacher;
 import com.example.demo.model.TeacherAccount;
 import com.example.demo.service.TeacherService;
+import com.example.demo.util.PageTool;
 
 @Service("teacherService")
 public class TeacherServiceImpl implements TeacherService {
@@ -107,6 +108,22 @@ public class TeacherServiceImpl implements TeacherService {
 			jsonResult.setStatus(1);
 		}
 		return jsonResult;
+	}
+
+	@Override
+	public PageTool<Teacher> getTeacherPage(PageTool<Teacher> page) {
+		Map<String, Object> map = new HashMap<>();
+		int pageCount = teacherDao.getAllConut();
+		page.setTotalCount(pageCount);
+		if(pageCount>0) {
+			map.put("page", page);
+			List<Teacher> teacherPage = teacherDao.getTeacherPage(map);
+			page.setResult(teacherPage);
+			page.setTotalCount(pageCount);
+		}else {
+			page.setResult(null);
+		}
+		return page;
 	}
 
 }

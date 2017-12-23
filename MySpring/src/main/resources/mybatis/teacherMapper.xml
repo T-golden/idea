@@ -21,6 +21,23 @@
 	<sql id="Base_Column_List">
 		id,teacher_id,teacher_pik,teacher_name,teacher_context,teacher_sex,teacher_age,teacher_email,teacher_phone,teacher_qq,create_time,modify_time
 	</sql>
+	
+	<sql id="Page_Suffix">
+		<if test="page != null">
+    <![CDATA[  LIMIT #{page.beginRowNo}, #{page.pageSize} ]]>
+		</if>
+	</sql>
+	
+	<select id="getTeacherPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from teacher 
+		<include refid="Page_Suffix" />
+	</select>
+	
+	<select id="getAllConut" resultType="java.lang.Integer">
+		select count(1) from teacher
+	</select>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="String">
 		select

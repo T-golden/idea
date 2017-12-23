@@ -1,17 +1,19 @@
 package com.example.demo.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.model.Course;
 import com.example.demo.model.JsonResult;
+import com.example.demo.model.Teacher;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.TeacherService;
+import com.example.demo.util.PageTool;
 
 @Controller
 @RequestMapping("/homeApi")
@@ -21,6 +23,9 @@ public class HomeApiController {
 	private TeacherService teacherService;
 	@Autowired
 	private CourseService courseService;
+	
+	PageTool<Teacher> teacherPage = new PageTool<>();
+	PageTool<Course> coursePage = new PageTool<>();
 	
 	@RequestMapping(value="getFiveTeacher")
 	@ResponseBody
@@ -48,16 +53,12 @@ public class HomeApiController {
 		return jsonResult;
 	}
 	
-	@RequestMapping(value="uploadSave")
+	
+	@RequestMapping(value="getTeacherPage")
 	@ResponseBody
-	public JsonResult uploadSave(MultipartFile myfile ,HttpServletRequest request, HttpServletResponse response){
-		JsonResult jsonResult = new JsonResult();
-		 try {
-			 String oldFileName = myfile.getOriginalFilename(); 
-			 System.out.println(oldFileName);
-		 } catch (Exception e) {
-			 
-		 }
-		 return jsonResult;
+	public PageTool<Teacher> getTeacherPage(@RequestParam(value="pageno",defaultValue = "1") int pageno,HttpServletRequest request){
+		teacherPage.setPageNo(pageno);
+		teacherPage = teacherService.getTeacherPage(teacherPage);
+		return teacherPage;
 	}
 }

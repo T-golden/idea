@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -484,7 +485,26 @@ public class TeacherApiController {
 		return jsonResult;
 	}
 	
-	
+	/**
+	 * 文件上传
+	 * @param myfile
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="uploadSave")
+	@ResponseBody
+	public JsonResult uploadSave(MultipartFile myfile ,HttpServletRequest request, HttpServletResponse response){
+		JsonResult jsonResult = new JsonResult();
+		String oldFileName = myfile.getOriginalFilename(); 
+		System.out.println(oldFileName);
+		try {
+			
+		} catch (Exception e) {
+			
+		}
+		return jsonResult;
+	}
 	
 	
 }
